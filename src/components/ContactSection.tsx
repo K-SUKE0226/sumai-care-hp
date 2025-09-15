@@ -39,7 +39,7 @@ const ContactSection = () => {
         service: "",
         message: ""
       });
-    } catch (error) {
+    } catch {
       setSubmitMessage("送信に失敗しました。お電話でお問い合わせください。");
     } finally {
       setIsSubmitting(false);

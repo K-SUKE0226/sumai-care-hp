@@ -120,7 +120,7 @@ const FeaturesSection = () => {
                     ))}
                   </div>
                   <blockquote className="text-gray-700 italic mb-4">
-                    "{testimonial.text}"
+                    &ldquo;{testimonial.text}&rdquo;
                   </blockquote>
                 </div>
                 <div>
