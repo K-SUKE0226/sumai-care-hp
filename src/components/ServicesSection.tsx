@@ -1,0 +1,135 @@
+const ServicesSection = () => {
+  const services = [
+    {
+      title: "高齢者住宅紹介",
+      description: "お客様のご希望とご予算に合わせて、最適な高齢者向け住宅をご紹介いたします。施設見学から入居まで丁寧にサポートします。",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      ),
+      features: ["無料相談", "施設見学同行", "入居手続きサポート"]
+    },
+    {
+      title: "福祉に寄り添った引っ越し",
+      description: "要支援の方の特別なニーズに配慮した引っ越しサービス。介護施設間の引っ越しも専門スタッフが安全に行います。",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+        </svg>
+      ),
+      features: ["介護用品の取り扱い", "バリアフリー対応", "丁寧な梱包・設置"]
+    },
+    {
+      title: "特殊清掃サービス",
+      description: "事故物件の原状回復、死臭除去などの特殊清掃を専門技術で行います。近隣への配慮も万全です。",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
+      features: ["完全除菌・消臭", "24時間対応", "秘密厳守"]
+    },
+    {
+      title: "生前整頓・遺品整理",
+      description: "ご家族の大切な思い出を丁寧に整理いたします。必要なものと不要なものの仕分けから処分まで一貫してサポート。",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      ),
+      features: ["思い出の品の丁寧な取り扱い", "必要書類の分別", "供養サービス連携"]
+    },
+    {
+      title: "家電リサイクル",
+      description: "不要になった家電製品を環境に配慮してリサイクル。まだ使える家電は買取も行っております。",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ),
+      features: ["適正価格での買取", "環境配慮リサイクル", "運搬・設置サービス"]
+    },
+    {
+      title: "荷物預かりサービス",
+      description: "施設から長期入院になった際など、次の施設が決まるまでの荷物を自社倉庫で安全に保管いたします。",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h1.586a1 1 0 01.707.293l1.414 1.414a1 1 0 00.707.293H15a2 2 0 012 2v0M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m0 0V6a2 2 0 00-2-2H9.414a1 1 0 00-.707.293L7.293 5.707A1 1 0 006.586 6H5a2 2 0 00-2 2v0" />
+        </svg>
+      ),
+      features: ["24時間監視の自社倉庫", "温湿度管理", "必要時の即日配送"]
+    }
+  ];
+
+  return (
+    <section id="services" className="py-20 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* セクションヘッダー */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">私たちのサービス</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            要支援の方とご家族のさまざまなニーズにお応えする専門サービスをご提供しています。
+            どのようなご相談でもお気軽にお声かけください。
+          </p>
+        </div>
+
+        {/* サービス一覧 */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <div key={index} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-8">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 ml-4">{service.title}</h3>
+              </div>
+              
+              <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+              
+              <div className="space-y-2">
+                {service.features.map((feature, featureIndex) => (
+                  <div key={featureIndex} className="flex items-center">
+                    <svg className="w-5 h-5 text-accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-sm text-gray-700">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-16">
+          <p className="text-lg text-gray-600 mb-6">
+            どのサービスがお客様に最適かわからない場合でも、まずはお気軽にご相談ください。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="tel:0120-651-340"
+              className="bg-primary text-white px-8 py-4 rounded-lg hover:bg-primary-dark transition-colors font-semibold inline-flex items-center justify-center space-x-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>今すぐお電話</span>
+            </a>
+            <a
+              href="#contact"
+              className="border-2 border-primary text-primary px-8 py-4 rounded-lg hover:bg-primary hover:text-white transition-colors font-semibold inline-flex items-center justify-center space-x-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              <span>メールで相談</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ServicesSection;
