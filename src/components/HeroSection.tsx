@@ -7,16 +7,15 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* コンテンツ */}
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              <span className="text-primary">福祉に寄り添う</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+              <span className="text-primary">高齢者とご家族の困ったに</span>
               <br />
-              総合サポート
+              <span className="text-2xl sm:text-3xl lg:text-4xl">'大丈夫ですよ'でお応えします</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              要支援の方とご家族のニーズに丁寧にお応えします。<br />
-              高齢者住宅紹介から特殊引っ越し、荷物預かりまで、<br />
-              ホスピタリティあふれるサービスを提供いたします。
-            </p>
+            <div className="text-lg text-gray-600 mb-8 leading-relaxed space-y-2">
+              <p className="font-semibold text-primary">札幌で一番「なんとかしてくれる」会社を目指しています</p>
+              <p>諦める前に、すまいケアにご相談を</p>
+            </div>
             
             {/* CTAボタン */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
