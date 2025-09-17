@@ -1,14 +1,14 @@
 const FeaturesSection = () => {
   const features = [
     {
-      title: "スタッフの仲の良さ",
-      description: "私たちの最大の強みは、スタッフ同士の良好な関係性です。チーム一丸となってお客様をサポートし、和やかで安心できる雰囲気づくりを心がけています。",
+      title: "豊富な実績と経験",
+      description: "これまで多くのお客様にご利用いただき、様々なケースに対応してきた実績があります。お客様の状況に応じて最適なサービスをご提案いたします。",
       icon: (
         <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      image: "👥"
+      image: "🏆"
     },
     {
       title: "要支援の方への配慮",
@@ -89,8 +89,8 @@ const FeaturesSection = () => {
               <p className="text-gray-600">お客様満足度</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">24時間</div>
-              <p className="text-gray-600">緊急対応可能</p>
+              <div className="text-4xl font-bold text-primary mb-2">安心</div>
+              <p className="text-gray-600">保険完備</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-primary mb-2">保険</div>

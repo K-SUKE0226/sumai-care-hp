@@ -21,16 +21,6 @@ const ServicesSection = () => {
       features: ["介護用品の取り扱い", "バリアフリー対応", "丁寧な梱包・設置"]
     },
     {
-      title: "特殊清掃サービス",
-      description: "事故物件の原状回復、死臭除去などの特殊清掃を専門技術で行います。近隣への配慮も万全です。",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
-      ),
-      features: ["完全除菌・消臭", "24時間対応", "秘密厳守"]
-    },
-    {
       title: "生前整頓・遺品整理",
       description: "ご家族の大切な思い出を丁寧に整理いたします。必要なものと不要なものの仕分けから処分まで一貫してサポート。",
       icon: (
@@ -41,14 +31,14 @@ const ServicesSection = () => {
       features: ["思い出の品の丁寧な取り扱い", "必要書類の分別", "供養サービス連携"]
     },
     {
-      title: "家電リサイクル",
-      description: "不要になった家電製品を環境に配慮してリサイクル。まだ使える家電は買取も行っております。",
+      title: "中古家電販売・買取",
+      description: "良質な中古家電の販売と買取を行っております。必要な家電を適正価格でお客様にご提供いたします。",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      features: ["適正価格での買取", "環境配慮リサイクル", "運搬・設置サービス"]
+      features: ["適正価格での買取・販売", "動作確認済み中古家電", "運搬・設置サービス"]
     },
     {
       title: "荷物預かりサービス",

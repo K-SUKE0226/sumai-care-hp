@@ -131,9 +131,8 @@ const ContactSection = () => {
                   <option value="">選択してください</option>
                   <option value="housing">高齢者住宅紹介</option>
                   <option value="moving">福祉に寄り添った引っ越し</option>
-                  <option value="cleaning">特殊清掃サービス</option>
                   <option value="organizing">生前整頓・遺品整理</option>
-                  <option value="recycling">家電リサイクル</option>
+                  <option value="recycling">中古家電販売・買取</option>
                   <option value="storage">荷物預かりサービス</option>
                   <option value="other">その他</option>
                 </select>
@@ -183,7 +182,7 @@ const ContactSection = () => {
               </div>
               <div className="space-y-3 text-center">
                 <p className="text-lg"><strong>営業時間：9:00〜18:00</strong></p>
-                <p className="text-gray-600">年中無休（緊急時24時間対応）</p>
+                <p className="text-gray-600">年中無休</p>
                 <p className="text-sm text-gray-500">フリーダイヤルですので、お気軽にお電話ください</p>
               </div>
             </div>
@@ -227,21 +226,6 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* 緊急時対応 */}
-            <div className="bg-red-50 border-2 border-red-200 rounded-3xl p-8">
-              <h3 className="text-xl font-bold text-red-800 mb-4 flex items-center">
-                <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.502 0L3.312 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                </svg>
-                緊急時対応について
-              </h3>
-              <p className="text-red-700 mb-3">
-                特殊清掃や緊急の荷物預かりなど、お急ぎの場合は24時間対応いたします。
-              </p>
-              <p className="text-sm text-red-600">
-                深夜・早朝でもお気軽にお電話ください。専門スタッフが対応いたします。
-              </p>
-            </div>
           </div>
         </div>
       </div>

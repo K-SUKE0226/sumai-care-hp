@@ -58,17 +58,12 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link href="#services" className="hover:text-primary transition-colors">
-                    特殊清掃サービス
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#services" className="hover:text-primary transition-colors">
                     生前整頓・遺品整理
                   </Link>
                 </li>
                 <li>
                   <Link href="#services" className="hover:text-primary transition-colors">
-                    家電リサイクル
+                    中古家電販売・買取
                   </Link>
                 </li>
                 <li>
@@ -104,18 +99,6 @@ const Footer = () => {
                 </li>
               </ul>
 
-              {/* 緊急時の連絡先 */}
-              <div className="mt-8 p-4 bg-red-900/30 border border-red-700 rounded-lg">
-                <h5 className="text-red-300 font-semibold mb-2 flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.502 0L3.312 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                  </svg>
-                  緊急時24時間対応
-                </h5>
-                <p className="text-red-200 text-sm">
-                  特殊清掃・緊急搬送など
-                </p>
-              </div>
             </div>
           </div>
         </div>
