@@ -10,7 +10,7 @@ const HeroSection = () => {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
               <span className="text-primary">高齢者とご家族の困ったに</span>
               <br />
-              <span className="text-2xl sm:text-3xl lg:text-4xl">'大丈夫ですよ'でお応えします</span>
+              <span className="text-2xl sm:text-3xl lg:text-4xl">&lsquo;大丈夫ですよ&rsquo;でお応えします</span>
             </h1>
             <div className="text-lg text-gray-600 mb-8 leading-relaxed space-y-2">
               <p className="font-semibold text-primary">札幌で一番「なんとかしてくれる」会社を目指しています</p>
