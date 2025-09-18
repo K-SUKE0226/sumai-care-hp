@@ -10,24 +10,6 @@ const BeforeAfterSection = () => {
       afterImage: "/images/before-after/after1.jpg",
       beforeAlt: "整理前：家財道具で溢れた部屋",
       afterAlt: "整理後：すっきりと片付いた部屋"
-    },
-    {
-      id: 2,
-      title: "施設入居前の荷物整理",
-      description: "必要な物だけを残し、その他は適切に処分・保管",
-      beforeImage: "/images/before-after/before2.jpg",
-      afterImage: "/images/before-after/after2.jpg",
-      beforeAlt: "整理前：荷物が山積みの状態",
-      afterAlt: "整理後：必要な物だけが残された状態"
-    },
-    {
-      id: 3,
-      title: "急な入院による緊急整理",
-      description: "入院中に家族様のご依頼でお部屋を整理・清掃",
-      beforeImage: "/images/before-after/before3.jpg",
-      afterImage: "/images/before-after/after3.jpg",
-      beforeAlt: "整理前：散乱した家財道具",
-      afterAlt: "整理後：清潔で安全な住環境"
     }
   ];
 
@@ -91,7 +73,7 @@ const BeforeAfterSection = () => {
                     <div className="bg-gray-200 rounded-2xl overflow-hidden aspect-[4/3] relative shadow-lg">
                       {/* 実際の写真を表示（Afterはservicesフォルダからきれいな写真を使用） */}
                       <Image
-                        src={index === 0 ? "/images/services/IMG_3355.JPG" : index === 1 ? "/images/services/IMG_3357.JPG" : "/images/services/IMG_3355.JPG"}
+                        src="/images/services/IMG_3355.JPG"
                         alt={caseItem.afterAlt}
                         fill
                         className="object-cover"
