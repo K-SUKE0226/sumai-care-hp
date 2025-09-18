@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const FeaturesSection = () => {
   const features = [
     {
@@ -77,27 +79,6 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        {/* 実績・信頼性 */}
-        <div className="bg-gradient-to-r from-primary/5 to-blue-50 rounded-3xl p-12 mb-20">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">500+</div>
-              <p className="text-gray-600">サービス提供実績</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">95%</div>
-              <p className="text-gray-600">お客様満足度</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">安心</div>
-              <p className="text-gray-600">保険完備</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">保険</div>
-              <p className="text-gray-600">完備で安心</p>
-            </div>
-          </div>
-        </div>
 
         {/* お客様の声 */}
         <div>
@@ -110,22 +91,61 @@ const FeaturesSection = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow">
-                <div className="mb-6">
-                  <div className="flex text-yellow-400 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
+              <div key={index} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                {/* お客様写真エリア（サービス風景写真） */}
+                <div className="aspect-[16/10] bg-gradient-to-br from-blue-50 to-primary/5 relative">
+                  {index === 0 && (
+                    <Image
+                      src="/images/gallery/IMG_3328.JPEG"
+                      alt="サービス風景"
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                  {index === 1 && (
+                    <Image
+                      src="/images/gallery/IMG_3329.JPEG"
+                      alt="サービス風景"
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                  {index === 2 && (
+                    <Image
+                      src="/images/services/IMG_3355.JPG"
+                      alt="サービス風景"
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+
+                  {/* 写真上のサービス名オーバーレイ */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                    <p className="text-white text-sm font-medium">{testimonial.service}</p>
                   </div>
-                  <blockquote className="text-gray-700 italic mb-4">
-                    &ldquo;{testimonial.text}&rdquo;
-                  </blockquote>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900">{testimonial.author}</p>
-                  <p className="text-sm text-primary">{testimonial.service}</p>
+
+                {/* お客様の声内容 */}
+                <div className="p-8">
+                  <div className="mb-6">
+                    <div className="flex text-yellow-400 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <blockquote className="text-gray-700 italic mb-4">
+                      &ldquo;{testimonial.text}&rdquo;
+                    </blockquote>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-gray-900">{testimonial.author}</p>
+                      <p className="text-sm text-primary">{testimonial.service}</p>
+                    </div>
+                    <div className="text-4xl text-gray-300">&rdquo;</div>
+                  </div>
                 </div>
               </div>
             ))}

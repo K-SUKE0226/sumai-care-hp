@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const ServicesSection = () => {
   const services = [
     {
@@ -18,7 +20,7 @@ const ServicesSection = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
         </svg>
       ),
-      features: ["介護用品の取り扱い", "バリアフリー対応", "丁寧な梱包・設置"]
+      features: ["介護用品の取り扱い", "バリアフリー対応", "引っ越し後清掃・管理会社立会い代行"]
     },
     {
       title: "生前整頓・遺品整理",
@@ -67,25 +69,77 @@ const ServicesSection = () => {
         {/* サービス一覧 */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-8">
-              <div className="flex items-center mb-6">
-                <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                  {service.icon}
+            <div key={index} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
+              {/* サービス写真 */}
+              <div className="aspect-[16/10] bg-gray-200 relative">
+                {index === 0 && (
+                  <Image
+                    src="/images/services/IMG_3345.JPG"
+                    alt="高齢者住宅紹介サービス"
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                {index === 1 && (
+                  <Image
+                    src="/images/services/IMG_3347.JPG"
+                    alt="福祉引っ越しサービス"
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                {index === 2 && (
+                  <Image
+                    src="/images/services/IMG_3349.JPG"
+                    alt="生前整頓・遺品整理サービス"
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                {index === 3 && (
+                  <Image
+                    src="/images/services/IMG_3350.JPG"
+                    alt="中古家電販売・買取サービス"
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                {index === 4 && (
+                  <Image
+                    src="/images/services/IMG_3353.JPG"
+                    alt="荷物預かりサービス"
+                    fill
+                    className="object-cover"
+                  />
+                )}
+
+                {/* 写真上のタイトルオーバーレイ */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                  <p className="text-white font-semibold text-sm">{service.title}</p>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 ml-4">{service.title}</h3>
               </div>
-              
-              <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-              
-              <div className="space-y-2">
-                {service.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-center">
-                    <svg className="w-5 h-5 text-accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-sm text-gray-700">{feature}</span>
+
+              {/* コンテンツ */}
+              <div className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mr-4">
+                    {service.icon}
                   </div>
-                ))}
+                  <h3 className="text-xl font-bold text-gray-900">{service.title}</h3>
+                </div>
+
+                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+
+                <div className="space-y-2">
+                  {service.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-center">
+                      <svg className="w-5 h-5 text-accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-sm text-gray-700">{feature}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

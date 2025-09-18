@@ -99,6 +99,68 @@ const ConsultationSection = () => {
             <strong className="text-primary">全部別々の業者に頼まなくても、すまいケア1社で完結！</strong><br />
             窓口ひとつで、すべてのお困りごとを解決いたします。
           </p>
+
+          {/* 解決事例 */}
+          <div className="mb-8">
+            <h4 className="text-2xl font-bold text-gray-900 mb-6">実際の解決事例</h4>
+            <div className="grid md:grid-cols-2 gap-4 text-left">
+              <div className="bg-white/70 rounded-2xl p-4 border border-blue-200">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-600 mr-2">✅</span>
+                  <span className="font-semibold text-gray-800">「引っ越し先でリフォームも必要に...」</span>
+                </div>
+                <p className="text-sm text-gray-600 pl-6">→ 引っ越し・リフォーム・家具調達まで一括対応</p>
+              </div>
+
+              <div className="bg-white/70 rounded-2xl p-4 border border-blue-200">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-600 mr-2">✅</span>
+                  <span className="font-semibold text-gray-800">「施設退去と荷物預かりを同時に...」</span>
+                </div>
+                <p className="text-sm text-gray-600 pl-6">→ 退去手続き・清掃・荷物保管を一日で完了</p>
+              </div>
+
+              <div className="bg-white/70 rounded-2xl p-4 border border-blue-200">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-600 mr-2">✅</span>
+                  <span className="font-semibold text-gray-800">「急な入院で家が散らかったまま...」</span>
+                </div>
+                <p className="text-sm text-gray-600 pl-6">→ 退院前に清掃・整理・バリアフリー化まで</p>
+              </div>
+
+              <div className="bg-white/70 rounded-2xl p-4 border border-blue-200">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-600 mr-2">✅</span>
+                  <span className="font-semibold text-gray-800">「母の家電が古くて施設で使えない...」</span>
+                </div>
+                <p className="text-sm text-gray-600 pl-6">→ 家電買取・新品調達・設置を一気に解決</p>
+              </div>
+
+              <div className="bg-white/70 rounded-2xl p-4 border border-blue-200">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-600 mr-2">✅</span>
+                  <span className="font-semibold text-gray-800">「生活保護の引っ越し、手続きがわからず...」</span>
+                </div>
+                <p className="text-sm text-gray-600 pl-6">→ 役所手続き・引っ越し・生活立て直しまでサポート</p>
+              </div>
+
+              <div className="bg-white/70 rounded-2xl p-4 border border-blue-200">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-600 mr-2">✅</span>
+                  <span className="font-semibold text-gray-800">「引っ越し後の清掃と立会いが心配...」</span>
+                </div>
+                <p className="text-sm text-gray-600 pl-6">→ 引っ越し後清掃・管理会社立会い代行まで対応</p>
+              </div>
+
+              <div className="bg-white/70 rounded-2xl p-4 border border-blue-200">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-600 mr-2">✅</span>
+                  <span className="font-semibold text-gray-800">「遺品整理と同時に家の売却も...」</span>
+                </div>
+                <p className="text-sm text-gray-600 pl-6">→ 整理・清掃・不動産仲介まで窓口一本化</p>
+              </div>
+            </div>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
