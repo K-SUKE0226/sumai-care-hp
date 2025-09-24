@@ -48,7 +48,7 @@ const BeforeAfterSection = () => {
                     <div className="bg-gray-200 rounded-2xl overflow-hidden aspect-[4/3] relative shadow-lg">
                       {/* 実際の写真を表示 */}
                       <Image
-                        src="/images/before-after/IMG_3330.JPEG"
+                        src="/images/gallery/ビフォーアフター.JPEG"
                         alt={caseItem.beforeAlt}
                         fill
                         className="object-cover"
@@ -73,7 +73,7 @@ const BeforeAfterSection = () => {
                     <div className="bg-gray-200 rounded-2xl overflow-hidden aspect-[4/3] relative shadow-lg">
                       {/* 実際の写真を表示（Afterはservicesフォルダからきれいな写真を使用） */}
                       <Image
-                        src="/images/services/IMG_3355.JPG"
+                        src="/images/gallery/家財撤去後の清掃.JPG"
                         alt={caseItem.afterAlt}
                         fill
                         className="object-cover"

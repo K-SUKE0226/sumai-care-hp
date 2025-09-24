@@ -4,14 +4,13 @@ const RealEstateServicesSection = () => {
   const services = [
     {
       title: "退去後残置物撤去・清掃",
-      description: "大型家具・家電から細かな私物まで、すべて撤去。ハウスクリーニングまで完了させます。",
+      description: "大型家具・家電から細かな私物まで、すべて撤去。リフォームまで請け負います。",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>
       ),
-      features: ["24時間以内対応可能", "リサイクル品の適正処理", "清掃・原状回復まで完了"],
-      benefit: "オーナー様への即日報告でトラブル防止"
+      features: ["最短で前日対応可能", "家財の適正処理", "そのまま引き渡し可能な状態で完了します"],
     },
     {
       title: "入居者向け家電搬入サービス",
@@ -22,7 +21,6 @@ const RealEstateServicesSection = () => {
         </svg>
       ),
       features: ["動作確認済み中古家電", "適正価格での提供", "搬入・設置・説明まで"],
-      benefit: "入居日から快適生活スタート"
     },
     {
       title: "生活保護手続きサポート",
@@ -33,7 +31,6 @@ const RealEstateServicesSection = () => {
         </svg>
       ),
       features: ["福祉事務所との連携", "必要書類の準備代行", "申請手続きサポート"],
-      benefit: "スムーズな入居で空室期間短縮"
     },
     {
       title: "入居前荷物整理・引っ越し",
@@ -43,8 +40,7 @@ const RealEstateServicesSection = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
         </svg>
       ),
-      features: ["丁寧な荷物仕分け", "不用品の適正処分", "新居での配置まで"],
-      benefit: "入居者様の負担軽減"
+      features: ["丁寧な荷物仕分け", "不用品の適正処分", "新居での配置サポート"],
     },
     {
       title: "送迎サポートサービス",
@@ -54,8 +50,7 @@ const RealEstateServicesSection = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
         </svg>
       ),
-      features: ["介護・福祉対応車両", "専門スタッフ同行", "安全第一の移動"],
-      benefit: "入居日程の柔軟調整が可能"
+      features: ["安心・安全な送迎", "丁寧なサポート対応", "予定外の対応可能"],
     },
     {
       title: "特殊清掃サービス",
@@ -66,7 +61,6 @@ const RealEstateServicesSection = () => {
         </svg>
       ),
       features: ["特殊清掃専門技術", "消臭・除菌処理", "原状回復工事"],
-      benefit: "迅速な物件復旧で空室期間短縮"
     }
   ];
 
@@ -91,7 +85,14 @@ const RealEstateServicesSection = () => {
               {/* サービス写真 */}
               <div className="aspect-[16/10] bg-gray-200 relative">
                 <Image
-                  src={`/images/services/IMG_334${5 + (index % 3)}.JPG`}
+                  src={[
+                    "/images/gallery/家財撤去後の清掃.JPG",
+                    "/images/gallery/丁寧な搬入・搬出.jpeg",
+                    "/images/gallery/適正な家財処分風景.jpeg",
+                    "/images/gallery/家財整理風景.jpeg",
+                    "/images/gallery/さわやかスタッフ.jpeg",
+                    "/images/gallery/特殊清掃.jpeg"
+                  ][index]}
                   alt={service.title}
                   fill
                   className="object-cover"
@@ -125,15 +126,6 @@ const RealEstateServicesSection = () => {
                   ))}
                 </div>
 
-                {/* メリット */}
-                <div className="bg-primary/5 border-l-4 border-primary p-4 rounded">
-                  <p className="text-sm text-primary font-semibold">
-                    💡 不動産会社様のメリット
-                  </p>
-                  <p className="text-sm text-gray-700 mt-1">
-                    {service.benefit}
-                  </p>
-                </div>
               </div>
             </div>
           ))}

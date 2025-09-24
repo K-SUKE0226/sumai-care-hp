@@ -74,7 +74,7 @@ const ServicesSection = () => {
               <div className="aspect-[16/10] bg-gray-200 relative">
                 {index === 0 && (
                   <Image
-                    src="/images/services/IMG_3345.JPG"
+                    src="/images/gallery/家財整理風景.jpeg"
                     alt="高齢者住宅紹介サービス"
                     fill
                     className="object-cover"
@@ -82,7 +82,7 @@ const ServicesSection = () => {
                 )}
                 {index === 1 && (
                   <Image
-                    src="/images/services/IMG_3347.JPG"
+                    src="/images/gallery/丁寧な搬入・搬出.jpeg"
                     alt="福祉引っ越しサービス"
                     fill
                     className="object-cover"
@@ -90,7 +90,7 @@ const ServicesSection = () => {
                 )}
                 {index === 2 && (
                   <Image
-                    src="/images/services/IMG_3349.JPG"
+                    src="/images/gallery/貴重品査定.jpeg"
                     alt="生前整頓・遺品整理サービス"
                     fill
                     className="object-cover"
@@ -98,7 +98,7 @@ const ServicesSection = () => {
                 )}
                 {index === 3 && (
                   <Image
-                    src="/images/services/IMG_3350.JPG"
+                    src="/images/gallery/適正な家財処分風景.jpeg"
                     alt="中古家電販売・買取サービス"
                     fill
                     className="object-cover"
@@ -106,7 +106,7 @@ const ServicesSection = () => {
                 )}
                 {index === 4 && (
                   <Image
-                    src="/images/services/IMG_3353.JPG"
+                    src="/images/gallery/外注先.JPEG"
                     alt="荷物預かりサービス"
                     fill
                     className="object-cover"

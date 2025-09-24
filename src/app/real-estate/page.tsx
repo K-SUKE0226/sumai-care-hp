@@ -3,6 +3,7 @@ import RealEstateHeroSection from "@/components/real-estate/RealEstateHeroSectio
 import RealEstateChallengesSection from "@/components/real-estate/RealEstateChallengesSection";
 import RealEstateServicesSection from "@/components/real-estate/RealEstateServicesSection";
 import RealEstateCaseStudiesSection from "@/components/real-estate/RealEstateCaseStudiesSection";
+import RealEstateGallerySection from "@/components/real-estate/RealEstateGallerySection";
 import RealEstatePricingSection from "@/components/real-estate/RealEstatePricingSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -16,6 +17,7 @@ export default function RealEstatePage() {
         <RealEstateChallengesSection />
         <RealEstateServicesSection />
         <RealEstateCaseStudiesSection />
+        <RealEstateGallerySection />
         <RealEstatePricingSection />
         <ContactSection />
       </main>

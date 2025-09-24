@@ -16,7 +16,7 @@ const RealEstateHeroSection = () => {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
               <span className="text-primary">不動産会社様の</span>
               <br />
-              <span className="text-2xl sm:text-3xl lg:text-4xl">お困りごとを&lsquo;すべて&rsquo;解決します</span>
+              <span className="text-2xl sm:text-3xl lg:text-4xl">お困りごとを&lsquo;ワンストップ&rsquo;で対応します</span>
             </h1>
             <div className="text-lg text-gray-600 mb-8 leading-relaxed space-y-3">
               <p className="font-semibold text-primary">退去後の残置物から入居前サポートまで</p>
@@ -63,7 +63,7 @@ const RealEstateHeroSection = () => {
             <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden mb-6">
               <div className="aspect-[4/3] bg-gray-200 relative overflow-hidden">
                 <Image
-                  src="/images/services/IMG_3355.JPG"
+                  src="/images/gallery/家財撤去後の清掃.JPG"
                   alt="すまいケアの不動産向けサービス"
                   fill
                   className="object-cover"

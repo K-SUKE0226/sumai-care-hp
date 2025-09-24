@@ -4,6 +4,7 @@ import ConsultationSection from "@/components/ConsultationSection";
 import ServicesSection from "@/components/ServicesSection";
 import BeforeAfterSection from "@/components/BeforeAfterSection";
 import FeaturesSection from "@/components/FeaturesSection";
+import GallerySection from "@/components/GallerySection";
 import ComplianceSection from "@/components/ComplianceSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -18,6 +19,7 @@ export default function Home() {
         <ServicesSection />
         <BeforeAfterSection />
         <FeaturesSection />
+        <GallerySection />
         <ComplianceSection />
         <ContactSection />
       </main>

@@ -53,7 +53,7 @@ const HeroSection = () => {
             <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden mb-6">
               <div className="aspect-[4/3] bg-gray-200 relative overflow-hidden">
                 <Image
-                  src="/images/services/IMG_3343.JPG"
+                  src="/images/gallery/社長のスマイル.JPG"
                   alt="すまいケアの作業風景"
                   fill
                   className="object-cover"

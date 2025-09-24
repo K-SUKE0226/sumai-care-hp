@@ -10,8 +10,8 @@ const RealEstateCaseStudiesSection = () => {
       challenge: "孤独死発生の特殊案件。オーナー様から特殊清掃の依頼があり、進行状況や消臭処理から原状回復まで専門的な処理が必要でした。",
       solution: "特殊清掃の専門スタッフが対応。特殊清掃→消臭処理→原状回復工事→ハウスクリーニングまで5日間で完了。",
       result: "すぐに募集再開でき、空室期間を最小限に抑制。オーナー様から高い評価をいただきました。",
-      beforeImage: "/images/before-after/IMG_3330.JPEG",
-      afterImage: "/images/services/IMG_3355.JPG"
+      beforeImage: "/images/gallery/ビフォーアフター.JPEG",
+      afterImage: "/images/gallery/家財撤去後の清掃.JPG"
     },
     {
       id: 2,
@@ -21,8 +21,8 @@ const RealEstateCaseStudiesSection = () => {
       challenge: "生活保護受給予定の方の入居。複雑な行政手続きと家電不足で入居が遅延する可能性がありました。",
       solution: "福祉事務所との連携で書類準備を代行。中古家電セット（冷蔵庫・洗濯機・電子レンジ）を適正価格で提供し搬入・設置まで完了。",
       result: "予定通りの入居実現。入居者様の生活も即日スタートでき、オーナー様にも満足いただけました。",
-      beforeImage: "/images/before-after/IMG_3330.JPEG",
-      afterImage: "/images/services/IMG_3357.JPG"
+      beforeImage: "/images/gallery/家財整理風景.jpeg",
+      afterImage: "/images/gallery/丁寧な搬入・搬出.jpeg"
     }
   ];
 
@@ -163,28 +163,6 @@ const RealEstateCaseStudiesSection = () => {
           ))}
         </div>
 
-        {/* 実績数値 */}
-        <div className="mt-16 bg-primary rounded-3xl text-white p-12 text-center">
-          <h3 className="text-3xl font-bold mb-8">すまいケアの実績</h3>
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-4xl font-bold mb-2">500+</div>
-              <div className="text-sm opacity-90">年間対応件数</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">5日</div>
-              <div className="text-sm opacity-90">特殊清掃完了目安</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">95%</div>
-              <div className="text-sm opacity-90">お客様満足度</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">100%</div>
-              <div className="text-sm opacity-90">生活保護手続き成功率</div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

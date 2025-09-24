@@ -112,7 +112,7 @@ const FeaturesSection = () => {
                   )}
                   {index === 2 && (
                     <Image
-                      src="/images/services/IMG_3355.JPG"
+                      src="/images/gallery/家財撤去後の清掃.JPG"
                       alt="サービス風景"
                       fill
                       className="object-cover"
