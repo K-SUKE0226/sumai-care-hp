@@ -16,7 +16,7 @@ export default function HokanPage() {
       <section className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">福祉型保管サービス</h1>
-          <p className="text-xl">"暮らしを止めない"ための安心の保管体制</p>
+          <p className="text-xl">&ldquo;暮らしを止めない&rdquo;ための安心の保管体制</p>
         </div>
       </section>
 
@@ -186,7 +186,7 @@ export default function HokanPage() {
               <h4 className="font-bold text-lg mb-3">想いを預かり、再出発を支える</h4>
               <p className="text-gray-700 leading-relaxed">
                 私たちは、単に荷物を預かるだけでなく、
-                お客様の"想い"や"暮らし"を守り、再出発を支える気持ちで保管サービスを提供しています。
+                お客様の&ldquo;想い&rdquo;や&ldquo;暮らし&rdquo;を守り、再出発を支える気持ちで保管サービスを提供しています。
                 大切な品々を、安心してお任せください。
               </p>
             </div>

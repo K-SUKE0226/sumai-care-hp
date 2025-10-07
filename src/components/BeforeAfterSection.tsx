@@ -27,7 +27,7 @@ const BeforeAfterSection = () => {
 
         {/* ビフォーアフター事例 */}
         <div className="space-y-16">
-          {beforeAfterCases.map((caseItem, index) => (
+          {beforeAfterCases.map((caseItem) => (
             <div key={caseItem.id} className="bg-gray-50 rounded-3xl p-8">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">

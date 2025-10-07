@@ -12,7 +12,7 @@ export default function Home() {
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 mb-8">
             整理・支援・住まい・保管・引越しを通じて、<br />
-            "暮らしの安心"を支えるスマイリードグループ。
+            &ldquo;暮らしの安心&rdquo;を支えるスマイリードグループ。
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
@@ -175,7 +175,7 @@ export default function Home() {
           </h2>
           <p className="text-lg text-gray-700 text-center mb-12 max-w-3xl mx-auto">
             行政・包括支援センター・ケアマネジャー・医療機関・不動産会社・管理会社など、
-            幅広い関係機関と連携し、"つながりの安心"を提供しています。
+            幅広い関係機関と連携し、&ldquo;つながりの安心&rdquo;を提供しています。
           </p>
           <div className="grid md:grid-cols-3 gap-6 text-center">
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -210,7 +210,7 @@ export default function Home() {
                 私たちは、人の想いと住まいに真心を持って向き合い、
                 暮らしに寄り添う支援を大切にしています。
                 整理・住宅・引越し・保管という日常の困りごとを通じて、
-                地域の皆様の"安心な暮らし"を支えることが私たちの使命です。
+                地域の皆様の&ldquo;安心な暮らし&rdquo;を支えることが私たちの使命です。
               </p>
               <Link href="/company" className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
                 理念ページへ
