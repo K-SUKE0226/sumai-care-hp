@@ -1,27 +1,37 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Roboto } from "next/font/google";
+import { Zen_Maru_Gothic, Noto_Sans_JP, Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 
+// 温かみのある丸ゴシック（見出し用）
+const zenMaruGothic = Zen_Maru_Gothic({
+  variable: "--font-zen-maru",
+  subsets: ["latin"],
+  weight: ['400', '500', '700', '900'],
+  display: 'swap',
+});
+
+// 読みやすい角ゴシック（本文用）
+const zenKakuGothic = Zen_Kaku_Gothic_New({
+  variable: "--font-zen-kaku",
+  subsets: ["latin"],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+});
+
+// フォールバック用
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
   display: 'swap',
 });
 
-const roboto = Roboto({
-  variable: "--font-roboto",
-  subsets: ["latin"],
-  weight: ['300', '400', '500', '700'],
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
-  title: "すまいケア｜福祉に寄り添う総合サポート",
-  description: "高齢者住宅紹介、福祉引っ越し、中古家電販売・買取、荷物預かりなど、要支援の方とご家族のニーズに丁寧にお応えする総合サポートサービス。札幌市を中心にホスピタリティあふれるサービスを提供しています。",
-  keywords: "高齢者住宅,介護引っ越し,中古家電販売,荷物預かり,札幌,介護サポート",
+  title: "住まいサポートケア｜札幌の福祉型住環境支援｜株式会社スマイリード",
+  description: "札幌で家財整理・住宅紹介・引越し支援・荷物保管を通じて、高齢者・障がい者・生活困窮者の暮らしを支える福祉型サービス。行政・包括・ケアマネジャーと連携し、安心の住環境を提供します。",
+  keywords: "住まいサポートケア,スマイリード,家財整理,遺品整理,住宅紹介,引越し支援,荷物保管,札幌,福祉,高齢者支援",
   openGraph: {
-    title: "すまいケア｜福祉に寄り添う総合サポート",
-    description: "要支援の方とご家族のニーズに丁寧にお応えする総合サポートサービス",
+    title: "住まいサポートケア｜札幌の福祉型住環境支援",
+    description: "人と住まいに、まごころを。損得ではなく善悪で判断する、札幌の福祉型支援サービス",
     type: "website",
     locale: "ja_JP",
   },
@@ -35,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${notoSansJP.variable} ${roboto.variable} antialiased`}
+        className={`${zenMaruGothic.variable} ${zenKakuGothic.variable} ${notoSansJP.variable} antialiased`}
       >
         {children}
       </body>
