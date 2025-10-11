@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '福祉型保管サービス｜荷物の一時預かり・大型倉庫2拠点｜札幌・北海道',
+  description: '札幌で荷物の一時保管。大型倉庫2拠点完備。入院・退去・転居・施設入居まで"暮らしを止めない"安心の預かり体制。行政・病院・包括支援センター・ケアマネジャーと連携。',
+  robots: 'index,follow',
+}
 
 export default function HokanPage() {
   return (

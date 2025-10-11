@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '福祉に寄り添う引越し支援｜荷造り・送迎・立ち会い・行政書類まで｜札幌',
+  description: '札幌で支援型の引越し。高齢者・障がい者・生活保護・身寄りのない方にも対応。荷造り・荷解き・送迎・退去立ち会い・介護タクシー手配・Zoom見積までワンストップで支援します。',
+  robots: 'index,follow',
+}
 
 export default function HikkoshiPage() {
   return (

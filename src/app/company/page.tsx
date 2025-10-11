@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '会社情報・理念｜株式会社スマイリード／住まいサポートケア｜札幌',
+  description: '株式会社スマイリード（屋号：住まいサポートケア）の会社概要・代表挨拶・経営理念をご紹介。北海道の暮らしを支える"福祉型まちづくり企業"として、整理・支援・住まい・保管・引越しを提供。',
+  robots: 'index,follow',
+}
 
 export default function CompanyPage() {
   return (

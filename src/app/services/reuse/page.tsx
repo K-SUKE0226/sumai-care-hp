@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'リユース・地域連携｜再利用・寄付で"やさしい循環"を｜札幌',
+  description: '家財整理で生じた品をリユース・リサイクルし、札幌の地域や福祉へ循環。社会福祉法人・地域団体・リサイクル業者と連携し、モノを次につなぐ活動を行っています。',
+  robots: 'index,follow',
+}
 
 export default function ReusePage() {
   return (

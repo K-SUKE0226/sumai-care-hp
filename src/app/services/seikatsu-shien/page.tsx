@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '住環境整理・生活支援｜家財整理・遺品整理・再生活用｜札幌の住まいサポートケア',
+  description: '札幌で家財整理・遺品整理・生前整理・住環境の清掃や消臭まで、誠実に対応。行政・包括・管理会社とも連携できる安心の体制。住まいの再生活用やリユースにも取り組む住まいサポートケア。',
+  robots: 'index,follow',
+}
 
 export default function SeikatsuShienPage() {
   return (
@@ -16,7 +23,7 @@ export default function SeikatsuShienPage() {
       <section className="bg-gradient-to-r from-green-600 to-green-700 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">住環境整理・生活支援</h1>
-          <p className="text-xl">人の想いを大切に、心を込めた整理を</p>
+          <p className="text-xl">人の想いを大切に、心を込めた整理で&ldquo;暮らしの再生&rdquo;を支えます。</p>
         </div>
       </section>
 
@@ -24,71 +31,41 @@ export default function SeikatsuShienPage() {
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">サービス内容</h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-2xl font-semibold mb-3 text-green-700">遺品整理・生前整理</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  故人の想いや残されたご家族の気持ちに寄り添い、丁寧に遺品整理を行います。
-                  生前整理では、ご本人の意思を尊重しながら、今後の生活をより良くするための整理をサポートします。
-                </p>
-              </div>
-              <div>
-                <h3 className="text-2xl font-semibold mb-3 text-green-700">特殊清掃</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  長期間放置された住居や特殊な状況下での清掃作業を、専門知識と技術で対応します。
-                  近隣への配慮も含め、プライバシーを守りながら作業を進めます。
-                </p>
-              </div>
-              <div>
-                <h3 className="text-2xl font-semibold mb-3 text-green-700">再生活用</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  まだ使える家具・家電・日用品を、リユース・リサイクルを通じて次の方へつなぎます。
-                  環境にも優しく、想いのこもった品々を無駄にしない取り組みを行っています。
-                </p>
-              </div>
-            </div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">誠実な家財整理・遺品整理を札幌中心に対応</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              住まいサポートケアは、札幌市を中心に<strong>家財整理・遺品整理・生前整理・清掃・消臭</strong>まで一貫対応。状況とご事情に合わせた最適な計画で、丁寧に作業します。
+            </p>
+
+            <h3 className="text-2xl font-semibold mb-4 text-green-700">主な対応内容</h3>
+            <ul className="space-y-2 mb-6 text-gray-700">
+              <li className="flex items-start gap-2">
+                <span className="text-green-600 mt-1">✓</span>
+                <span>遺品整理・生前整理・空き家整理</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-600 mt-1">✓</span>
+                <span>清掃・消臭・除菌など住環境改善</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-600 mt-1">✓</span>
+                <span>再利用・寄付・リサイクルによる再生活用</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-green-600 mt-1">✓</span>
+                <span>行政・包括支援センター・管理会社からのご依頼に対応</span>
+              </li>
+            </ul>
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">作業の流れ</h2>
-            <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">お問い合わせ・ご相談</h4>
-                  <p className="text-gray-600">お電話・LINE・フォームよりお気軽にご相談ください</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">現地調査・お見積り</h4>
-                  <p className="text-gray-600">スタッフが訪問し、状況を確認後、お見積りを提示します（無料）</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">ご契約・作業日程調整</h4>
-                  <p className="text-gray-600">ご納得いただけましたら、作業日を決定します</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">作業実施</h4>
-                  <p className="text-gray-600">丁寧かつ迅速に整理・清掃作業を行います</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">完了確認・お支払い</h4>
-                  <p className="text-gray-600">作業完了を確認いただき、お支払いとなります</p>
-                </div>
-              </div>
-            </div>
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">作業の流れ・費用の目安</h2>
+            <ol className="space-y-3 mb-6 text-gray-700 list-decimal list-inside">
+              <li><strong>ご相談・現地/オンライン見積</strong></li>
+              <li><strong>お見積り・作業計画のご提案</strong></li>
+              <li><strong>仕分け・搬出・清掃・再生活用</strong></li>
+              <li><strong>最終確認・完了報告</strong></li>
+            </ol>
+            <p className="text-gray-600">規模・間取り・作業難易度によって変動します。詳細は無料でお見積りいたします。</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
@@ -125,9 +102,9 @@ export default function SeikatsuShienPage() {
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">対応地域</h2>
-            <p className="text-gray-700 mb-4">札幌市全区（中央区・北区・東区・白石区・豊平区・南区・西区・厚別区・手稲区・清田区）</p>
-            <p className="text-gray-700">※近郊市町村も対応可能です。お気軽にご相談ください。</p>
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">対応エリア</h2>
+            <p className="text-gray-700 mb-2"><strong>札幌市全域</strong>／道内各地</p>
+            <p className="text-gray-600 text-sm">小樽・千歳・苫小牧・旭川・帯広・函館 ほか</p>
           </div>
 
           <div className="bg-green-50 rounded-lg shadow-md p-8">
@@ -146,13 +123,13 @@ export default function SeikatsuShienPage() {
       {/* CTA */}
       <section className="py-16 px-4 bg-gradient-to-r from-green-100 to-blue-100">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">まずはお気軽にご相談ください</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">まずは無料相談</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:0120-651-340" className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
               📞 0120-651-340
             </a>
-            <Link href="/contact" className="bg-white text-gray-800 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-gray-300 hover:bg-gray-50 transition">
-              お問い合わせフォーム
+            <Link href="/contact" className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition">
+              LINE相談可
             </Link>
           </div>
         </div>

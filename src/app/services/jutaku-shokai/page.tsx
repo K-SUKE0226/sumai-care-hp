@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '住宅紹介・居住支援｜高齢者・障がい者・生活困窮者の住まい探し｜札幌',
+  description: '札幌で高齢者・障がい者・生活困窮者の住まい探しを支援。入居前相談・見学同行・入居後フォローまで一貫対応。居住支援法人・包括・ケアマネジャー・医療・不動産と連携。',
+  robots: 'index,follow',
+}
 
 export default function JutakuShokaiPage() {
   return (

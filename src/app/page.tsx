@@ -1,4 +1,11 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '住まいサポートケア｜札幌の福祉型住環境支援｜株式会社スマイリード',
+  description: '札幌で家財整理・住宅紹介・引越し支援・荷物保管を通じて、高齢者・障がい者・生活困窮者の暮らしを支える福祉型サービス。行政・包括・ケアマネジャーと連携し、安心の住環境を提供します。',
+  robots: 'index,follow',
+}
 
 export default function Home() {
   return (
