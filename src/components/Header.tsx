@@ -1,137 +1,183 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from 'react'
+import Link from 'next/link'
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+  }
 
   return (
-    <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-md z-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* ロゴ */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-primary">すまいケア</div>
+    <>
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <div className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-rose-500 bg-clip-text text-transparent">
+              住まいサポートケア
+            </div>
           </Link>
 
-          {/* デスクトップナビゲーション */}
-          <nav className="hidden md:flex space-x-8">
-            <Link
-              href="#home"
-              className="text-gray-700 hover:text-primary transition-colors font-medium"
-            >
-              ホーム
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/about" className="text-gray-700 hover:text-orange-600 transition font-medium">
+              会社情報
             </Link>
-            <Link
-              href="#services"
-              className="text-gray-700 hover:text-primary transition-colors font-medium"
-            >
-              サービス
+            <Link href="/philosophy" className="text-gray-700 hover:text-orange-600 transition font-medium">
+              理念・想い
             </Link>
-            <Link
-              href="#features"
-              className="text-gray-700 hover:text-primary transition-colors font-medium"
-            >
-              私たちの強み
+            <Link href="/network" className="text-gray-700 hover:text-orange-600 transition font-medium">
+              連携ネットワーク
             </Link>
-            <Link
-              href="#contact"
-              className="text-gray-700 hover:text-primary transition-colors font-medium"
-            >
+            <Link href="/gallery" className="text-gray-700 hover:text-orange-600 transition font-medium">
+              作業実績
+            </Link>
+            <Link href="/contact" className="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition font-semibold">
               お問い合わせ
             </Link>
           </nav>
 
-          {/* お問い合わせボタン */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="tel:0120-651-340"
-              className="flex items-center space-x-2 text-primary hover:text-primary-dark transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <span className="font-medium">0120-651-340</span>
-            </a>
-            <Link
-              href="#contact"
-              className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
-            >
-              無料相談
-            </Link>
-          </div>
-
-          {/* モバイルメニューボタン */}
+          {/* Hamburger Button */}
           <button
-            className="md:hidden p-2"
             onClick={toggleMenu}
-            aria-label="メニューを開く"
+            className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50"
+            aria-label="メニュー"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-              />
-            </svg>
+            <span
+              className={`block w-6 h-0.5 bg-gray-800 transition-all duration-500 ease-in-out ${
+                isMenuOpen ? 'rotate-45 translate-y-2' : ''
+              }`}
+            ></span>
+            <span
+              className={`block w-6 h-0.5 bg-gray-800 transition-all duration-500 ease-in-out ${
+                isMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            ></span>
+            <span
+              className={`block w-6 h-0.5 bg-gray-800 transition-all duration-500 ease-in-out ${
+                isMenuOpen ? '-rotate-45 -translate-y-2' : ''
+              }`}
+            ></span>
           </button>
         </div>
+      </header>
 
-        {/* モバイルメニュー */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            <nav className="px-2 pt-2 pb-4 space-y-1">
+      {/* Mobile Navigation Overlay */}
+      <div
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
+          isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+          onClick={closeMenu}
+        ></div>
+
+        {/* Menu Panel */}
+        <div
+          className={`absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transition-transform duration-500 ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="pt-20 px-6">
+            <nav className="flex flex-col gap-1">
               <Link
-                href="#home"
-                className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                href="/"
+                onClick={closeMenu}
+                className="text-lg font-semibold text-gray-800 hover:text-orange-600 hover:bg-orange-50 px-4 py-3 rounded-lg transition"
               >
-                ホーム
+                トップページ
               </Link>
               <Link
-                href="#services"
-                className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                href="/about"
+                onClick={closeMenu}
+                className="text-lg font-semibold text-gray-800 hover:text-orange-600 hover:bg-orange-50 px-4 py-3 rounded-lg transition"
               >
-                サービス
+                会社情報
               </Link>
               <Link
-                href="#features"
-                className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                href="/philosophy"
+                onClick={closeMenu}
+                className="text-lg font-semibold text-gray-800 hover:text-orange-600 hover:bg-orange-50 px-4 py-3 rounded-lg transition"
               >
-                私たちの強み
+                理念・想い
               </Link>
               <Link
-                href="#contact"
-                className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                href="/network"
+                onClick={closeMenu}
+                className="text-lg font-semibold text-gray-800 hover:text-orange-600 hover:bg-orange-50 px-4 py-3 rounded-lg transition"
+              >
+                連携ネットワーク
+              </Link>
+              <Link
+                href="/gallery"
+                onClick={closeMenu}
+                className="text-lg font-semibold text-gray-800 hover:text-orange-600 hover:bg-orange-50 px-4 py-3 rounded-lg transition"
+              >
+                作業実績
+              </Link>
+
+              <div className="border-t border-gray-200 my-4"></div>
+
+              <div className="text-sm font-bold text-gray-500 px-4 py-2">サービス一覧</div>
+              <Link
+                href="/services/seikatsu-shien"
+                onClick={closeMenu}
+                className="text-base text-gray-700 hover:text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-lg transition"
+              >
+                住環境整理・生活支援
+              </Link>
+              <Link
+                href="/services/jutaku-shokai"
+                onClick={closeMenu}
+                className="text-base text-gray-700 hover:text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-lg transition"
+              >
+                住宅紹介・居住支援
+              </Link>
+              <Link
+                href="/services/reuse"
+                onClick={closeMenu}
+                className="text-base text-gray-700 hover:text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-lg transition"
+              >
+                リユース・地域連携
+              </Link>
+              <Link
+                href="/services/hikkoshi"
+                onClick={closeMenu}
+                className="text-base text-gray-700 hover:text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-lg transition"
+              >
+                福祉に寄り添う引越し支援
+              </Link>
+              <Link
+                href="/services/hokan"
+                onClick={closeMenu}
+                className="text-base text-gray-700 hover:text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-lg transition"
+              >
+                福祉型保管サービス
+              </Link>
+
+              <div className="border-t border-gray-200 my-4"></div>
+
+              <Link
+                href="/contact"
+                onClick={closeMenu}
+                className="bg-gradient-to-r from-orange-600 to-rose-500 text-white text-center px-6 py-3 rounded-full font-bold hover:shadow-lg transition mt-2"
               >
                 お問い合わせ
               </Link>
-              <div className="border-t border-gray-200 pt-4">
-                <a
-                  href="tel:0120-651-340"
-                  className="flex items-center space-x-2 px-3 py-2 text-primary hover:text-primary-dark transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span>0120-651-340</span>
-                </a>
-              </div>
             </nav>
           </div>
-        )}
+        </div>
       </div>
-    </header>
-  );
-};
-
-export default Header;
+    </>
+  )
+}

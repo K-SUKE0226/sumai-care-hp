@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import Header from '@/components/Header'
 
 export const metadata: Metadata = {
   title: '住まいサポートケア｜札幌の福祉型住環境支援｜株式会社スマイリード',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-warm-50">
+      <Header />
       {/* Hero Section - シンプル&コンパクト */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
         <div className="absolute inset-0 opacity-10">
@@ -30,10 +32,7 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <a href="tel:0120-651-340" className="bg-orange-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-orange-700 transition shadow-lg hover:shadow-xl">
-                📞 0120-651-340
-              </a>
-              <Link href="/contact" className="bg-white text-orange-600 px-10 py-5 rounded-full text-xl font-semibold border-2 border-orange-600 hover:bg-orange-50 transition">
+              <Link href="/contact" className="bg-orange-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-orange-700 transition shadow-lg hover:shadow-xl">
                 LINE・メールで相談
               </Link>
             </div>
@@ -215,9 +214,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer - コンパクト */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-16 px-4">
         <div className="max-w-6xl mx-auto">
+          {/* Phone CTA Section */}
+          <div className="text-center mb-12 pb-12 border-b border-gray-800">
+            <p className="text-gray-400 mb-4 text-lg">まずはお気軽にご相談ください</p>
+            <a
+              href="tel:0120-651-340"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-600 to-rose-500 text-white px-12 py-5 rounded-full text-2xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+            >
+              <span className="text-3xl">📞</span>
+              <span>0120-651-340</span>
+            </a>
+            <p className="text-gray-400 text-sm mt-4">受付時間：平日 9:00〜18:00</p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             {/* Logo & Tagline */}
             <div>
