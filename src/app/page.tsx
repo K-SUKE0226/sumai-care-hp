@@ -25,28 +25,10 @@ export default function Home() {
               人と住まいに、<br />
               <span className="text-orange-600">まごころ</span>を。
             </h1>
-            <p className="text-xl md:text-2xl text-gray-700 mb-12 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
               整理・支援・住まい・保管・引越しを通じて、<br />
               <span className="font-semibold">&ldquo;暮らしの安心&rdquo;</span>を支えるスマイリードグループ。
             </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Link href="/contact" className="bg-orange-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-orange-700 transition shadow-lg hover:shadow-xl">
-                LINE・メールで相談
-              </Link>
-            </div>
-
-            {/* Quick Links */}
-            <div className="flex flex-wrap justify-center gap-3 text-sm">
-              <Link href="/about" className="text-gray-600 hover:text-orange-600 transition">会社情報</Link>
-              <span className="text-gray-300">|</span>
-              <Link href="/philosophy" className="text-gray-600 hover:text-orange-600 transition">理念・想い</Link>
-              <span className="text-gray-300">|</span>
-              <Link href="/network" className="text-gray-600 hover:text-orange-600 transition">連携ネットワーク</Link>
-              <span className="text-gray-300">|</span>
-              <Link href="/gallery" className="text-gray-600 hover:text-orange-600 transition">作業実績</Link>
-            </div>
           </div>
         </div>
       </section>
