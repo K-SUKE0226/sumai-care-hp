@@ -705,6 +705,7 @@
             // ---- 状態 ----
             var checkItems = [];
             var timeoutId  = null;
+            var idCounter  = 0;  // 重複しない連番ID
 
             // ---- 関数定義 ----
 
@@ -789,7 +790,8 @@
             function addCheckItem(text, isChecked, id) {
                 text      = text      !== undefined ? text      : '';
                 isChecked = isChecked !== undefined ? isChecked : false;
-                id        = id        !== undefined ? id        : Date.now().toString();
+                // Date.now()は連続呼び出し時に重複するため連番カウンターを使用
+                id        = id        !== undefined ? id        : 'item_' + (++idCounter);
 
                 var item = { id: id, text: text, isChecked: isChecked };
                 checkItems.push(item);
