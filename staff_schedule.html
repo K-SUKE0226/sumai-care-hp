@@ -659,9 +659,22 @@
             // LINE共有
             var lineShareBtn = document.getElementById('lineShareBtn');
             lineShareBtn.addEventListener('click', function () {
-                updateUrlState();
-                var url = window.location.href;
-                var lineUrl = 'https://line.me/R/msg/text/?' + encodeURIComponent(url);
+                // その場でstateをシリアライズして完全なURLを組み立てる
+                // window.location.hrefに頼ると#以降が取れないケースがあるため
+                var state      = getState();
+                var jsonStr    = JSON.stringify(state);
+                var compressed = LZString.compressToEncodedURIComponent(jsonStr);
+                var hash       = '#' + compressed;
+
+                // ブラウザURLも更新
+                window.history.replaceState(null, '', hash);
+
+                // baseUrl = プロトコル + ホスト + パス（#より前）
+                var baseUrl  = location.protocol + '//' + location.host + location.pathname;
+                var shareUrl = baseUrl + hash;
+
+                // LINE共有：URLをテキストとして送信
+                var lineUrl = 'https://line.me/R/msg/text/?' + encodeURIComponent(shareUrl);
                 window.open(lineUrl, '_blank');
             });
 
