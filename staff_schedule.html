@@ -592,7 +592,8 @@
                 var state      = getState();
                 var jsonStr    = JSON.stringify(state);
                 var compressed = LZString.compressToEncodedURIComponent(jsonStr);
-                window.history.replaceState(null, '', '#' + compressed);
+                // #ではなく?d=を使う（LINEのiOSが#以降をリンク認識しないため）
+                window.history.replaceState(null, '', '?d=' + compressed);
             }
 
             function showToast() {
@@ -600,9 +601,17 @@
                 setTimeout(function () { toast.classList.remove('show'); }, 3000);
             }
 
+            function buildShareUrl() {
+                var state      = getState();
+                var jsonStr    = JSON.stringify(state);
+                var compressed = LZString.compressToEncodedURIComponent(jsonStr);
+                window.history.replaceState(null, '', '?d=' + compressed);
+                return location.protocol + '//' + location.host + location.pathname + '?d=' + compressed;
+            }
+
             function generateAndCopyUrl() {
-                updateUrlState();
-                navigator.clipboard.writeText(window.location.href).then(function () {
+                var shareUrl = buildShareUrl();
+                navigator.clipboard.writeText(shareUrl).then(function () {
                     showToast();
                 }).catch(function (err) {
                     console.error('クリップボードへのコピーに失敗しました', err);
@@ -611,8 +620,11 @@
             }
 
             function loadFromUrl() {
-                var hash = window.location.hash.substring(1);
-                if (!hash) {
+                // ?d= クエリパラメータ（新形式）を優先、旧 #hash 形式も互換対応
+                var params     = new URLSearchParams(window.location.search);
+                var compressed = params.get('d') || window.location.hash.substring(1);
+
+                if (!compressed) {
                     addCheckItem('戸締り・清掃・搬出忘れ確認', false);
                     addCheckItem('完了写真・トランクルームチェック', false);
                     addCheckItem('お客様（管理人）への最終確認・ご挨拶', false);
@@ -620,7 +632,7 @@
                 }
 
                 try {
-                    var jsonStr = LZString.decompressFromEncodedURIComponent(hash);
+                    var jsonStr = LZString.decompressFromEncodedURIComponent(compressed);
                     var state   = JSON.parse(jsonStr);
 
                     textFields.forEach(function (fid) {
@@ -659,22 +671,9 @@
             // LINE共有
             var lineShareBtn = document.getElementById('lineShareBtn');
             lineShareBtn.addEventListener('click', function () {
-                // その場でstateをシリアライズして完全なURLを組み立てる
-                // window.location.hrefに頼ると#以降が取れないケースがあるため
-                var state      = getState();
-                var jsonStr    = JSON.stringify(state);
-                var compressed = LZString.compressToEncodedURIComponent(jsonStr);
-                var hash       = '#' + compressed;
-
-                // ブラウザURLも更新
-                window.history.replaceState(null, '', hash);
-
-                // baseUrl = プロトコル + ホスト + パス（#より前）
-                var baseUrl  = location.protocol + '//' + location.host + location.pathname;
-                var shareUrl = baseUrl + hash;
-
-                // LINE共有：URLをテキストとして送信
-                var lineUrl = 'https://line.me/R/msg/text/?' + encodeURIComponent(shareUrl);
+                // ?d= 形式でURLを構築（LINEのiOSが#以降をリンク認識しないため?を使う）
+                var shareUrl = buildShareUrl();
+                var lineUrl  = 'https://line.me/R/msg/text/?' + encodeURIComponent(shareUrl);
                 window.open(lineUrl, '_blank');
             });
 
