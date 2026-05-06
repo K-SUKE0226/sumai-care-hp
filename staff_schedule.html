@@ -73,6 +73,12 @@
             .form-row { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
+        .form-row-time {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
         label {
             display: block;
             font-size: 0.875rem;
@@ -232,12 +238,27 @@
         .actions {
             margin-top: 3rem;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
         }
 
         @media (max-width: 600px) {
             .actions { grid-template-columns: 1fr; }
+        }
+
+        .btn-line {
+            background: #06C755;
+            color: white;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            width: 100%;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-line:hover {
+            background: #05a848;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .toast {
@@ -281,6 +302,9 @@
             }
 
             .actions, .btn-outline, .btn-danger { display: none !important; }
+
+            /* 印刷時：空のスタッフ欄を非表示 */
+            .staff-input-wrapper.print-hide { display: none !important; }
 
             input[type="text"],
             input[type="time"],
@@ -343,15 +367,15 @@
                     <div class="form-group">
                         <label>スタッフ (最大4名)</label>
                         <div class="staff-grid">
-                            <input type="text" id="staff1" name="staff1" placeholder="スタッフ1">
-                            <input type="text" id="staff2" name="staff2" placeholder="スタッフ2">
-                            <input type="text" id="staff3" name="staff3" placeholder="スタッフ3">
-                            <input type="text" id="staff4" name="staff4" placeholder="スタッフ4">
+                            <div class="staff-input-wrapper"><input type="text" id="staff1" name="staff1" placeholder="スタッフ1"></div>
+                            <div class="staff-input-wrapper"><input type="text" id="staff2" name="staff2" placeholder="スタッフ2"></div>
+                            <div class="staff-input-wrapper"><input type="text" id="staff3" name="staff3" placeholder="スタッフ3"></div>
+                            <div class="staff-input-wrapper"><input type="text" id="staff4" name="staff4" placeholder="スタッフ4"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row-time">
                     <div class="form-group">
                         <label for="startTime">開始時間</label>
                         <select id="startTime" name="startTime"></select>
@@ -401,15 +425,21 @@
                 </div>
 
                 <div class="actions">
+                    <button type="button" class="btn btn-line" id="lineShareBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 6px; vertical-align: middle;">
+                            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.070 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                        </svg>
+                        LINEで共有
+                    </button>
                     <button type="button" class="btn btn-primary" id="shareBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
                             <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                             <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                         </svg>
-                        共有URLをコピー
+                        URLコピー
                     </button>
                     <button type="button" class="btn btn-secondary" id="printBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
                             <polyline points="6 9 6 2 18 2 18 9"></polyline>
                             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
                             <rect x="6" y="14" width="12" height="8"></rect>
@@ -626,10 +656,40 @@
             updateMeetingMap();
             updateRelocationMap();
 
+            // LINE共有
+            var lineShareBtn = document.getElementById('lineShareBtn');
+            lineShareBtn.addEventListener('click', function () {
+                updateUrlState();
+                var url = window.location.href;
+                var lineUrl = 'https://line.me/R/msg/text/?' + encodeURIComponent(url);
+                window.open(lineUrl, '_blank');
+            });
+
             // ボタンイベント
             addCheckItemBtn.addEventListener('click', function () { addCheckItem(); });
             shareBtn.addEventListener('click', generateAndCopyUrl);
             printBtn.addEventListener('click', function () { window.print(); });
+
+            // 印刷前：空スタッフ欄を非表示にする
+            window.addEventListener('beforeprint', function () {
+                var staffIds = ['staff1', 'staff2', 'staff3', 'staff4'];
+                staffIds.forEach(function (sid) {
+                    var inp = document.getElementById(sid);
+                    if (inp) {
+                        var wrapper = inp.closest('.staff-input-wrapper');
+                        if (wrapper) {
+                            wrapper.classList.toggle('print-hide', inp.value.trim() === '');
+                        }
+                    }
+                });
+            });
+
+            // 印刷後：非表示クラスを元に戻す
+            window.addEventListener('afterprint', function () {
+                document.querySelectorAll('.staff-input-wrapper.print-hide').forEach(function (el) {
+                    el.classList.remove('print-hide');
+                });
+            });
 
             // テキストフィールド変更検知
             textFields.forEach(function (fid) {
