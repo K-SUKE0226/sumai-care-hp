@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おまかせ引越しのご案内【裏面】 | 住まいサポートケア</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        :root {
+            --brand-terra: #e26139;
+            /* Warm Terracotta / Burnt Orange */
+            --bg-warm: #fff9f0;
+            /* Soft old-paper white */
+            --bg-box: #ffffff;
+            --text-dark: #3a2517;
+            /* Extremely dark brown instead of black */
+            --text-brown: #5c3a21;
+            --accent-yellow: #f4c241;
+            --line-color: #d8c8b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-warm);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 15mm;
+        }
+
+        /* --- Hand-drawn border effect (matches front) --- */
+        .page-border {
+            position: absolute;
+            top: 8mm;
+            left: 8mm;
+            right: 8mm;
+            bottom: 8mm;
+            border: 3px solid var(--brand-terra);
+            border-radius: 15px 25px 20px 10px;
+            /* Slightly different for back */
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .page-border::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border: 1px dashed var(--brand-terra);
+            border-radius: 25px 15px 10px 20px;
+            opacity: 0.6;
+        }
+
+        /* --- Print Button --- */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--brand-terra);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 9999;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-weight: 800;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .content-wrap {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* --- Section Titles --- */
+        .section-title {
+            text-align: center;
+            font-size: 20pt;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            align-self: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            right: -10px;
+            bottom: 4px;
+            height: 10px;
+            background: var(--accent-yellow);
+            z-index: -1;
+            border-radius: 5px;
+            opacity: 0.7;
+        }
+
+        /* --- 3 Reasons (Hand-drawn boxes) --- */
+        .reasons-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .reason-card {
+            background: var(--bg-box);
+            border: 3px solid var(--text-brown);
+            border-radius: 25px 10px 15px 20px;
+            /* hand-drawn bubble look */
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 3px 3px 0px rgba(92, 58, 33, 0.1);
+        }
+
+        .r-num {
+            background: var(--brand-terra);
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50% 40% 60% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22pt;
+            font-weight: 900;
+            flex-shrink: 0;
+            border: 2px dashed #ffffff;
+        }
+
+        .r-text-box {
+            flex-grow: 1;
+        }
+
+        .r-title {
+            font-size: 15pt;
+            font-weight: 900;
+            color: var(--brand-terra);
+            margin-bottom: 3px;
+        }
+
+        .r-desc {
+            font-size: 11pt;
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--text-brown);
+        }
+
+        /* --- Flow Section --- */
+        .flow-container {
+            background: var(--accent-yellow);
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+        }
+
+        .flow-title {
+            text-align: center;
+            font-size: 16pt;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .step {
+            background: #ffffff;
+            border: 2px solid var(--text-dark);
+            border-radius: 12px;
+            padding: 10px;
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            /* Arrows between steps */
+            content: '▶';
+            color: var(--text-dark);
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14pt;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-num {
+            color: var(--brand-terra);
+            font-weight: 900;
+            font-size: 11pt;
+            margin-bottom: 2px;
+        }
+
+        .step-title {
+            font-size: 13pt;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .step-icon {
+            font-size: 24pt;
+        }
+
+        /* --- Bottom Company / Contact --- */
+        .company-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 3px dashed var(--brand-terra);
+            border-radius: 15px;
+            padding: 15px 20px;
+            background: #ffffff;
+            margin-top: auto;
+        }
+
+        .c-left {
+            flex: 1;
+        }
+
+        .c-message {
+            font-size: 14pt;
+            font-weight: 900;
+            color: var(--brand-terra);
+            margin-bottom: 8px;
+        }
+
+        .c-phone-box {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .c-phone {
+            font-size: 28pt;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+
+        .c-hours {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--text-brown);
+        }
+
+        .c-info {
+            font-size: 10pt;
+            color: var(--text-brown);
+            line-height: 1.5;
+        }
+
+        .c-right {
+            text-align: center;
+            padding-left: 20px;
+            border-left: 2px dashed var(--line-color);
+            display: flex;
+            gap: 15px;
+        }
+
+        .qr-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background: #eee;
+            border: 2px solid var(--text-dark);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .qr-label {
+            font-size: 10pt;
+            font-weight: 800;
+            background: var(--brand-terra);
+            color: #ffffff;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .qr-label.line {
+            background: #06c755;
+            /* LINE Green */
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ 第2面（裏）を印刷</button>
+    <div class="page-border"></div>
+
+    <div class="content-wrap">
+
+        <h2 class="section-title">スマイリードが安心な ৩つの理由</h2>
+
+        <!-- Reasons Hand-drawn list -->
+        <div class="reasons-box">
+            <div class="reason-card">
+                <div class="r-num">1</div>
+                <div class="r-text-box">
+                    <div class="r-title">お見積もり無料！追加料金は一切なし！</div>
+                    <div class="r-desc">事前の無料お見積りで確定した金額から、後日追加でご請求することは絶対にありません。</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="r-num"
+                    style="background:var(--accent-yellow); color:var(--text-dark); border-color:var(--text-dark);">2
+                </div>
+                <div class="r-text-box">
+                    <div class="r-title">「買取」で費用を大幅カット！</div>
+                    <div class="r-desc">リサイクル可能な家具や家電は、その場で買い取り。引越し費用から差し引くので大変お得です。</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="r-num">3</div>
+                <div class="r-text-box">
+                    <div class="r-title">ご家族やケアマネ様からの依頼も大歓迎！</div>
+                    <div class="r-desc">離れて暮らすご家族からのご相談や、施設へのご入居に伴うお引越しなど、柔軟に丁寧に対応いたします。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flow Section -->
+        <div class="flow-container">
+            <div class="flow-title">ご依頼の流れはとってもカンタン！</div>
+            <div class="flow-steps">
+                <div class="step">
+                    <div class="step-num">Step 1</div>
+                    <div class="step-title">お電話</div>
+                    <div class="step-icon">📞</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">Step 2</div>
+                    <div class="step-title">無料お見積り</div>
+                    <div class="step-icon">📝</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">Step 3</div>
+                    <div class="step-title">お引越し・お片付け</div>
+                    <div class="step-icon">🚚✨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="company-area">
+            <div class="c-left">
+                <div class="c-message">温かく丁寧なスタッフがお伺いします！</div>
+
+                <div class="c-phone-box">
+                    <div class="c-phone">☎ 0120-651-340</div>
+                    <div class="c-hours">受付 9:00〜18:00</div>
+                </div>
+
+                <div class="c-info">
+                    株式会社スマイリード<br>
+                    〒064-0807 札幌市中央区南7条西2丁目2-10 パラスト中島公園102号<br>
+                    古物商許可：北海道公安委員会
+                </div>
+            </div>
+
+            <div class="c-right">
+                <div class="qr-box">
+                    <div class="qr-label">WEBサイト</div>
+                    <div class="qr-placeholder">QR Image</div>
+                </div>
+                <div class="qr-box">
+                    <div class="qr-label line">LINE相談</div>
+                    <div class="qr-placeholder">QR Image</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

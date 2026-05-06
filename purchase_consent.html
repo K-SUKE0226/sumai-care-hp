@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物品の査定・買取および処分に関する同意書</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+            background: #e0e0e0;
+            /* Gray background to see pages */
+            box-sizing: border-box;
+        }
+
+        .sheet {
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm;
+            box-sizing: border-box;
+            position: relative;
+            background: white;
+            margin: 0 auto 20px auto;
+            /* Center and add space between pages */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 18pt;
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 10.5pt;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 12pt;
+            margin-bottom: 10px;
+            border-left: 5px solid #2980b9;
+            padding-left: 10px;
+        }
+
+        .category-box {
+            margin-bottom: 15px;
+            border: 1px solid #999;
+        }
+
+        .category-title {
+            background: #eee;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 10pt;
+            border-bottom: 1px solid #999;
+        }
+
+        .input-area {
+            height: 60px;
+            /* Space for writing */
+            padding: 5px;
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .check-item {
+            margin-bottom: 15px;
+            font-size: 11pt;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .check-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            margin-right: 15px;
+            margin-top: 3px;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .note {
+            font-size: 9pt;
+            color: #666;
+            margin-left: 38px;
+            margin-top: 5px;
+        }
+
+        .photo-option {
+            margin: 10px 0;
+            padding: 10px;
+            background: #fdfefe;
+            border: 1px dashed #2980b9;
+        }
+
+        .agreement-box {
+            background: #f9f9f9;
+            border: 1px solid #333;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .agreement-text {
+            font-size: 10pt;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .signature-area {
+            margin-top: 40px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .signature-box {
+            width: 300px;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .date-line {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 45mm;
+            /* Moved up approx 3 lines (25mm) from 20mm */
+            right: 20mm;
+            font-size: 10pt;
+            text-align: right;
+        }
+
+        .company-name {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        @media print {
+            body {
+                background: none;
+                width: auto;
+            }
+
+            .sheet {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+
+            .sheet:last-child {
+                page-break-after: auto;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ 印刷 / PDF保存</button>
+
+    <!-- Page 1 -->
+    <div class="sheet">
+        <h1>物品の査定・買取および処分に関する同意書</h1>
+
+        <div class="date-line">
+            日付：20__ 年 __ 月 __ 日
+        </div>
+
+        <div class="description">
+            私（依頼者）は、株式会社スマイリード（以下「貴社」）に対し、物品の査定・買取・処分を依頼するにあたり、以下の事項について確認し、同意いたします。
+        </div>
+
+        <div class="section">
+            <div class="section-title">1. 対象物品の区分と一時預かりの同意</div>
+            <div class="description" style="margin-bottom:10px;">
+                以下の区分に従い、対象物品をご記入ください。<br>
+                <b>※いずれの場合も、正確な査定を行うため貴社にて「一時預かり（持ち出し）」とすることに同意します。</b>
+            </div>
+
+            <div class="category-box">
+                <div class="category-title">① 買取希望（値段がつかない場合は処分）</div>
+                <div class="input-area"><span style="color:#ccc;">(物品名を記入)</span></div>
+            </div>
+
+            <div class="category-box">
+                <div class="category-title">② 査定のみ（金額提示後に買取可否を判断）</div>
+                <div class="input-area"><span style="color:#ccc;">(物品名を記入)</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">◆ 買取・査定および現物照会の手順</div>
+            <div style="font-size: 10.5pt; line-height: 1.6;">
+                <p>お預かりする物品は、トラブル防止のため以下の手順で管理いたします。</p>
+                <ol style="margin-left: 20px; padding-left: 0;">
+                    <li>担当スタッフが対象物品の<b>写真を撮影</b>し、記録として残します。</li>
+                    <li>撮影した写真をその場で（お客様）にご提示し、<b>お品物に間違いがないか相互確認</b>を行います。</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="sheet">
+        <div class="section" style="margin-top: 20px;">
+            <div class="section-title">2. 現物照会写真の共有について</div>
+            <div style="font-size: 11pt; margin-bottom: 10px;">
+                お預かり時に撮影した記録写真の共有を希望されますか？
+            </div>
+
+            <div class="photo-option">
+                <div class="check-item">
+                    <span class="check-box"></span>
+                    <div><b>希望する</b> （LINE等のデータ送付にて共有）</div>
+                </div>
+            </div>
+
+            <div class="photo-option" style="background: #fff3f3; border-color: #c0392b;">
+                <div class="check-item">
+                    <span class="check-box"></span>
+                    <div><b>希望しない</b></div>
+                </div>
+                <div class="note" style="color: #c0392b; font-weight:bold;">
+                    ※「希望しない」を選択された場合、貴社による写真データの管理（保存期間終了後の削除等）に関して、後日一切の異議・開示請求を行わないことに同意します。
+                </div>
+            </div>
+        </div>
+
+        <div class="agreement-box">
+            <div class="section-title" style="border-left-color: #c0392b;">免責および異議申し立ての放棄</div>
+            <div class="agreement-text">
+                上記の手順（写真による現物照会および一時預かり）を経て処理された物品に関して、その後の返還請求、損害賠償請求、クレーム等の申し立ては一切行わないことを誓約いたします。
+            </div>
+
+            <div class="signature-area">
+                <div class="signature-box">
+                    <div>ご署名欄</div>
+                    <div class="signature-line"></div>
+                    <div style="font-size: 9pt;">（自署にてお願いいたします）</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="company-name">株式会社スマイリード</div>
+            札幌市中央区南７条西２丁目2-10<br>
+            パラスト中島公園102号<br>
+            TEL：0120-651-340
+        </div>
+    </div>
+</body>
+
+</html>

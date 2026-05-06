@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作業日程表 - スマイルケア</title>
+    <meta name="description" content="現場スタッフ向けの作業日程表。スケジュールの確認とチェックリストの管理が可能です。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --secondary-hover: #059669;
+            --danger: #EF4444;
+            --danger-hover: #DC2626;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 1.5rem 1rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), #818CF8);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .header p { font-size: 0.9rem; opacity: 0.9; }
+
+        .content { padding: 2rem; }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        input[type="text"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            background-color: #F9FAFB;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        input[type="text"]:focus,
+        input[type="time"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            background-color: #FFFFFF;
+        }
+
+        textarea { resize: vertical; min-height: 80px; }
+
+        .checklist-section {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed var(--border-color);
+        }
+
+        .checklist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .checklist-header h2 { font-size: 1.25rem; color: var(--text-main); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+
+        .btn-sm { padding: 0.25rem 0.5rem; font-size: 0.75rem; }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover { background: var(--primary); color: white; }
+
+        .btn-danger { background: transparent; color: var(--danger); }
+        .btn-danger:hover { background: #FEE2E2; }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            width: 100%;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            width: 100%;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .checklist-items { list-style: none; }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            background: #F9FAFB;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            gap: 1rem;
+        }
+
+        .check-item:focus-within { border-color: var(--primary); background: white; }
+
+        .check-item input[type="checkbox"] {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 0.25rem;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .check-item input[type="text"] {
+            flex-grow: 1;
+            border: none;
+            background: transparent;
+            padding: 0.25rem 0;
+            font-size: 1rem;
+            box-shadow: none !important;
+        }
+
+        .check-item input[type="text"]:focus { background: transparent; }
+
+        .check-item.completed input[type="text"] {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .actions {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .actions { grid-template-columns: 1fr; }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-main);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 480px) {
+            .staff-grid { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+
+            .container { box-shadow: none; max-width: 100%; border-radius: 0; }
+
+            .header {
+                background: white !important;
+                color: black !important;
+                padding: 1rem 0;
+                border-bottom: 2px solid black;
+            }
+
+            .actions, .btn-outline, .btn-danger { display: none !important; }
+
+            input[type="text"],
+            input[type="time"],
+            select,
+            textarea {
+                border: none;
+                border-bottom: 1px solid #ccc;
+                background: transparent;
+                padding: 0.25rem 0;
+                border-radius: 0;
+            }
+
+            .check-item {
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid #eee;
+                border-radius: 0;
+                padding: 0.5rem 0;
+            }
+
+            .check-item input[type="checkbox"] {
+                border: 1px solid black;
+                appearance: none;
+                -webkit-appearance: none;
+            }
+            .check-item input[type="checkbox"]:checked { background-color: transparent; }
+            .check-item input[type="checkbox"]:checked::after {
+                content: '✔';
+                display: block;
+                text-align: center;
+                line-height: 1.5rem;
+                font-size: 1.2rem;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>📝 作業日程表</h1>
+            <p>本日の作業内容とチェック項目</p>
+        </div>
+
+        <div class="content">
+            <form id="scheduleForm">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="leader">リーダー</label>
+                        <select id="leader" name="leader">
+                            <option value="">選択してください</option>
+                            <option value="平野">平野</option>
+                            <option value="加賀">加賀</option>
+                            <option value="星野">星野</option>
+                            <option value="常盤和">常盤和</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>スタッフ (最大4名)</label>
+                        <div class="staff-grid">
+                            <input type="text" id="staff1" name="staff1" placeholder="スタッフ1">
+                            <input type="text" id="staff2" name="staff2" placeholder="スタッフ2">
+                            <input type="text" id="staff3" name="staff3" placeholder="スタッフ3">
+                            <input type="text" id="staff4" name="staff4" placeholder="スタッフ4">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startTime">開始時間</label>
+                        <select id="startTime" name="startTime"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime">終了予定時間</label>
+                        <select id="endTime" name="endTime"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskContent">作業内容</label>
+                    <select id="taskContent" name="taskContent">
+                        <option value="">選択してください</option>
+                        <option value="引越し">引越し</option>
+                        <option value="家財整理">家財整理</option>
+                        <option value="家電搬入">家電搬入</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="meetingPlace">集合場所</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="meetingPlace" name="meetingPlace" placeholder="例: 本社 / 建物名など">
+                        <a id="mapLink" href="#" target="_blank" class="btn btn-outline" style="white-space: nowrap; text-decoration: none; transition: opacity 0.2s;">
+                            🗺️ 地図
+                        </a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="relocationPlace">移転場所（引越しの場合）</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="relocationPlace" name="relocationPlace" placeholder="引越しがない場合は空欄">
+                        <a id="relocationMapLink" href="#" target="_blank" class="btn btn-outline" style="white-space: nowrap; text-decoration: none; transition: opacity 0.2s;">
+                            🗺️ 地図
+                        </a>
+                    </div>
+                </div>
+
+                <div class="checklist-section">
+                    <div class="checklist-header">
+                        <h2>✅ チェック項目</h2>
+                        <button type="button" class="btn btn-outline btn-sm" id="addCheckItemBtn">＋ 項目を追加</button>
+                    </div>
+                    <ul class="checklist-items" id="checklist"></ul>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn btn-primary" id="shareBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        共有URLをコピー
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="printBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        PDF化 / 印刷
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">URLをクリップボードにコピーしました！</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ---- DOM 参照 ----
+            var checklistEl      = document.getElementById('checklist');
+            var addCheckItemBtn  = document.getElementById('addCheckItemBtn');
+            var shareBtn         = document.getElementById('shareBtn');
+            var printBtn         = document.getElementById('printBtn');
+            var toast            = document.getElementById('toast');
+            var startTimeSelect  = document.getElementById('startTime');
+            var endTimeSelect    = document.getElementById('endTime');
+
+            var textFields = ['leader', 'staff1', 'staff2', 'staff3', 'staff4',
+                              'startTime', 'endTime', 'taskContent', 'meetingPlace', 'relocationPlace'];
+
+            // ---- 状態 ----
+            var checkItems = [];
+            var timeoutId  = null;
+
+            // ---- 関数定義 ----
+
+            function generateTimeOptions() {
+                var opts = '<option value="">選択してください</option>';
+                for (var h = 8; h <= 19; h++) {
+                    for (var m = 0; m < 60; m += 30) {
+                        if (h === 19 && m > 0) break;
+                        var hh   = String(h).padStart(2, '0');
+                        var mm   = String(m).padStart(2, '0');
+                        opts += '<option value="' + hh + ':' + mm + '">' + h + ':' + mm + '</option>';
+                    }
+                }
+                return opts;
+            }
+
+            function setupMapLink(inputId, linkId) {
+                var inp  = document.getElementById(inputId);
+                var link = document.getElementById(linkId);
+                function update() {
+                    var val = inp.value.trim();
+                    if (val) {
+                        link.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(val);
+                        link.style.opacity = '1';
+                        link.style.pointerEvents = 'auto';
+                    } else {
+                        link.style.opacity = '0.3';
+                        link.style.pointerEvents = 'none';
+                    }
+                }
+                inp.addEventListener('input', update);
+                return update;
+            }
+
+            function createCheckItemElement(id, text, isChecked) {
+                var li = document.createElement('li');
+                li.className = 'check-item' + (isChecked ? ' completed' : '');
+                li.dataset.id = id;
+
+                var checkbox    = document.createElement('input');
+                checkbox.type  = 'checkbox';
+                checkbox.checked = isChecked;
+                checkbox.addEventListener('change', function (e) {
+                    li.classList.toggle('completed', e.target.checked);
+                    updateCheckItem(id, { isChecked: e.target.checked });
+                });
+
+                var inp       = document.createElement('input');
+                inp.type      = 'text';
+                inp.value     = text;
+                inp.placeholder = 'チェック内容を入力';
+                inp.addEventListener('input', function (e) {
+                    updateCheckItem(id, { text: e.target.value });
+                });
+
+                var delBtn       = document.createElement('button');
+                delBtn.type      = 'button';
+                delBtn.className = 'btn btn-sm btn-danger';
+                delBtn.innerHTML = '✖';
+                delBtn.title     = '削除';
+                delBtn.addEventListener('click', function () {
+                    li.remove();
+                    removeCheckItem(id);
+                });
+
+                li.appendChild(checkbox);
+                li.appendChild(inp);
+                li.appendChild(delBtn);
+                return li;
+            }
+
+            function addCheckItem(text, isChecked, id) {
+                text      = text      !== undefined ? text      : '';
+                isChecked = isChecked !== undefined ? isChecked : false;
+                id        = id        !== undefined ? id        : Date.now().toString();
+
+                var item = { id: id, text: text, isChecked: isChecked };
+                checkItems.push(item);
+                var el = createCheckItemElement(id, text, isChecked);
+                checklistEl.appendChild(el);
+
+                if (!text) {
+                    el.querySelector('input[type="text"]').focus();
+                }
+
+                updateUrlStateDebounced();
+            }
+
+            function updateCheckItem(id, updates) {
+                var item = checkItems.find(function (i) { return i.id === id; });
+                if (item) {
+                    Object.assign(item, updates);
+                    updateUrlStateDebounced();
+                }
+            }
+
+            function removeCheckItem(id) {
+                checkItems = checkItems.filter(function (i) { return i.id !== id; });
+                updateUrlStateDebounced();
+            }
+
+            function getState() {
+                var state = {};
+                textFields.forEach(function (fid) {
+                    state[fid] = document.getElementById(fid).value;
+                });
+                state.checkItems = checkItems.map(function (item) {
+                    return { text: item.text, isChecked: item.isChecked };
+                });
+                return state;
+            }
+
+            function updateUrlStateDebounced() {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(updateUrlState, 500);
+            }
+
+            function updateUrlState() {
+                var state      = getState();
+                var jsonStr    = JSON.stringify(state);
+                var compressed = LZString.compressToEncodedURIComponent(jsonStr);
+                window.history.replaceState(null, '', '#' + compressed);
+            }
+
+            function showToast() {
+                toast.classList.add('show');
+                setTimeout(function () { toast.classList.remove('show'); }, 3000);
+            }
+
+            function generateAndCopyUrl() {
+                updateUrlState();
+                navigator.clipboard.writeText(window.location.href).then(function () {
+                    showToast();
+                }).catch(function (err) {
+                    console.error('クリップボードへのコピーに失敗しました', err);
+                    alert('URLのコピーに失敗しました。手動でURLバーからコピーしてください。');
+                });
+            }
+
+            function loadFromUrl() {
+                var hash = window.location.hash.substring(1);
+                if (!hash) {
+                    addCheckItem('戸締り・清掃・搬出忘れ確認', false);
+                    addCheckItem('完了写真・トランクルームチェック', false);
+                    addCheckItem('お客様（管理人）への最終確認・ご挨拶', false);
+                    return;
+                }
+
+                try {
+                    var jsonStr = LZString.decompressFromEncodedURIComponent(hash);
+                    var state   = JSON.parse(jsonStr);
+
+                    textFields.forEach(function (fid) {
+                        if (state[fid] !== undefined) {
+                            document.getElementById(fid).value = state[fid];
+                        }
+                    });
+
+                    if (state.checkItems && Array.isArray(state.checkItems)) {
+                        state.checkItems.forEach(function (item) {
+                            addCheckItem(item.text, item.isChecked);
+                        });
+                    }
+
+                    updateMeetingMap();
+                    updateRelocationMap();
+                } catch (e) {
+                    console.error('URLデータのパースに失敗しました', e);
+                    alert('データの読み込みに失敗しました。URLが壊れている可能性があります。');
+                }
+            }
+
+            // ---- 初期化 ----
+
+            // 時間セレクト生成
+            var timeOptions = generateTimeOptions();
+            startTimeSelect.innerHTML = timeOptions;
+            endTimeSelect.innerHTML   = timeOptions;
+
+            // マップリンク
+            var updateMeetingMap    = setupMapLink('meetingPlace', 'mapLink');
+            var updateRelocationMap = setupMapLink('relocationPlace', 'relocationMapLink');
+            updateMeetingMap();
+            updateRelocationMap();
+
+            // ボタンイベント
+            addCheckItemBtn.addEventListener('click', function () { addCheckItem(); });
+            shareBtn.addEventListener('click', generateAndCopyUrl);
+            printBtn.addEventListener('click', function () { window.print(); });
+
+            // テキストフィールド変更検知
+            textFields.forEach(function (fid) {
+                var el = document.getElementById(fid);
+                if (!el) return;
+                el.addEventListener('input', updateUrlStateDebounced);
+                el.addEventListener('change', updateUrlStateDebounced);
+            });
+
+            // URL復元（全定義・セットアップ完了後）
+            loadFromUrl();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>洗濯機設置トラブル対応マニュアル</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 0; }
+        body {
+            margin: 0; padding: 0; width: 210mm; min-height: 297mm;
+            font-family: 'Noto Sans JP', sans-serif; color: #333; background: #fff;
+            box-sizing: border-box; font-size: 10pt; line-height: 1.5;
+        }
+        .sheet { width: 100%; padding: 15mm; box-sizing: border-box; }
+        h1 {
+            font-size: 18pt; text-align: center; border-bottom: 3px solid #0056b3;
+            padding-bottom: 10px; margin-bottom: 20px; color: #0056b3;
+        }
+        .section { margin-bottom: 20px; border: 1px solid #ddd; padding: 10px; border-radius: 5px; }
+        .section-title {
+            font-size: 12pt; font-weight: bold; background: #f0f8ff;
+            color: #0056b3; padding: 5px 10px; margin: -10px -10px 10px -10px;
+            border-bottom: 1px solid #ddd; border-radius: 5px 5px 0 0;
+        }
+        .alert { color: #d32f2f; font-weight: bold; }
+        .action-box {
+            background: #fff3cd; border: 1px solid #ffecb5; padding: 10px;
+            margin-top: 5px; border-radius: 4px;
+        }
+        .action-title { font-weight: bold; margin-bottom: 5px; display: block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 5px 10px; text-align: left; }
+        th { background: #f9f9f9; width: 30%; }
+        .print-btn {
+            position: fixed; top: 20px; right: 20px; padding: 8px 16px;
+            background: #0056b3; color: #fff; border: none; border-radius: 4px;
+            cursor: pointer; z-index: 9999;
+        }
+        @media print { .no-print { display: none !important; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ 印刷</button>
+    <div class="sheet">
+        <h1>洗濯機設置トラブル対応マニュアル</h1>
+        <p>現場で以下の状況が発生した場合の統一対応ルールです。</p>
+
+        <div class="section">
+            <div class="section-title">1. 部品不足・設置環境の不備（請求対象）</div>
+            <p>以下のケースでは、必要な部品を購入・設置し、費用を請求します。</p>
+            
+            <table>
+                <tr>
+                    <th>事例</th>
+                    <th>対応アクション</th>
+                </tr>
+                <tr>
+                    <td>
+                        <b>ニップル・継手不足</b><br>
+                        <span style="font-size: 9pt; color: #666;">（蛇口にホースが繋がらない）</span>
+                    </td>
+                    <td>
+                        <div class="action-box">
+                            <span class="action-title">対応：部品購入・設置</span>
+                            1. 適合するニップルを購入する<br>
+                            2. 設置作業を行う<br>
+                            3. <b>部品代 + 作業費</b> を請求<br>
+                            <span class="alert">※管理会社への確認不要（事後報告）</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>排水エルボ不足</b><br>
+                        <span style="font-size: 9pt; color: #666;">（排水口にL字部品がない）</span>
+                    </td>
+                    <td>
+                        <div class="action-box">
+                            <span class="action-title">対応：部品購入・設置</span>
+                            1. 適合するエルボを購入する<br>
+                            2. 設置作業を行う<br>
+                            3. <b>部品代 + 作業費</b> を請求<br>
+                            <span class="alert">※管理会社への確認不要（事後報告）</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>真下排水（排水口が洗濯機の下）</b><br>
+                        <span style="font-size: 9pt; color: #666;">（ホースが潰れて排水できない）</span>
+                    </td>
+                    <td>
+                        <div class="action-box">
+                            <span class="action-title">対応：かさ上げ設置</span>
+                            1. かさ上げ台（ブロック等）を購入する<br>
+                            2. 洗濯機をかさ上げして設置<br>
+                            3. <b>部材代 + 作業費</b> を請求<br>
+                            <span class="alert">※管理会社への確認不要（事後報告）</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">2. 報告事項（設置不可・リスクあり）</div>
+            <p>以下のケースでは、勝手な判断で工事を行わず、必ず報告を行ってください。</p>
+
+            <table>
+                <tr>
+                    <th>事例</th>
+                    <th>対応アクション</th>
+                </tr>
+                <tr>
+                    <td>
+                        <b>排水トラップ未設置</b><br>
+                        <span style="font-size: 9pt; color: #666;">（下水の臭い・虫・水漏れリスク）</span>
+                    </td>
+                    <td>
+                        <div class="action-box" style="background-color: #ffebee; border-color: #ffcdd2;">
+                            <span class="action-title" style="color: #c62828;">対応：要報告（水漏れリスクあり）</span>
+                            管理会社または担当者に「排水トラップがなく、水漏れや悪臭のリスクがある」旨を報告。<br>
+                            指示を仰ぐこと。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>水抜きされている</b><br>
+                        <span style="font-size: 9pt; color: #666;">（通水確認ができない）</span>
+                    </td>
+                    <td>
+                        <div class="action-box" style="background-color: #e3f2fd; border-color: #bbdefb;">
+                            <span class="action-title" style="color: #1565c0;">対応：要報告（動作確認不可）</span>
+                            「水抜き中のため通水テスト・動作確認ができていない」旨を報告書に記載し、担当者に伝える。
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">3. 費用の目安（請求時）</div>
+            <ul>
+                <li><b>作業費（一律）：2,000円</b></li>
+                <li><b>部品代</b>：実費（レシート保管のこと）</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

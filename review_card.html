@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>口コミ依頼カード (はがきサイズ)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Yomogi&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+            /* Center for screen preview */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        /* A4 Sheet Context for Print */
+        .sheet {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            padding: 10mm;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10mm;
+        }
+
+        /* Postcard Individual Style */
+        .postcard {
+            width: 100%;
+            /* Fits grid cell */
+            height: 100%;
+            border: 1px dashed #ccc;
+            /* Cut adjustment line */
+            padding: 5mm;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        .thank-you {
+            font-family: 'Yomogi', cursive;
+            /* Handwritten feel */
+            font-size: 16pt;
+            color: #e67e22;
+            /* Warm orange */
+            margin-bottom: 5px;
+        }
+
+        .main-message {
+            font-size: 10pt;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .qr-section {
+            background: #fef9e7;
+            /* Soft yellow bg */
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            border: 2px solid #f1c40f;
+        }
+
+        .qr-title {
+            font-weight: bold;
+            font-size: 11pt;
+            margin-bottom: 5px;
+            color: #d35400;
+        }
+
+        .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background: #333;
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 8pt;
+        }
+
+        .qr-note {
+            font-size: 8pt;
+            color: #666;
+        }
+
+        .footer {
+            font-size: 8pt;
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 5px;
+            color: #777;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 10pt;
+            color: #333;
+        }
+
+        @media print {
+            body {
+                background: none;
+                display: block;
+                padding: 0;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .print-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Back Side Styles */
+        .back-side {
+            background: #fdfefe;
+        }
+
+        .instruction-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12pt;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            color: #d35400;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .step {
+            width: 32%;
+            background: #fef9e7;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 8pt;
+            box-sizing: border-box;
+            border: 1px solid #f1c40f;
+        }
+
+        .step-num {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #e67e22;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            line-height: 20px;
+            margin-bottom: 3px;
+        }
+
+        .step p {
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .example-box {
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+
+        .example-title {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 5px;
+            color: #2980b9;
+        }
+
+        .example-list {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 9pt;
+            color: #555;
+        }
+
+        .example-list li {
+            margin-bottom: 3px;
+        }
+
+        .footer-note {
+            font-size: 7pt;
+            text-align: right;
+            color: #999;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ PDFで保存 / 印刷</button>
+
+    <div class="sheet">
+        <!-- Card 1 -->
+        <div class="postcard">
+            <div class="header-content">
+                <div class="thank-you">Thank You</div>
+                <h2 style="margin: 0; font-size: 14pt;">ご利用ありがとうございました</h2>
+            </div>
+
+            <div class="main-message">
+                この度は「住まいサポートケア」をご利用いただき、誠にありがとうございました。<br>
+                <br>
+                今後のサービス向上のため、お客様の率直なご感想をお聞かせいただければ幸いです。<br>
+                励みになりますので、ぜひレビュー投稿をお願いいたします。
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-title">スマホで簡単投稿 📱</div>
+                <div class="qr-placeholder" style="background: white; padding: 0;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fsearch.google.com%2Flocal%2Fwritereview%3Fplaceid%3DChIJTcQhSwAnC18RtI7UnPqBKIA%26source%3Dg.page.m._%26utm_source%3Dgbp%26laa%3Dmerchant-review-solicitation"
+                        alt="QR Code" style="width: 100%; height: 100%;">
+                </div>
+                <div class="qr-note">カメラで読み取ってください</div>
+            </div>
+
+            <div class="footer">
+                <div class="logo-text">住まいサポートケア</div>
+                <div>TEL：0120‐651‐340</div>
+            </div>
+        </div>
+
+        <!-- Card 2 (Copy) -->
+        <div class="postcard">
+            <div class="header-content">
+                <div class="thank-you">Thank You</div>
+                <h2 style="margin: 0; font-size: 14pt;">ご利用ありがとうございました</h2>
+            </div>
+            <div class="main-message">
+                この度は「住まいサポートケア」をご利用いただき、誠にありがとうございました。<br>
+                <br>
+                今後のサービス向上のため、お客様の率直なご感想をお聞かせいただければ幸いです。<br>
+                励みになりますので、ぜひレビュー投稿をお願いいたします。
+            </div>
+            <div class="qr-section">
+                <div class="qr-title">スマホで簡単投稿 📱</div>
+                <div class="qr-placeholder" style="background: white; padding: 0;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fsearch.google.com%2Flocal%2Fwritereview%3Fplaceid%3DChIJTcQhSwAnC18RtI7UnPqBKIA%26source%3Dg.page.m._%26utm_source%3Dgbp%26laa%3Dmerchant-review-solicitation"
+                        alt="QR Code" style="width: 100%; height: 100%;">
+                </div>
+                <div class="qr-note">カメラで読み取ってください</div>
+            </div>
+            <div class="footer">
+                <div class="logo-text">住まいサポートケア</div>
+                <div>TEL：0120‐651‐340</div>
+            </div>
+        </div>
+
+        <!-- Card 3 (Copy) -->
+        <div class="postcard">
+            <div class="header-content">
+                <div class="thank-you">Thank You</div>
+                <h2 style="margin: 0; font-size: 14pt;">ご利用ありがとうございました</h2>
+            </div>
+            <div class="main-message">
+                この度は「住まいサポートケア」をご利用いただき、誠にありがとうございました。<br>
+                <br>
+                今後のサービス向上のため、お客様の率直なご感想をお聞かせいただければ幸いです。<br>
+                励みになりますので、ぜひレビュー投稿をお願いいたします。
+            </div>
+            <div class="qr-section">
+                <div class="qr-title">スマホで簡単投稿 📱</div>
+                <div class="qr-placeholder" style="background: white; padding: 0;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fsearch.google.com%2Flocal%2Fwritereview%3Fplaceid%3DChIJTcQhSwAnC18RtI7UnPqBKIA%26source%3Dg.page.m._%26utm_source%3Dgbp%26laa%3Dmerchant-review-solicitation"
+                        alt="QR Code" style="width: 100%; height: 100%;">
+                </div>
+                <div class="qr-note">カメラで読み取ってください</div>
+            </div>
+            <div class="footer">
+                <div class="logo-text">住まいサポートケア</div>
+                <div>TEL：0120‐651‐340</div>
+            </div>
+        </div>
+
+        <!-- Card 4 (Copy) -->
+        <div class="postcard">
+            <div class="header-content">
+                <div class="thank-you">Thank You</div>
+                <h2 style="margin: 0; font-size: 14pt;">ご利用ありがとうございました</h2>
+            </div>
+            <div class="main-message">
+                この度は「住まいサポートケア」をご利用いただき、誠にありがとうございました。<br>
+                <br>
+                今後のサービス向上のため、お客様の率直なご感想をお聞かせいただければ幸いです。<br>
+                励みになりますので、ぜひレビュー投稿をお願いいたします。
+            </div>
+            <div class="qr-section">
+                <div class="qr-title">スマホで簡単投稿 📱</div>
+                <div class="qr-placeholder" style="background: white; padding: 0;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fsearch.google.com%2Flocal%2Fwritereview%3Fplaceid%3DChIJTcQhSwAnC18RtI7UnPqBKIA%26source%3Dg.page.m._%26utm_source%3Dgbp%26laa%3Dmerchant-review-solicitation"
+                        alt="QR Code" style="width: 100%; height: 100%;">
+                </div>
+                <div class="qr-note">カメラで読み取ってください</div>
+            </div>
+            <div class="footer">
+                <div class="logo-text">住まいサポートケア</div>
+                <div>TEL：0120‐651‐340</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Sheet 2: Back Side (Instructions & Examples) -->
+    <div class="sheet">
+        <!-- Card 1 Back -->
+        <div class="postcard back-side">
+            <div class="instruction-title">操作ガイド / 投稿手順</div>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <p>表面の<b>QRコード</b>を<br>カメラで読み取る</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <p>Googleマップの<br><b>口コミ欄が開きます</b></p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <p>星の数を選んで<br>感想を入力して<b>投稿</b>！</p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">💡 記入例 (こんな内容でOKです！)</div>
+                <ul class="example-list">
+                    <li>「スタッフさんが親切でした」</li>
+                    <li>「急な依頼でもすぐ対応してくれました」</li>
+                    <li>「テキパキ作業してくれて助かりました」</li>
+                    <li>「家の中がスッキリして安心しました」</li>
+                </ul>
+            </div>
+            <div class="footer-note">※ Googleアカウントへのログインが必要です</div>
+        </div>
+
+        <!-- Card 2 Back -->
+        <div class="postcard back-side">
+            <div class="instruction-title">操作ガイド / 投稿手順</div>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <p>表面の<b>QRコード</b>を<br>カメラで読み取る</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <p>Googleマップの<br><b>口コミ欄が開きます</b></p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <p>星の数を選んで<br>感想を入力して<b>投稿</b>！</p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">💡 記入例 (こんな内容でOKです！)</div>
+                <ul class="example-list">
+                    <li>「スタッフさんが親切でした」</li>
+                    <li>「急な依頼でもすぐ対応してくれました」</li>
+                    <li>「テキパキ作業してくれて助かりました」</li>
+                    <li>「家の中がスッキリして安心しました」</li>
+                </ul>
+            </div>
+            <div class="footer-note">※ Googleアカウントへのログインが必要です</div>
+        </div>
+
+        <!-- Card 3 Back -->
+        <div class="postcard back-side">
+            <div class="instruction-title">操作ガイド / 投稿手順</div>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <p>表面の<b>QRコード</b>を<br>カメラで読み取る</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <p>Googleマップの<br><b>口コミ欄が開きます</b></p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <p>星の数を選んで<br>感想を入力して<b>投稿</b>！</p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">💡 記入例 (こんな内容でOKです！)</div>
+                <ul class="example-list">
+                    <li>「スタッフさんが親切でした」</li>
+                    <li>「急な依頼でもすぐ対応してくれました」</li>
+                    <li>「テキパキ作業してくれて助かりました」</li>
+                    <li>「家の中がスッキリして安心しました」</li>
+                </ul>
+            </div>
+            <div class="footer-note">※ Googleアカウントへのログインが必要です</div>
+        </div>
+
+        <!-- Card 4 Back -->
+        <div class="postcard back-side">
+            <div class="instruction-title">操作ガイド / 投稿手順</div>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <p>表面の<b>QRコード</b>を<br>カメラで読み取る</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <p>Googleマップの<br><b>口コミ欄が開きます</b></p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <p>星の数を選んで<br>感想を入力して<b>投稿</b>！</p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">💡 記入例 (こんな内容でOKです！)</div>
+                <ul class="example-list">
+                    <li>「スタッフさんが親切でした」</li>
+                    <li>「急な依頼でもすぐ対応してくれました」</li>
+                    <li>「テキパキ作業してくれて助かりました」</li>
+                    <li>「家の中がスッキリして安心しました」</li>
+                </ul>
+            </div>
+            <div class="footer-note">※ Googleアカウントへのログインが必要です</div>
+        </div>
+    </div>
+
+</html>

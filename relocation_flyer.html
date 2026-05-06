@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お引越し・家財整理のご案内 | 住まいサポートケア</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #3a3a3a;
+            background: #f5f5f5;
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== 参考デザイン No.1 ===== */
+
+        /* ヘッダー帯 */
+        .header-band {
+            background: linear-gradient(135deg, #4a7c59 0%, #6aad7a 100%);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-band .company-name {
+            color: #fff;
+            font-size: 11pt;
+            font-weight: 700;
+        }
+
+        .header-band .phone-header {
+            color: #fff;
+            font-size: 11pt;
+            font-weight: 700;
+        }
+
+        .header-band .phone-header span {
+            font-size: 14pt;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        /* メインビジュアル */
+        .main-visual {
+            background: linear-gradient(180deg, #e8f5e9 0%, #f1f8e9 50%, #fff 100%);
+            padding: 40px 35px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .main-visual .catch-copy {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-size: 28pt;
+            font-weight: 700;
+            color: #2e5e3e;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .main-visual .sub-copy {
+            font-size: 13pt;
+            color: #5a8a6a;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .main-visual .target-badge {
+            display: inline-block;
+            background: #fff;
+            border: 2px solid #6aad7a;
+            border-radius: 30px;
+            padding: 8px 25px;
+            font-size: 10pt;
+            color: #4a7c59;
+            font-weight: 700;
+        }
+
+        /* こんなお困りごとセクション */
+        .worry-section {
+            padding: 30px 35px 20px;
+        }
+
+        .section-heading {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-size: 16pt;
+            font-weight: 700;
+            color: #2e5e3e;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #6aad7a;
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        .worry-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .worry-item {
+            display: flex;
+            align-items: center;
+            background: #f9fdf9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 10pt;
+        }
+
+        .worry-item .icon {
+            font-size: 18pt;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .worry-item .text {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* サービス内容 */
+        .service-section {
+            padding: 25px 35px;
+            background: #fafafa;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .service-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+
+        .service-card .s-icon {
+            font-size: 30pt;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .service-card .s-title {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #2e5e3e;
+            margin-bottom: 5px;
+        }
+
+        .service-card .s-desc {
+            font-size: 9pt;
+            color: #777;
+            line-height: 1.5;
+        }
+
+        /* 選ばれる理由 */
+        .reason-section {
+            padding: 25px 35px;
+        }
+
+        .reason-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .reason-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .reason-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #4a7c59;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 11pt;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .reason-text {
+            font-size: 10pt;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .reason-text strong {
+            color: #2e5e3e;
+            display: block;
+            font-size: 10.5pt;
+        }
+
+        /* CTA（お問い合わせ） */
+        .cta-section {
+            margin: 20px 35px;
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6b4c 100%);
+            border-radius: 12px;
+            padding: 25px 30px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .cta-section h3 {
+            font-size: 14pt;
+            font-weight: 700;
+            margin: 0 0 10px;
+        }
+
+        .cta-phone {
+            font-size: 28pt;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin: 5px 0;
+        }
+
+        .cta-phone::before {
+            content: '☎ ';
+            font-size: 22pt;
+        }
+
+        .cta-hours {
+            font-size: 10pt;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .cta-subtitle {
+            font-size: 10pt;
+            opacity: 0.85;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* フッター */
+        .footer {
+            background: #f5f5f5;
+            padding: 15px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-info {
+            font-size: 8.5pt;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .footer-info .company {
+            font-weight: 700;
+            font-size: 10pt;
+            color: #555;
+        }
+
+        .footer-badge {
+            text-align: right;
+            font-size: 8pt;
+            color: #aaa;
+        }
+
+        /* 参考ナンバー */
+        .ref-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 7pt;
+            color: #ccc;
+        }
+
+        /* 印刷ボタン */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #4a7c59;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 9999;
+            font-size: 11pt;
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ PDF保存 / 印刷</button>
+
+    <div class="sheet">
+        <span class="ref-number no-print">参考デザイン No.1</span>
+
+        <!-- ヘッダー帯 -->
+        <div class="header-band">
+            <div class="company-name">🏠 住まいサポートケア</div>
+            <div class="phone-header">📞 <span>0120-651-340</span></div>
+        </div>
+
+        <!-- メインビジュアル -->
+        <div class="main-visual">
+            <div class="catch-copy">
+                お引越し・家財の整理<br>
+                まるごとお手伝いします
+            </div>
+            <div class="sub-copy">ご高齢のお引越しに寄り添い、丁寧にサポートいたします</div>
+            <div class="target-badge">建替え・立退き・住み替え・施設入居をご検討の方へ</div>
+        </div>
+
+        <!-- こんなお困りごとありませんか？ -->
+        <div class="worry-section">
+            <div class="section-heading">こんなお困りごとありませんか？</div>
+            <div class="worry-list">
+                <div class="worry-item">
+                    <span class="icon">📦</span>
+                    <span class="text">荷物が多くて<br>何から手を付ければいいか分からない</span>
+                </div>
+                <div class="worry-item">
+                    <span class="icon">🏠</span>
+                    <span class="text">退去日が決まっているが<br>自分では片付けられない</span>
+                </div>
+                <div class="worry-item">
+                    <span class="icon">👨‍👩‍👧</span>
+                    <span class="text">離れて暮らす家族の<br>引越しを手配したい</span>
+                </div>
+                <div class="worry-item">
+                    <span class="icon">💰</span>
+                    <span class="text">不用品の処分と引越しを<br>まとめて頼みたい</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- サービス内容 -->
+        <div class="service-section">
+            <div class="section-heading">サービス内容</div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <span class="s-icon">🚚</span>
+                    <div class="s-title">お引越し</div>
+                    <div class="s-desc">荷造りから搬出・搬入まで<br>ワンストップで対応します</div>
+                </div>
+                <div class="service-card">
+                    <span class="s-icon">🏡</span>
+                    <div class="s-title">家財整理</div>
+                    <div class="s-desc">残置物の仕分け・<br>整理をお手伝い</div>
+                </div>
+                <div class="service-card">
+                    <span class="s-icon">♻️</span>
+                    <div class="s-title">不用品処分</div>
+                    <div class="s-desc">大型家具・家電も<br>まとめて回収</div>
+                </div>
+                <div class="service-card">
+                    <span class="s-icon">💎</span>
+                    <div class="s-title">買取サービス</div>
+                    <div class="s-desc">ご不要な品物を<br>査定・買取いたします</div>
+                </div>
+                <div class="service-card">
+                    <span class="s-icon">📋</span>
+                    <div class="s-title">各種手続き代行</div>
+                    <div class="s-desc">ライフラインの手続き等<br>もご相談ください</div>
+                </div>
+                <div class="service-card">
+                    <span class="s-icon">🤝</span>
+                    <div class="s-title">施設ご紹介</div>
+                    <div class="s-desc">提携の介護施設・<br>住宅のご案内も可能</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 選ばれる理由 -->
+        <div class="reason-section">
+            <div class="section-heading">選ばれる理由</div>
+            <div class="reason-grid">
+                <div class="reason-item">
+                    <span class="reason-num">1</span>
+                    <div class="reason-text">
+                        <strong>お見積り・ご相談 無料</strong>
+                        お電話やご訪問でお気軽にご相談いただけます
+                    </div>
+                </div>
+                <div class="reason-item">
+                    <span class="reason-num">2</span>
+                    <div class="reason-text">
+                        <strong>明朗会計・追加料金なし</strong>
+                        お見積り後の追加請求は一切いたしません
+                    </div>
+                </div>
+                <div class="reason-item">
+                    <span class="reason-num">3</span>
+                    <div class="reason-text">
+                        <strong>高齢者のお引越し 実績多数</strong>
+                        シニア世代に寄り添った丁寧な対応をお約束します
+                    </div>
+                </div>
+                <div class="reason-item">
+                    <span class="reason-num">4</span>
+                    <div class="reason-text">
+                        <strong>ご家族様からもご依頼OK</strong>
+                        遠方のご家族に代わって全て手配いたします
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h3>まずはお気軽にご相談ください</h3>
+            <div class="cta-phone">0120-651-340</div>
+            <div class="cta-hours">受付時間：9:00〜18:00（年中無休）</div>
+            <div class="cta-subtitle">
+                お電話が難しい方は、このチラシをお手元に保管いただき、<br>
+                ご家族様やケアマネージャー様からご連絡ください
+            </div>
+        </div>
+
+        <!-- フッター -->
+        <div class="footer">
+            <div class="footer-info">
+                <div class="company">株式会社スマイリード</div>
+                札幌市中央区南7条西2丁目2-10 パラスト中島公園102号<br>
+                TEL：0120-651-340
+            </div>
+            <div class="footer-badge">
+                古物商許可<br>
+                北海道公安委員会
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

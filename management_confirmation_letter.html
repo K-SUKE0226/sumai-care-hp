@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>洗濯機設置に伴う追加作業についてのご案内</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+            background: #fff;
+            box-sizing: border-box;
+            font-size: 10pt;
+            line-height: 1.7;
+        }
+
+        .sheet {
+            width: 100%;
+            padding: 20mm;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #333;
+        }
+
+        .intro {
+            margin-bottom: 25px;
+            background: #f8f8f8;
+            padding: 15px;
+            border-left: 4px solid #333;
+        }
+
+        .content {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 13pt;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        .examples {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .example-item {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .example-item:before {
+            content: "●";
+            position: absolute;
+            left: 0;
+        }
+
+        .price-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .price-box .label {
+            font-size: 12pt;
+            margin-bottom: 10px;
+        }
+
+        .price-box .price {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .price-box .detail {
+            font-size: 10pt;
+            margin-top: 10px;
+            color: #666;
+        }
+
+        .note {
+            font-size: 10pt;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 9999;
+            font-size: 12pt;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ 印刷</button>
+    <div class="sheet">
+        <h1>洗濯機設置に伴う追加作業についてのご案内</h1>
+
+        <div class="intro">
+            <p style="margin: 0;">
+                いつもお世話になっております。<br>
+                洗濯機設置時の追加作業について、これまで曖昧にしていた部分を明確化し、<br>
+                今後は下記のルールで統一させていただきます。
+            </p>
+        </div>
+
+        <div class="content">
+            <p>
+                洗濯機の設置現場では、建物の設備状況により追加の部材購入や作業が必要になるケースがございます。<br>
+                再訪問による日程調整の手間や追加出張費の発生を防ぐため、<b>現場判断で必要な対応を行い、規定料金にてご請求</b>させていただきます。
+            </p>
+        </div>
+
+        <div class="section-title">【追加作業が必要になる主なケース】</div>
+        <div class="examples">
+            <div class="example-item">ニップル・継手交換（蛇口の形状不適合など）</div>
+            <div class="example-item">排水エルボ設置（排水口の部品欠品など）</div>
+            <div class="example-item">かさ上げ設置（真下排水で排水ホース経路確保のため）</div>
+            <div class="example-item">その他、設置に必要な部材の追加購入</div>
+        </div>
+
+        <div class="section-title">【追加作業料金（税別）】</div>
+        <div class="price-box">
+            <div class="label">部品代（実費）+ 作業費</div>
+            <div class="price">1,000円 + 2,000円</div>
+            <div class="detail">= 合計 3,000円（税別）</div>
+        </div>
+
+        <div class="note">
+            <b>【補足】</b><br>
+            ※ 部品代は実費1,000円で統一しております（部品の種類やメーカーにより若干変動する場合がございます）<br>
+            ※ 設置後は基本的に動作確認を行いますが、冬季の水抜き時や水道が使用できない場合は設置のみとさせていただきます<br>
+            ※ 上記以外の著しいイレギュラーが発生した場合は、別途ご連絡・ご相談させていただきます<br>
+            ※ ご不明点がございましたら、お気軽にお問い合わせください
+        </div>
+    </div>
+</body>
+
+</html>

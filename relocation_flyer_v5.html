@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おまかせ引越しのご案内 | 住まいサポートケア</title>
+    <!-- Google Fonts: Zen Maru Gothic & Noto Sans JP -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        :root {
+            --brand-orange: #ea5b0c;
+            /* High contrast, warm, energetic */
+            --brand-yellow: #fdbb2d;
+            /* Friendly, accessible */
+            --bg-cream: #fff9f0;
+            /* Soft background */
+            --text-brown: #4a3424;
+            /* Dark brown for text (friendlier than black) */
+            --text-light: #7c6250;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            color: var(--text-brown);
+            background: var(--bg-cream);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sans {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .b {
+            font-weight: 700;
+        }
+
+        .xb {
+            font-weight: 900;
+        }
+
+        /* --- Print Button --- */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--brand-orange);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 9999;
+            font-size: 11pt;
+            box-shadow: 0 4px 12px rgba(234, 91, 12, 0.3);
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-weight: 700;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* --- Header / Top Area --- */
+        .header {
+            background: var(--brand-orange);
+            color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-brand {
+            font-size: 14pt;
+            font-weight: 700;
+        }
+
+        .header-badge {
+            background: #ffffff;
+            color: var(--brand-orange);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11pt;
+            font-weight: 900;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 30px 20px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Warm background shape */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -10%;
+            width: 120%;
+            height: 280px;
+            background: var(--brand-yellow);
+            border-radius: 0 0 50% 50%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-lead {
+            display: inline-block;
+            background: #ffffff;
+            color: var(--brand-orange);
+            font-size: 18pt;
+            font-weight: 900;
+            padding: 8px 25px;
+            border-radius: 30px;
+            border: 3px solid var(--brand-orange);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 0 var(--brand-orange);
+            transform: rotate(-1deg);
+        }
+
+        .hero-catch {
+            font-size: 38pt;
+            font-weight: 900;
+            line-height: 1.25;
+            color: var(--text-brown);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .hero-catch span.highlight {
+            color: var(--brand-orange);
+            font-size: 44pt;
+            display: block;
+            margin-top: 5px;
+            text-shadow: 2px 2px 0px #ffffff, -2px -2px 0px #ffffff, 2px -2px 0px #ffffff, -2px 2px 0px #ffffff;
+        }
+
+        /* Impact Image Area */
+        .hero-image-wrapper {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 6px solid #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            display: block;
+            height: 250px;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        /* Happy Badge on image */
+        .happy-badge {
+            position: absolute;
+            bottom: -15px;
+            right: 20px;
+            background: var(--brand-orange);
+            color: #fff;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18pt;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.2;
+            border: 5px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transform: rotate(10deg);
+        }
+
+        /* --- 3 Points Section --- */
+        .points-section {
+            padding: 40px 30px 20px;
+            flex-grow: 1;
+        }
+
+        .points-title {
+            text-align: center;
+            font-size: 20pt;
+            font-weight: 900;
+            color: var(--brand-orange);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .points-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--brand-yellow);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .point-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 2px solid #f0e9df;
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38pt;
+            color: var(--brand-orange);
+            flex-shrink: 0;
+            border: 2px solid var(--brand-yellow);
+        }
+
+        .card-text {
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 18pt;
+            font-weight: 900;
+            color: var(--brand-orange);
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 13pt;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* --- Trust Box --- */
+        .trust-box {
+            margin: 25px 30px;
+            background: var(--brand-yellow);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .trust-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .t-item {
+            font-size: 14pt;
+            font-weight: 900;
+            color: var(--text-brown);
+        }
+
+        .t-item span {
+            color: #ffffff;
+            background: var(--brand-orange);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-right: 5px;
+            font-size: 12pt;
+        }
+
+        /* --- Footer / CTA Section --- */
+        .cta-section {
+            background: #ffffff;
+            padding: 25px 30px 20px;
+            text-align: center;
+            border-top: 5px solid var(--brand-orange);
+            margin-top: auto;
+        }
+
+        .cta-message {
+            font-size: 18pt;
+            font-weight: 900;
+            color: var(--text-brown);
+            margin-bottom: 15px;
+        }
+
+        .cta-message span {
+            color: var(--brand-orange);
+            border-bottom: 4px solid var(--brand-yellow);
+        }
+
+        .phone-box {
+            display: inline-block;
+            background: var(--bg-cream);
+            border: 3px solid var(--brand-orange);
+            border-radius: 16px;
+            padding: 10px 40px;
+            margin-bottom: 12px;
+        }
+
+        .phone-label {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--brand-orange);
+            margin-bottom: 2px;
+        }
+
+        .phone-number {
+            font-size: 42pt;
+            font-weight: 900;
+            color: var(--brand-orange);
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .phone-number::before {
+            content: '☎';
+            font-size: 30pt;
+            margin-right: 8px;
+            vertical-align: text-bottom;
+        }
+
+        .cta-hours {
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .company-info {
+            font-size: 10pt;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ PDF保存 / 印刷</button>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-brand">住まいサポートケア</div>
+        <div class="header-badge">シニア引越し 対応エリア：札幌・近郊</div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-lead">引越し先の新居は決まった！でも…</div>
+            <div class="hero-catch">
+                片付けも引越しも<br>
+                <span class="highlight">「ぜんぶ丸投げ」</span>
+            </div>
+
+            <div class="hero-image-wrapper">
+                <!-- A bright, friendly image of smiling seniors indicating relief/happiness -->
+                <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?q=80&w=1000&auto=format&fit=crop"
+                    alt="明るくほっとしたシニアご夫婦">
+                <div class="happy-badge">超<br>ラク！</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3 Points Section (Very low text) -->
+    <div class="points-section">
+        <div class="points-title">お電話1本で、すべて解決！</div>
+
+        <div class="point-cards">
+            <!-- Point 1 -->
+            <div class="card">
+                <div class="card-icon">📦</div>
+                <div class="card-text">
+                    <div class="card-title">【引越し】</div>
+                    <div class="card-desc">事前の荷造り不要！<br>梱包から運搬まですべてお任せ。</div>
+                </div>
+            </div>
+
+            <!-- Point 2 -->
+            <div class="card">
+                <div class="card-icon">♻️</div>
+                <div class="card-text">
+                    <div class="card-title">【片付け】</div>
+                    <div class="card-desc">不用品は買取＆スパッと処分！<br>ゴミの分別も不要です。</div>
+                </div>
+            </div>
+
+            <!-- Point 3 -->
+            <div class="card">
+                <div class="card-icon">✨</div>
+                <div class="card-text">
+                    <div class="card-title">【お掃除】</div>
+                    <div class="card-desc">退去後のお部屋の清掃まで<br>ピカピカにして完了します！</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="trust-box">
+        <div class="trust-items">
+            <div class="t-item"><span>1</span> お見積り無料</div>
+            <div class="t-item"><span>2</span> 追加料金なし</div>
+            <div class="t-item"><span>3</span> ご家族の依頼OK</div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+        <div class="cta-message">
+            まずは<span>「引越しを丸投げしたい」</span><br>とお電話ください！
+        </div>
+
+        <div class="phone-box">
+            <div class="phone-label">ご相談・お見積り（専門の相談員が対応します）</div>
+            <div class="phone-number sans">0120-651-340</div>
+        </div>
+
+        <div class="cta-hours">
+            受付時間 9:00〜18:00（年中無休）
+        </div>
+
+        <div class="company-info">
+            株式会社スマイリード ｜ 札幌市中央区南7条西2丁目2-10 パラスト中島公園102号<br>
+            古物商許可：北海道公安委員会
+        </div>
+    </div>
+</body>
+
+</html>

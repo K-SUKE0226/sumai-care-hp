@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【イラスト版】おまかせ引越しのご案内（表面）</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        :root {
+            --brand-terra: #e26139;
+            /* Warm Terracotta */
+            --bg-warm: #fcf9f2;
+            /* Very soft cream background */
+            --text-dark: #3a2517;
+            --text-brown: #5c3a21;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-warm);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 15mm;
+        }
+
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--brand-terra);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 9999;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-weight: 800;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* --- Custom Frame using "VectorShelf" style SVG line --- */
+        .page-frame {
+            position: absolute;
+            top: 10mm;
+            left: 10mm;
+            right: 10mm;
+            bottom: 10mm;
+            border: 3px solid var(--text-dark);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        /* Hand-drawn corner accents */
+        .page-frame::before,
+        .page-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--brand-terra);
+            border-radius: 50%;
+        }
+
+        .page-frame::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .page-frame::after {
+            bottom: -10px;
+            right: -10px;
+        }
+
+        .content-wrap {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* --- Top Section --- */
+        .top-area {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .top-illustration {
+            /* 📍 【画像差し替えポイント】えんぴつ素材の「キラキラ」や「矢印」 */
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            width: 60px;
+            opacity: 0.8;
+        }
+
+        .top-illustration-right {
+            /* 📍 【画像差し替えポイント】しぐれにの「小鳥」や「葉っぱ」 */
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 50px;
+        }
+
+        .main-catch {
+            font-size: 30pt;
+            font-weight: 900;
+            line-height: 1.3;
+        }
+
+        .main-catch span.big {
+            font-size: 44pt;
+            color: var(--brand-terra);
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* --- Center Hero Image (Linustock / Shigureni style) --- */
+        .hero-image-box {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .hero-img {
+            /* 📍 【画像差し替えポイント】Linustockの「引越しする家族」や、しぐれにの「ほっとする女の子」の大きなイラストをここに */
+            max-width: 90%;
+            max-height: 380px;
+            object-fit: contain;
+            /* Placeholder styling to look like a placeholder */
+            background: #fff;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .hero-badge {
+            /* 📍 【画像差し替えポイント】ハンコでアソブの「おすすめスタンプ」 */
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            width: 90px;
+            transform: rotate(-10deg);
+        }
+
+        /* --- 3 Illustrated Points --- */
+        .illustrated-points {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .i-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 30%;
+        }
+
+        .i-icon {
+            /* 📍 【画像差し替えポイント】えんぴつ素材の「段ボール」「ほうき」「トラック」などのイラスト */
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+            background: #fff;
+            border: 2px dashed #e26139;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            color: #e26139;
+        }
+
+        .i-text {
+            font-size: 12pt;
+            font-weight: 800;
+            line-height: 1.4;
+            color: var(--text-dark);
+        }
+
+        .i-text span {
+            color: var(--brand-terra);
+            font-size: 14pt;
+        }
+
+        /* --- Bottom CTA (Hand-drawn style) --- */
+        .bottom-cta {
+            border: 4px solid var(--text-dark);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            background: #ffffff;
+            position: relative;
+            box-shadow: 6px 6px 0px rgba(226, 97, 57, 0.2);
+            /* Terracotta shadow */
+        }
+
+        .cta-arrow {
+            /* 📍 【画像差し替えポイント】えんぴつ素材の「くるくる矢印」 */
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+        }
+
+        .cta-lead {
+            font-size: 16pt;
+            font-weight: 900;
+            color: var(--brand-terra);
+            margin-bottom: 10px;
+        }
+
+        .p-number {
+            font-size: 42pt;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+        }
+
+        .p-number::before {
+            content: '☎ ';
+            font-size: 32pt;
+            color: var(--brand-terra);
+        }
+
+        .cta-sub {
+            font-size: 11pt;
+            margin-top: 10px;
+            font-weight: 800;
+            color: var(--text-brown);
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ 第1面（表）を印刷</button>
+    <div class="page-frame"></div>
+
+    <div class="content-wrap">
+
+        <!-- Top Title -->
+        <div class="top-area">
+            <!-- ⬇️ [えんぴつ素材] キラキラや装飾の画像URLに差し替えてください -->
+            <img src="https://via.placeholder.com/60/ffffff/e26139?text=Kirakira" class="top-illustration" alt="装飾">
+            <img src="https://via.placeholder.com/50/ffffff/e26139?text=Leaf" class="top-illustration-right" alt="装飾">
+
+            <div class="main-catch">
+                引越し・片付け・掃除<br>
+                <span class="big">ぜ〜んぶ「丸投げ」</span>
+            </div>
+            <div style="font-size: 16pt; font-weight: 800; margin-top: 8px;">専門スタッフにお任せください！</div>
+        </div>
+
+        <!-- Center Interactive/Visual Area -->
+        <div class="hero-image-box">
+            <!-- ⬇️ [Linustock または しぐれに] の一番大きなメインイラストURLに差し替えてください -->
+            <img src="https://via.placeholder.com/500x350/ffffff/3a2517?text=ここに「引越し」メイン画像%0A(Linustockなど)"
+                class="hero-img" alt="メインイラスト">
+
+            <!-- ⬇️ [ハンコでアソブ] のスタンプ風画像のURLに差し替えてください -->
+            <img src="https://via.placeholder.com/90/e26139/ffffff?text=Stamp" class="hero-badge" alt="ハンコ">
+        </div>
+
+        <!-- 3 Hand-drawn Points -->
+        <div class="illustrated-points">
+            <div class="i-point">
+                <!-- ⬇️ [えんぴつ素材] のイラストURLに差し替えてください（段ボール等） -->
+                <div class="i-icon"><img src="https://via.placeholder.com/60/ffffff/e26139?text=Box"
+                        style="border-radius:50%;" alt="箱"></div>
+                <div class="i-text">面倒な<span>荷造り</span><br>しなくてOK!</div>
+            </div>
+            <div class="i-point">
+                <!-- ⬇️ [えんぴつ素材] のイラストURLに差し替えてください（リサイクル・掃除等） -->
+                <div class="i-icon"><img src="https://via.placeholder.com/60/ffffff/e26139?text=Recycle"
+                        style="border-radius:50%;" alt="買取"></div>
+                <div class="i-text">不用品も同時に<br><span>買取＆処分!</span></div>
+            </div>
+            <div class="i-point">
+                <!-- ⬇️ [えんぴつ素材] のイラストURLに差し替えてください（ほうき・ピカピカ等） -->
+                <div class="i-icon"><img src="https://via.placeholder.com/60/ffffff/e26139?text=Sweep"
+                        style="border-radius:50%;" alt="掃除"></div>
+                <div class="i-text">退去時の<br><span>お掃除</span>まで!</div>
+            </div>
+        </div>
+
+        <!-- Bottom Call to Action -->
+        <div class="bottom-cta">
+            <!-- ⬇️ [えんぴつ素材] の矢印イラストURLに差し替えてください -->
+            <img src="https://via.placeholder.com/40/ffffff/e26139?text=Arrow" class="cta-arrow" alt="矢印">
+
+            <div class="cta-lead">＼ 「お引越しをとにかくラクにしたい！」と思ったら ／</div>
+            <div class="p-number">0120-651-340</div>
+            <div class="cta-sub">
+                受付：9:00〜18:00（年中無休・お見積り無料）<br>
+                ※裏面に「安心の理由」と「詳しい流れ」を掲載しています！
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

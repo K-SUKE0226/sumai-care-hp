@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>残置物撤去チラシ（インパクト案）</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            height: 297mm;
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #f1c40f;
+            /* Warning Yellow */
+            color: #000;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 10mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            border: 10mm solid #000;
+            /* Black Border */
+        }
+
+        /* Header */
+        .header-box {
+            background: #000;
+            color: #f1c40f;
+            text-align: center;
+            padding: 10px;
+            font-size: 24pt;
+            font-weight: 900;
+            transform: skewX(-10deg);
+            margin-bottom: 20px;
+        }
+
+        /* Main Copy */
+        .main-copy {
+            font-size: 48pt;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 #fff;
+        }
+
+        .sub-copy {
+            font-size: 20pt;
+            text-align: center;
+            font-weight: bold;
+            background: #c0392b;
+            color: white;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Visuals */
+        .visual-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: #000;
+            padding: 10px;
+        }
+
+        .photo {
+            width: 50%;
+            height: 200px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20pt;
+            font-weight: bold;
+            color: #ccc;
+            position: relative;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo::after {
+            content: "BEFORE";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #000;
+            color: white;
+            padding: 5px 10px;
+        }
+
+        .photo:last-child::after {
+            content: "AFTER";
+            background: #c0392b;
+        }
+
+        /* Bullet Points */
+        .points {
+            background: #fff;
+            padding: 20px;
+            border: 5px solid #000;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+            margin-bottom: auto;
+        }
+
+        .point-item {
+            font-size: 22pt;
+            font-weight: 900;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .check {
+            color: #c0392b;
+            margin-right: 10px;
+            font-size: 30pt;
+        }
+
+        /* Footer */
+        .footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .tel-label {
+            font-size: 18pt;
+            color: #f1c40f;
+        }
+
+        .tel {
+            font-size: 56pt;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .company {
+            font-size: 12pt;
+            margin-top: 10px;
+        }
+
+        /* Tape Effect */
+        .tape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            width: 150px;
+            height: 40px;
+            transform: rotate(-45deg);
+            top: 20px;
+            left: -40px;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-box">管理会社様 緊急連絡先</div>
+
+        <div class="main-copy">
+            次の入居が決まっているのに<br>
+            <span style="color: #c0392b;">部屋が片付かない！！</span>
+        </div>
+
+        <div class="sub-copy">
+            夜逃げ・ゴミ屋敷・孤独死…どんな汚部屋も即日撤去
+        </div>
+
+        <div class="visual-area">
+            <div class="photo"><img src="https://placehold.co/400x300/333/FFF?text=ゴミ屋敷" alt="Before"></div>
+            <div class="photo"><img src="https://placehold.co/400x300/27ae60/FFF?text=完全撤去" alt="After"></div>
+        </div>
+
+        <div class="points">
+            <div class="point-item"><span class="check">✔</span> 立ち会い不要！</div>
+            <div class="point-item"><span class="check">✔</span> 鍵預かりOK！</div>
+            <div class="point-item"><span class="check">✔</span> 完了報告は写真で！</div>
+            <div class="point-item"><span class="check">✔</span> 秘密厳守！</div>
+        </div>
+
+        <div class="footer">
+            <div class="tel-label">「残置物撤去」とお電話ください</div>
+            <div class="tel">0120-651-340</div>
+            <div class="company">株式会社スマイリード（担当：〇〇）</div>
+        </div>
+    </div>
+</body>
+
+</html>

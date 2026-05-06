@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おまかせ引越しのご案内【表面】 | 住まいサポートケア</title>
+    <!-- M PLUS Rounded 1c is excellent for a warm, hand-drawn, friendly feel -->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        :root {
+            --brand-terra: #e26139;
+            /* Warm Terracotta / Burnt Orange */
+            --bg-warm: #fff9f0;
+            /* Soft old-paper white */
+            --text-dark: #3a2517;
+            /* Extremely dark brown instead of black */
+            --text-brown: #5c3a21;
+            --accent-yellow: #f4c241;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-warm);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Hand-drawn border effect --- */
+        .page-border {
+            position: absolute;
+            top: 8mm;
+            left: 8mm;
+            right: 8mm;
+            bottom: 8mm;
+            border: 3px solid var(--brand-terra);
+            border-radius: 20px 10px 15px 25px;
+            /* Irregular border for hand-drawn feel */
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .page-border::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border: 1px dashed var(--brand-terra);
+            border-radius: 10px 20px 25px 15px;
+            opacity: 0.6;
+        }
+
+        /* --- Print Button --- */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--brand-terra);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 9999;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-weight: 800;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .content-wrap {
+            padding: 15mm;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Top Section --- */
+        .top-area {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header-title {
+            font-size: 15pt;
+            color: var(--brand-terra);
+            background: #ffffff;
+            display: inline-block;
+            padding: 4px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--brand-terra);
+            margin-bottom: 15px;
+            box-shadow: 2px 2px 0px rgba(226, 97, 57, 0.2);
+        }
+
+        .main-catch {
+            font-size: 32pt;
+            font-weight: 900;
+            line-height: 1.3;
+            color: var(--text-dark);
+        }
+
+        .main-catch span.big {
+            font-size: 46pt;
+            color: var(--brand-terra);
+            display: block;
+            margin-top: 5px;
+        }
+
+        .sub-catch {
+            font-size: 18pt;
+            font-weight: 800;
+            margin-top: 10px;
+            background: linear-gradient(transparent 70%, var(--accent-yellow) 70%);
+            display: inline-block;
+            padding: 0 5px;
+        }
+
+        /* --- Illustration / Middle Area --- */
+        .middle-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Warm hand-drawn style illustration */
+        .illustration-box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .illustration-box img {
+            max-width: 85%;
+            height: auto;
+            /* Applying subtle CSS filter to make harsh stock vectors look softer/warmer if possible */
+            filter: contrast(0.9) sepia(0.2);
+            border-radius: 12px;
+        }
+
+        /* The 3 features in playful balloons */
+        .features-box {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 10px;
+            margin-top: -15px;
+            z-index: 2;
+        }
+
+        .feature-bubble {
+            background: #ffffff;
+            border: 3px solid var(--text-brown);
+            border-radius: 50% 50% 40% 60% / 50% 60% 40% 50%;
+            /* hand-drawn blob shape */
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 4px 4px 0px rgba(92, 58, 33, 0.1);
+        }
+
+        .feature-bubble.fb-1 {
+            transform: rotate(-3deg);
+        }
+
+        .feature-bubble.fb-2 {
+            transform: translateY(15px) rotate(2deg);
+            border-color: var(--brand-terra);
+        }
+
+        .feature-bubble.fb-3 {
+            transform: rotate(-5deg);
+        }
+
+        .fb-icon {
+            font-size: 30pt;
+            margin-bottom: 5px;
+        }
+
+        .fb-text {
+            font-size: 13pt;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+
+        /* --- Bottom CTA Area --- */
+        .bottom-cta {
+            background: var(--brand-terra);
+            border-radius: 15px 25px 15px 20px;
+            padding: 25px 20px;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-lead {
+            font-size: 18pt;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .phone-wrapper {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 10px 20px;
+            display: inline-block;
+            color: var(--brand-terra);
+            border: 3px solid var(--text-dark);
+            box-shadow: 2px 3px 0px var(--text-dark);
+        }
+
+        .p-label {
+            font-size: 12pt;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: -5px;
+        }
+
+        .p-number {
+            font-size: 46pt;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        .p-number::before {
+            content: '☎ ';
+            font-size: 34pt;
+        }
+
+        .cta-sub {
+            font-size: 11pt;
+            margin-top: 15px;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ 第1面（表）を印刷</button>
+    <div class="page-border"></div>
+
+    <div class="content-wrap">
+
+        <!-- Top Title -->
+        <div class="top-area">
+            <div class="header-title">👵 シニアのお引越し専門 👴</div>
+            <div class="main-catch">
+                引越し・片付け・掃除<br>
+                <span class="big">ぜ〜んぶ「丸投げ」</span>
+            </div>
+            <div class="sub-catch">しませんか？</div>
+        </div>
+
+        <!-- Middle Illustrations & Bubbles -->
+        <div class="middle-area">
+            <!-- Warm, friendly visual (Using a placeholder that fits the family/move vibe) -->
+            <div class="illustration-box">
+                <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?q=80&w=1000&auto=format&fit=crop"
+                    alt="笑顔で引越し">
+            </div>
+
+            <div class="features-box">
+                <div class="feature-bubble fb-1">
+                    <div class="fb-icon">📦</div>
+                    <div class="fb-text">荷造り<br>しなくてOK!</div>
+                </div>
+                <div class="feature-bubble fb-2">
+                    <div class="fb-icon">♻️</div>
+                    <div class="fb-text">不用品も<br>同時に買取・処分!</div>
+                </div>
+                <div class="feature-bubble fb-3">
+                    <div class="fb-icon">✨</div>
+                    <div class="fb-text">退去時の<br>お掃除まで!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Call to Action -->
+        <div class="bottom-cta">
+            <div class="cta-lead">「お引越しをとにかくラクにしたい！」と思ったら</div>
+
+            <div class="phone-wrapper">
+                <div class="p-label">＼ まずはお気軽にお電話ください！ ／</div>
+                <div class="p-number">0120-651-340</div>
+            </div>
+
+            <div class="cta-sub">
+                受付時間 9:00〜18:00（年中無休・お見積り無料）<br>
+                ※裏面に「安心の理由」と「詳しい流れ」を掲載しています！➡︎
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

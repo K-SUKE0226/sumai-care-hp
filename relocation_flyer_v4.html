@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おまかせ引越しのご案内 | 住まいサポートケア</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        :root {
+            --primary-navy: #1a2942;
+            --accent-gold: #c5a880;
+            --accent-gold-dark: #a3865d;
+            --bg-offwhite: #fcfbf9;
+            --text-main: #333333;
+            --text-light: #555555;
+            --border-color: #e5dfd3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 297mm;
+            height: 210mm;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-main);
+            background: var(--bg-offwhite);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .serif {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        /* --- Print Button --- */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--primary-navy);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 9999;
+            font-size: 11pt;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* --- Header / Hero (Top) --- */
+        .hero {
+            height: 85mm;
+            background: var(--primary-navy);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /* High quality subtle interior background to imply a clean, settled home */
+            background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            mix-blend-mode: luminosity;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 5px;
+        }
+
+        .hero-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 5px;
+        }
+
+        .hero-lead {
+            font-size: 16pt;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #e2d5c3;
+        }
+
+        .hero-brand {
+            font-size: 12pt;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        .hero-catch {
+            font-size: 28pt;
+            font-weight: 900;
+            line-height: 1.35;
+            letter-spacing: 2.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-catch span.gold {
+            color: var(--accent-gold);
+        }
+
+        /* --- Main Content Section --- */
+        .main-content {
+            flex: 1;
+            padding: 25px 40px;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Left Panel: Problem & Comparison */
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section-title {
+            font-size: 16pt;
+            font-weight: 700;
+            color: var(--primary-navy);
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 6px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .comparison-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .comparison-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .comparison-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .comp-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .comp-item::before {
+            content: '×';
+            color: #b0a89d;
+            font-size: 13pt;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .comp-item.ok::before {
+            content: '●';
+            color: var(--accent-gold);
+            font-size: 10pt;
+            margin-top: 2px;
+        }
+
+        .comp-item-text {
+            font-size: 9.5pt;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .arrow-down {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 16pt;
+            margin: -8px 0;
+            font-weight: bold;
+        }
+
+        .premium-box {
+            background: var(--primary-navy);
+            color: #ffffff;
+            border-color: var(--primary-navy);
+            position: relative;
+        }
+
+        .premium-box .comparison-title {
+            color: var(--accent-gold);
+            font-size: 12pt;
+        }
+
+        .premium-box .comp-item::before {
+            color: var(--accent-gold);
+        }
+
+        .premium-box .comp-item-text {
+            color: #ffffff;
+        }
+
+        /* Right Panel: 3 Reasons */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .reasons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .reason-card {
+            display: flex;
+            align-items: stretch;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            min-height: 65px;
+        }
+
+        .reason-num {
+            background: var(--accent-gold);
+            color: #ffffff;
+            width: 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .reason-num span {
+            font-size: 7.5pt;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .reason-num div {
+            font-size: 18pt;
+            line-height: 1;
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .reason-text {
+            padding: 8px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .reason-title {
+            font-size: 12pt;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 2px;
+        }
+
+        .reason-desc {
+            font-size: 9pt;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .trusted-badges {
+            margin-top: auto;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-around;
+            background: #f0ece1;
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+
+        .trusted-badges span {
+            font-size: 8.5pt;
+            color: var(--primary-navy);
+            font-weight: 700;
+        }
+
+        .trusted-badges span::before {
+            content: '✓';
+            color: var(--accent-gold-dark);
+            margin-right: 4px;
+        }
+
+        /* --- Footer / CTA Section (Bottom) --- */
+        .cta-section {
+            background: #ffffff;
+            border-top: 3px solid var(--accent-gold);
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 28mm;
+            /* ensure fit */
+        }
+
+        .cta-left {
+            flex: 1;
+        }
+
+        .cta-message {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 4px;
+        }
+
+        .cta-message span {
+            color: var(--accent-gold-dark);
+            border-bottom: 2px solid var(--accent-gold-dark);
+            padding-bottom: 1px;
+        }
+
+        .cta-sub {
+            font-size: 9pt;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .cta-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .cta-phone-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cta-phone {
+            font-size: 30pt;
+            font-weight: 700;
+            color: var(--primary-navy);
+            letter-spacing: 2px;
+            line-height: 1;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .cta-phone::before {
+            content: '✆';
+            font-size: 20pt;
+            color: var(--accent-gold);
+            margin-right: 6px;
+            vertical-align: text-top;
+        }
+
+        .cta-hours {
+            font-size: 9.5pt;
+            color: var(--text-main);
+            font-weight: 700;
+            background: #e8e4df;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .company-info {
+            font-size: 8pt;
+            color: #888888;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ PDF保存 / 印刷</button>
+
+    <!-- Header / Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-top-row">
+                <div class="hero-lead serif">引越し先は決まったけれど、何から手をつければいいか…</div>
+                <div class="hero-brand serif">住まいサポートケア</div>
+            </div>
+            <div class="hero-catch serif">
+                業者選び、荷造り、不用品処分、お掃除まで。<br>
+                ぜんぶ<span class="gold">「丸投げ」</span>で、新しい暮らしへ。
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+
+        <!-- Left Panel: Problem vs Promise -->
+        <div class="left-panel">
+            <div>
+                <h2 class="section-title serif">お引越しの「めんどう」、すべて解決します</h2>
+            </div>
+
+            <div class="comparison-box">
+                <div class="comparison-title">一般的なお引越しの場合…</div>
+                <div class="comparison-items">
+                    <div class="comp-item">
+                        <div class="comp-item-text">引越し業者、不用品回収業者などを別々に探して手配する手間</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-item-text">何日も前から段ボールを取り寄せ、少しずつ自分で荷造りする労力</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-item-text">自治体のルールに合わせて粗大ゴミを予約し、外まで運び出す大変さ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-down serif">↓</div>
+
+            <div class="comparison-box premium-box">
+                <div class="comparison-title serif">当社の『おまかせ引越し』なら</div>
+                <div class="comparison-items">
+                    <div class="comp-item ok">
+                        <div class="comp-item-text"><b>お電話一本で手配完了。</b>すべての工程を当社が一貫して行います。</div>
+                    </div>
+                    <div class="comp-item ok">
+                        <div class="comp-item-text"><b>事前の準備は一切不要。</b>当日はそのままの状態でスタッフにお任せください。</div>
+                    </div>
+                    <div class="comp-item ok">
+                        <div class="comp-item-text"><b>不用品の買取・処分も同時に実施。</b>お部屋の退去清掃まで一括対応いたします。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: 3 Reasons to Choose Us -->
+        <div class="right-panel">
+            <div>
+                <h2 class="section-title serif" style="border-bottom-color: transparent;">選ばれる３つの理由</h2>
+            </div>
+
+            <div class="reasons-list">
+                <div class="reason-card">
+                    <div class="reason-num"><span>理由</span>
+                        <div>1</div>
+                    </div>
+                    <div class="reason-text">
+                        <div class="reason-title serif">完全「丸投げ」OK</div>
+                        <div class="reason-desc">箱詰めから搬出、不用品の仕分けまで、お客様は指をさしてご指示いただくだけで結構です。</div>
+                    </div>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-num"><span>理由</span>
+                        <div>2</div>
+                    </div>
+                    <div class="reason-text">
+                        <div class="reason-title serif">買取・処分を同時進行</div>
+                        <div class="reason-desc">価値あるものはその場で買取。処分費から差し引くため、全体の費用を大幅に抑えることができます。</div>
+                    </div>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-num"><span>理由</span>
+                        <div>3</div>
+                    </div>
+                    <div class="reason-text">
+                        <div class="reason-title serif">シニア引越しの多数の実績</div>
+                        <div class="reason-desc">ご高齢の方特有のお悩み（施設入居、ご家族不在など）に寄り添い、丁寧かつ迅速に対応します。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trusted-badges">
+                <span>お見積り完全無料</span>
+                <span>追加料金一切なし</span>
+                <span>ご家族からのご依頼も歓迎</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+        <div class="cta-left">
+            <div class="cta-message serif">まずは<span>「引越しを楽にしたい」</span>とお電話ください。</div>
+            <div class="cta-sub">
+                専門の相談員が丁寧にお話を伺います。お見積りは無料です。<br>
+                ご自身でのお電話が難しい場合は、ご家族様からのご相談も承っております。
+            </div>
+        </div>
+        <div class="cta-right">
+            <div class="cta-phone-wrapper">
+                <div class="cta-hours">受付時間 9:00〜18:00 (年中無休)</div>
+                <div class="cta-phone">0120-651-340</div>
+            </div>
+            <div class="company-info">
+                株式会社スマイリード ｜ 札幌市中央区南7条西2丁目2-10 パラスト中島公園102号<br>
+                古物商許可：北海道公安委員会
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

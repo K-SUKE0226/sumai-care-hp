@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重大トラブル対応フロー（会社補償案件）</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            height: 297mm;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+            background: #fff;
+            box-sizing: border-box;
+            background-color: #fcfcfc;
+        }
+
+        .sheet {
+            width: 100%;
+            height: 100%;
+            padding: 15mm 20mm;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 4px solid #c0392b;
+            /* Alarming Red for Critical Issues */
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            font-size: 22pt;
+            margin: 0;
+            color: #c0392b;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #555;
+            background: #eee;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        /* Core Rule Box */
+        .iron-rule {
+            background: #fff3f3;
+            border: 2px solid #e74c3c;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .iron-rule-title {
+            color: #c0392b;
+            font-weight: 900;
+            font-size: 14pt;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .iron-rule-text {
+            font-size: 12pt;
+            font-weight: 700;
+        }
+
+        /* Flowchart Area */
+        .flow-container {
+            position: relative;
+            height: 350px;
+            margin-bottom: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 1px dashed #ccc;
+            padding: 20px;
+        }
+
+        .flow-node {
+            position: absolute;
+            width: 160px;
+            padding: 15px 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* Positions */
+        .node-staff {
+            top: 250px;
+            left: 20px;
+            background: #e8f6f3;
+            border: 2px solid #1abc9c;
+            color: #16a085;
+        }
+
+        .node-leader {
+            top: 250px;
+            right: 20px;
+            background: #eaf2f8;
+            border: 2px solid #3498db;
+            color: #2980b9;
+        }
+
+        .node-hoshino {
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            /* Bigger */
+            height: 100px;
+            background: #2c3e50;
+            border: 3px solid #f1c40f;
+            color: #fff;
+            font-size: 14pt;
+            z-index: 10;
+        }
+
+        .node-hoshino span {
+            font-size: 10pt;
+            font-weight: normal;
+            display: block;
+            margin-bottom: 5px;
+            color: #f1c40f;
+        }
+
+        .node-president {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #95a5a6;
+            border: 2px solid #7f8c8d;
+            color: white;
+            padding: 5px 20px;
+            font-size: 10pt;
+        }
+
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            background: #999;
+        }
+
+        /* Defined with SVG for clearer diagonals */
+        .svg-arrows {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Process Steps */
+        .process-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .step-box {
+            border: 1px solid #ddd;
+            border-left: 5px solid #555;
+            padding: 12px;
+            background: #fff;
+            position: relative;
+        }
+
+        .step-box.highlight {
+            border-left-color: #e74c3c;
+            background: #fffdfd;
+        }
+
+        .step-num {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #555;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            font-size: 11pt;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-box.highlight .step-num {
+            background: #e74c3c;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 12pt;
+            margin-bottom: 5px;
+            padding-left: 20px;
+            display: block;
+        }
+
+        .step-content {
+            font-size: 10pt;
+            padding-left: 20px;
+            line-height: 1.5;
+        }
+
+        .ojt-badge {
+            display: inline-block;
+            background: #f1c40f;
+            color: #333;
+            font-size: 8pt;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            text-align: right;
+            font-size: 9pt;
+            color: #999;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">🖨️ 印刷 / PDF保存</button>
+
+    <div class="sheet">
+        <header>
+            <h1>重大トラブル対応フロー</h1>
+            <div class="subtitle">対象：会社補償を伴う案件</div>
+        </header>
+
+
+
+        <div class="process-section">
+
+            <div class="step-box highlight">
+                <div class="step-num">1</div>
+                <span class="step-title">第一報（現場 → 星野）</span>
+                <div class="step-content">
+                    トラブル発生時、現場リーダーは直ちに星野係長へ連絡を入れる。<br>
+                    ※社長へは取り急ぎ事例だけ報告。また、現場判断での「補償の約束」は厳禁。
+                </div>
+            </div>
+
+            <div class="step-box highlight">
+                <div class="step-num">2</div>
+                <span class="step-title">状況聴取・事実確認（星野）</span>
+                <div class="step-content">
+                    星野係長が現場リーダーおよび同現場スタッフ全員から直接ヒアリングを行う。<br>
+                    「誰が」「いつ」「何を」「どうした」を正確に把握し、全体像を整理する。
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-num">3</div>
+                <span class="step-title">対策策定・社長報告（星野 → 社長）</span>
+                <div class="step-content">
+                    整理した情報を基に、星野係長が「解決策・補償案」を策定する。<br>
+                    社長へ報告し、対応方針の承認を得る。（ここが組織としての意思決定となる）
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-num">4</div>
+                <div style="display:flex; align-items:center;">
+                    <span class="step-title">担当者選任 (または自身で対応)</span>
+                </div>
+                <div class="step-content">
+                    決定した方針に基づき、星野係長が「担当者」を指名、もしくは自身で対応する。<br>
+                    担当をつける場合は、単に指示するだけでなく「なぜその対応をするのか」「どう詫びるのか」を担当者と共有する。
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-num">5</div>
+                <span class="step-title">二人三脚での解決実行</span>
+                <div class="step-content">
+                    選任スタッフが主体となり、星野係長のサポート（二人三脚）のもとで問題解決にあたる。<br>
+                    （星野自身が対応する場合も、現場リーダーに相談しつつ進める）
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-num">6</div>
+                <span class="step-title">最終報告・マニュアル改訂</span>
+                <div class="step-content">
+                    対応完了後、星野係長より社長へ最終報告を行う。<br>
+                    その後事例を社内で共有し、再発防止のため既存のマニュアルをブラッシュアップする。
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            株式会社スマイリード / 重大トラブル対応マニュアル / Ver 1.0
+        </footer>
+    </div>
+</body>
+
+</html>

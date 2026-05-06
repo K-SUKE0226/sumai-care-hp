@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【イラスト版】おまかせ引越しのご案内（裏面）</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        :root {
+            --brand-terra: #e26139;
+            --bg-warm: #fcf9f2;
+            --text-dark: #3a2517;
+            --text-brown: #5c3a21;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-warm);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 15mm;
+        }
+
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--brand-terra);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 9999;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-weight: 800;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* --- Custom Frame matches front --- */
+        .page-frame {
+            position: absolute;
+            top: 10mm;
+            left: 10mm;
+            right: 10mm;
+            bottom: 10mm;
+            border: 3px solid var(--text-dark);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .page-frame::before,
+        .page-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--brand-terra);
+            border-radius: 50%;
+        }
+
+        .page-frame::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .page-frame::after {
+            bottom: -10px;
+            right: -10px;
+        }
+
+        .content-wrap {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* --- Section Titles with VectorShelf style decorations --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .header-deco {
+            /* 📍 【画像差し替えポイント】VectorShelfの「リボン」や「葉っぱの装飾線」 */
+            width: 40px;
+            height: 15px;
+            opacity: 0.7;
+        }
+
+        .section-title {
+            font-size: 20pt;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+
+        /* --- 3 Reasons with Hankode Asobu Stamps --- */
+        .reasons-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .reason-card {
+            background: #fff;
+            border: 2px dashed var(--text-brown);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stamp-num {
+            /* 📍 【画像差し替えポイント】ハンコでアソブの「数字スタンプ（1, 2, 3）」 */
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border: 3px solid #e26139;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24pt;
+            font-weight: 900;
+            color: #e26139;
+            transform: rotate(-5deg);
+            flex-shrink: 0;
+        }
+
+        .r-title {
+            font-size: 15pt;
+            font-weight: 900;
+            color: var(--brand-terra);
+            margin-bottom: 3px;
+        }
+
+        .r-desc {
+            font-size: 11pt;
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--text-brown);
+        }
+
+        /* --- Flow Section with Shigureni/Linustock Icons --- */
+        .flow-container {
+            border: 3px solid var(--text-dark);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .flow-title {
+            text-align: center;
+            font-size: 16pt;
+            font-weight: 900;
+            color: var(--brand-terra);
+            margin-bottom: 15px;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 30%;
+        }
+
+        .step-icon-img {
+            /* 📍 【画像差し替えポイント】しぐれにorLinustockの「電話」「おじぎ」「トラック」 */
+            width: 70px;
+            height: 70px;
+            margin-bottom: 8px;
+            background: var(--bg-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--brand-terra);
+        }
+
+        .step-arrow {
+            /* 📍 【画像差し替えポイント】えんぴつ素材の「手書き矢印」 */
+            width: 30px;
+            margin-top: -30px;
+        }
+
+        .step-num {
+            font-weight: 900;
+            font-size: 12pt;
+            color: var(--text-dark);
+        }
+
+        .step-title {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--text-brown);
+        }
+
+        /* --- Bottom Company Area --- */
+        .company-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            margin-top: auto;
+            gap: 20px;
+        }
+
+        .c-left {
+            flex: 1;
+        }
+
+        .c-message {
+            font-size: 14pt;
+            font-weight: 900;
+            color: var(--brand-terra);
+            margin-bottom: 5px;
+        }
+
+        .c-phone {
+            font-size: 26pt;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .c-hours {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--text-brown);
+            margin-bottom: 10px;
+        }
+
+        .c-info {
+            font-size: 9.5pt;
+            color: var(--text-brown);
+            line-height: 1.5;
+        }
+
+        .c-right {
+            display: flex;
+            gap: 15px;
+        }
+
+        .qr-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qr-placeholder {
+            width: 85px;
+            height: 85px;
+            background: #eee;
+            border: 2px solid var(--text-dark);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .qr-label {
+            font-size: 10pt;
+            font-weight: 800;
+            background: var(--text-dark);
+            color: #ffffff;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        .qr-label.line {
+            background: #06c755;
+        }
+
+        /* LINE Green */
+    </style>
+</head>
+
+<body>
+    <button class="print-btn no-print" onclick="window.print()">🖨️ 第2面（裏）を印刷</button>
+    <div class="page-frame"></div>
+
+    <div class="content-wrap">
+
+        <div class="section-header">
+            <!-- ⬇️ [VectorShelf] の装飾線等URLに差し替えてください -->
+            <img src="https://via.placeholder.com/40x15/e26139/ffffff?text=~" class="header-deco" alt="装飾">
+            <h2 class="section-title">スマイリードが安心な ৩つの理由</h2>
+            <img src="https://via.placeholder.com/40x15/e26139/ffffff?text=~" class="header-deco" alt="装飾">
+        </div>
+
+        <div class="reasons-box">
+            <div class="reason-card">
+                <!-- ⬇️ [ハンコでアソブ] の 数字「1」のスタンプ画像URLに差し替え -->
+                <div class="stamp-num"><img src="https://via.placeholder.com/50/ffffff/e26139?text=1" alt="1"></div>
+                <div>
+                    <div class="r-title">お見積もり無料！追加料金は一切なし！</div>
+                    <div class="r-desc">事前の無料お見積りで確定した金額から、後日追加でご請求することは絶対にありません。</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <!-- ⬇️ [ハンコでアソブ] の 数字「2」のスタンプ画像URLに差し替え -->
+                <div class="stamp-num"><img src="https://via.placeholder.com/50/ffffff/e26139?text=2" alt="2"></div>
+                <div>
+                    <div class="r-title">「買取」で費用を大幅カット！</div>
+                    <div class="r-desc">リサイクル可能な家具や家電は、その場で買い取り。引越し費用から差し引くので大変お得です。</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <!-- ⬇️ [ハンコでアソブ] の 数字「3」のスタンプ画像URLに差し替え -->
+                <div class="stamp-num"><img src="https://via.placeholder.com/50/ffffff/e26139?text=3" alt="3"></div>
+                <div>
+                    <div class="r-title">ご家族やケアマネ様からの依頼も大歓迎！</div>
+                    <div class="r-desc">離れて暮らすご家族からのご相談や、施設へのご入居に伴うお引越しなど、柔軟に丁寧に対応いたします。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flow Section -->
+        <div class="flow-container">
+            <div class="flow-title">ご依頼の流れはとってもカンタン！</div>
+            <div class="flow-steps">
+
+                <div class="step">
+                    <!-- ⬇️ [しぐれに または Linustock] の「電話」してるイラストURLに差し替え -->
+                    <div class="step-icon-img"><img src="https://via.placeholder.com/70/ffffff/e26139?text=Call"
+                            style="border-radius:50%;" alt="電話"></div>
+                    <div class="step-num">Step 1</div>
+                    <div class="step-title">まずはお電話！</div>
+                </div>
+
+                <!-- ⬇️ [えんぴつ素材] の「右矢印」イラストURLに差し替え -->
+                <img src="https://via.placeholder.com/30/ffffff/3a2517?text=>>" class="step-arrow" alt="次へ">
+
+                <div class="step">
+                    <!-- ⬇️ [しぐれに または Linustock] の「お見積り・メモ」イラストURLに差し替え -->
+                    <div class="step-icon-img"><img src="https://via.placeholder.com/70/ffffff/e26139?text=Memo"
+                            style="border-radius:50%;" alt="メモ"></div>
+                    <div class="step-num">Step 2</div>
+                    <div class="step-title">無料お見積り</div>
+                </div>
+
+                <!-- ⬇️ [えんぴつ素材] の「右矢印」イラストURLに差し替え -->
+                <img src="https://via.placeholder.com/30/ffffff/3a2517?text=>>" class="step-arrow" alt="次へ">
+
+                <div class="step">
+                    <!-- ⬇️ [しぐれに または Linustock] の「トラック・荷物」イラストURLに差し替え -->
+                    <div class="step-icon-img"><img src="https://via.placeholder.com/70/ffffff/e26139?text=Truck"
+                            style="border-radius:50%;" alt="トラック"></div>
+                    <div class="step-num">Step 3</div>
+                    <div class="step-title">引越し・片付け</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="company-area">
+            <div class="c-left">
+                <div class="c-message">温かく丁寧なスタッフがお伺いします！</div>
+                <div class="c-phone">☎ 0120-651-340</div>
+                <div class="c-hours">受付 9:00〜18:00（年中無休）</div>
+                <div class="c-info">
+                    株式会社スマイリード<br>
+                    〒064-0807 札幌市中央区南7条西2丁目2-10 パラスト中島公園102号<br>
+                    古物商許可：北海道公安委員会
+                </div>
+            </div>
+
+            <div class="c-right">
+                <div class="qr-box">
+                    <div class="qr-label">WEBサイト</div>
+                    <!-- お客様のQRコード画像をここに入れてください -->
+                    <div class="qr-placeholder">QR Image</div>
+                </div>
+                <div class="qr-box">
+                    <div class="qr-label line">LINE相談</div>
+                    <!-- お客様のLINE QRコード画像をここに入れてください -->
+                    <div class="qr-placeholder">QR Image</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>残置物撤去チラシ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            height: 297mm;
+            font-family: 'Noto Sans JP', sans-serif;
+            background: white;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 15mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 5px solid #d35400;
+            padding-bottom: 10px;
+        }
+
+        .target-msg {
+            font-size: 14pt;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-size: 28pt;
+            color: #c0392b;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        .highlight {
+            background: yellow;
+            padding: 0 5px;
+        }
+
+        /* Main Visual */
+        .visual-area {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .photo-box {
+            width: 48%;
+            position: relative;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid #333;
+        }
+
+        .label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #c0392b;
+            color: white;
+            padding: 5px 15px;
+            font-weight: bold;
+            font-size: 14pt;
+        }
+
+        .arrow {
+            font-size: 40pt;
+            color: #d35400;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /* Catch */
+        .catch-copy {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 18pt;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* 3 Reasons */
+        .reasons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .reason-box {
+            width: 32%;
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            border: 2px solid #bdc3c7;
+        }
+
+        .reason-title {
+            color: #d35400;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 2px dotted #d35400;
+            display: inline-block;
+        }
+
+        .reason-text {
+            font-size: 10pt;
+            text-align: left;
+        }
+
+        /* Trouble List */
+        .trouble-list {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #f39c12;
+        }
+
+        .trouble-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 16pt;
+            margin-bottom: 10px;
+            color: #d35400;
+        }
+
+        .check-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .check-item {
+            font-size: 12pt;
+            font-weight: bold;
+        }
+
+        /* Footer / Contact */
+        .footer {
+            margin-top: auto;
+            background: #c0392b;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-text {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .phone-number {
+            font-size: 42pt;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .company-info {
+            font-size: 10pt;
+        }
+
+        /* Stamps */
+        .stamp {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14pt;
+            transform: rotate(-15deg);
+            border: 3px solid white;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .stamp-1 {
+            top: 180px;
+            left: 45%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="target-msg">賃貸管理会社・オーナー様へ</div>
+            <h1>次の入居が決まっているのに<br>部屋が片付かない…</h1>
+        </header>
+
+        <div class="visual-area">
+            <div class="photo-box">
+                <div class="label">BEFORE</div>
+                <!-- Placeholder for Trash Room -->
+                <img src="https://placehold.co/400x300/555/FFF?text=ゴミ屋敷・汚部屋" alt="ゴミ屋敷">
+            </div>
+            <div class="arrow">➡</div>
+            <div class="photo-box">
+                <div class="label">AFTER</div>
+                <!-- Placeholder for Clean Room -->
+                <img src="https://placehold.co/400x300/2ecc71/FFF?text=完全撤去・清掃済み" alt="清掃後">
+            </div>
+        </div>
+
+        <div class="stamp stamp-1">丸投げ<br>OK!</div>
+
+        <div class="catch-copy">
+            夜逃げ・孤独死・ゴミ屋敷…<br>
+            <span style="color: #f1c40f;">「訳あり物件」</span>の残置物、最短即日で撤去します！
+        </div>
+
+        <div class="trouble-list">
+            <div class="trouble-title">こんなお悩み、ありませんか？</div>
+            <div class="check-list">
+                <div class="check-item">✅ 夜逃げで荷物がそのまま</div>
+                <div class="check-item">✅ 孤独死で特殊清掃が必要</div>
+                <div class="check-item">✅ 競売物件の大量処分</div>
+                <div class="check-item">✅ 異臭・害虫が発生中</div>
+            </div>
+        </div>
+
+        <div class="reasons">
+            <div class="reason-box">
+                <div class="reason-title">断りません</div>
+                <div class="reason-text">
+                    足の踏み場もないゴミ屋敷でも、異臭がする現場でも対応します。他社が嫌がる案件こそ、私たちの得意分野です。
+                </div>
+            </div>
+            <div class="reason-box">
+                <div class="reason-title">スピード対応</div>
+                <div class="reason-text">
+                    お見積もり即日対応。「次の入居日が迫っている」という焦りに応え、最短スケジュールで原状回復へ繋げます。
+                </div>
+            </div>
+            <div class="reason-box">
+                <div class="reason-title">立ち会い不要</div>
+                <div class="reason-text">
+                    鍵をお預かりして作業完了。完了報告は「写真付きメール」で行いますので、現場確認の手間も不要です。
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="cta-text">「残置物撤去の件で」とお電話ください！即飛んでいきます！</div>
+            <div class="phone-number">0120-651-340</div>
+            <div class="company-info">
+                株式会社スマイリード<br>
+                札幌市〇〇区〇〇 1-2-3<br>
+                担当：〇〇
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
