@@ -388,6 +388,44 @@
             .actions { grid-template-columns: 1fr; }
         }
 
+        /* 閲覧モード */
+        .viewer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: #f59e0b;
+            background: rgba(245,158,11,0.12);
+            border: 1px solid rgba(245,158,11,0.3);
+            border-radius: 2rem;
+            padding: 0.2rem 0.7rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* メモ欄 */
+        .memo-textarea {
+            width: 100%;
+            min-height: 90px;
+            resize: vertical;
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 0.93rem;
+            font-family: inherit;
+            padding: 0.7rem 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            line-height: 1.6;
+        }
+        .memo-textarea::placeholder { color: var(--text-faint); }
+        .memo-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(108,99,255,0.22);
+        }
+
         /* LINE */
         .btn-line {
             background: linear-gradient(135deg, #06C755, #03a847);
@@ -601,6 +639,7 @@
 
                 <!-- チェックリスト -->
                 <div class="section-block">
+                    <div id="viewerBadge" class="viewer-badge" style="display:none;">👁 閲覧モード — チェックのみ可能</div>
                     <div class="checklist-section">
                         <div class="checklist-header">
                             <h2>☑ チェック項目</h2>
@@ -608,6 +647,12 @@
                         </div>
                         <ul class="checklist-items" id="checklist"></ul>
                     </div>
+                </div>
+
+                <!-- メモ欄 -->
+                <div class="section-block">
+                    <div class="section-label">📝 メモ</div>
+                    <textarea id="memo" name="memo" class="memo-textarea" placeholder="自由にメモを書いてください（誰でも書き込めます）"></textarea>
                 </div>
 
                 <div class="actions">
@@ -652,7 +697,10 @@
             var endTimeSelect    = document.getElementById('endTime');
 
             var textFields = ['leader', 'staff1', 'staff2', 'staff3', 'staff4',
-                              'startTime', 'endTime', 'taskContent', 'meetingPlace', 'relocationPlace'];
+                              'startTime', 'endTime', 'taskContent', 'meetingPlace', 'relocationPlace', 'memo'];
+
+            // 閲覧モード判定: ページロード時点で?d=があれば閲覧者
+            var isViewerMode = !!new URLSearchParams(window.location.search).get('d');
 
             // ---- 状態 ----
             var checkItems = [];
@@ -704,27 +752,37 @@
                     updateCheckItem(id, { isChecked: e.target.checked });
                 });
 
-                var inp       = document.createElement('input');
-                inp.type      = 'text';
-                inp.value     = text;
-                inp.placeholder = 'チェック内容を入力';
-                inp.addEventListener('input', function (e) {
-                    updateCheckItem(id, { text: e.target.value });
-                });
+                if (isViewerMode) {
+                    // 閲覧モード: テキストはラベル表示のみ（編集・削除不可）
+                    var span = document.createElement('span');
+                    span.textContent = text || 'チェック内容';
+                    span.style.cssText = 'flex-grow:1; font-size:0.93rem; color:var(--text); padding:0.2rem 0;';
+                    li.appendChild(checkbox);
+                    li.appendChild(span);
+                } else {
+                    // 編集モード: テキスト入力 + 削除ボタン
+                    var inp       = document.createElement('input');
+                    inp.type      = 'text';
+                    inp.value     = text;
+                    inp.placeholder = 'チェック内容を入力';
+                    inp.addEventListener('input', function (e) {
+                        updateCheckItem(id, { text: e.target.value });
+                    });
 
-                var delBtn       = document.createElement('button');
-                delBtn.type      = 'button';
-                delBtn.className = 'btn btn-sm btn-danger';
-                delBtn.innerHTML = '✖';
-                delBtn.title     = '削除';
-                delBtn.addEventListener('click', function () {
-                    li.remove();
-                    removeCheckItem(id);
-                });
+                    var delBtn       = document.createElement('button');
+                    delBtn.type      = 'button';
+                    delBtn.className = 'btn btn-sm btn-danger';
+                    delBtn.innerHTML = '✖';
+                    delBtn.title     = '削除';
+                    delBtn.addEventListener('click', function () {
+                        li.remove();
+                        removeCheckItem(id);
+                    });
 
-                li.appendChild(checkbox);
-                li.appendChild(inp);
-                li.appendChild(delBtn);
+                    li.appendChild(checkbox);
+                    li.appendChild(inp);
+                    li.appendChild(delBtn);
+                }
                 return li;
             }
 
@@ -811,9 +869,12 @@
                 var compressed = params.get('d') || window.location.hash.substring(1);
 
                 if (!compressed) {
-                    addCheckItem('戸締り・清掃・搬出忘れ確認', false);
-                    addCheckItem('完了写真・トランクルームチェック', false);
-                    addCheckItem('お客様（管理人）への最終確認・ご挨拶', false);
+                    addCheckItem('戸締り・清掃', false);
+                    addCheckItem('搬出忘れ確認', false);
+                    addCheckItem('完了写真', false);
+                    addCheckItem('トランクルームチェック', false);
+                    addCheckItem('お客様（管理人）へご挨拶', false);
+                    addCheckItem('鍵返却', false);
                     return;
                 }
 
@@ -862,6 +923,20 @@
                 var lineUrl  = 'https://line.me/R/msg/text/?' + encodeURIComponent(shareUrl);
                 window.open(lineUrl, '_blank');
             });
+
+            // 閲覧モード適用
+            if (isViewerMode) {
+                addCheckItemBtn.style.display = 'none';
+                document.getElementById('viewerBadge').style.display = 'inline-flex';
+                // メンバー・スケジュール・現場情報フィールドを読み取り専用に
+                var editFields = ['leader','staff1','staff2','staff3','staff4',
+                                  'startTime','endTime','taskContent','meetingPlace','relocationPlace'];
+                editFields.forEach(function (fid) {
+                    var el = document.getElementById(fid);
+                    if (el) el.setAttribute('disabled', true);
+                });
+                // 地図ボタン以外のアクション系も非表示（追加ボタンは既に消した）
+            }
 
             // ボタンイベント
             addCheckItemBtn.addEventListener('click', function () { addCheckItem(); });
