@@ -637,6 +637,18 @@
                     </div>
                 </div>
 
+                <!-- 必要資材 -->
+                <div class="section-block">
+                    <div id="materialViewerBadge" class="viewer-badge" style="display:none;">👁 閲覧モード — チェックのみ可能</div>
+                    <div class="checklist-section">
+                        <div class="checklist-header">
+                            <h2>📦 必要資材</h2>
+                            <button type="button" class="btn btn-outline btn-sm" id="addMaterialBtn">＋ 追加</button>
+                        </div>
+                        <ul class="checklist-items" id="materialList"></ul>
+                    </div>
+                </div>
+
                 <!-- チェックリスト -->
                 <div class="section-block">
                     <div id="viewerBadge" class="viewer-badge" style="display:none;">👁 閲覧モード — チェックのみ可能</div>
@@ -689,7 +701,9 @@
 
             // ---- DOM 参照 ----
             var checklistEl      = document.getElementById('checklist');
+            var materialListEl   = document.getElementById('materialList');
             var addCheckItemBtn  = document.getElementById('addCheckItemBtn');
+            var addMaterialBtn   = document.getElementById('addMaterialBtn');
             var shareBtn         = document.getElementById('shareBtn');
             var printBtn         = document.getElementById('printBtn');
             var toast            = document.getElementById('toast');
@@ -703,9 +717,10 @@
             var isViewerMode = !!new URLSearchParams(window.location.search).get('d');
 
             // ---- 状態 ----
-            var checkItems = [];
-            var timeoutId  = null;
-            var idCounter  = 0;  // 重複しない連番ID
+            var checkItems    = [];
+            var materialItems = [];
+            var timeoutId     = null;
+            var idCounter     = 0;  // 重複しない連番ID
 
             // ---- 関数定義 ----
 
@@ -740,6 +755,8 @@
                 return update;
             }
 
+            // ---- チェックリスト関数 ----
+
             function createCheckItemElement(id, text, isChecked) {
                 var li = document.createElement('li');
                 li.className = 'check-item' + (isChecked ? ' completed' : '');
@@ -754,31 +771,24 @@
                 });
 
                 if (isViewerMode) {
-                    // 閲覧モード: テキストはラベル表示のみ（編集・削除不可）
                     var span = document.createElement('span');
                     span.textContent = text || 'チェック内容';
                     span.style.cssText = 'flex-grow:1; font-size:0.93rem; color:var(--text); padding:0.2rem 0;';
                     li.appendChild(checkbox);
                     li.appendChild(span);
                 } else {
-                    // 編集モード: テキスト入力 + 削除ボタン
-                    var inp       = document.createElement('input');
-                    inp.type      = 'text';
-                    inp.value     = text;
+                    var inp = document.createElement('input');
+                    inp.type = 'text';
+                    inp.value = text;
                     inp.placeholder = 'チェック内容を入力';
-                    inp.addEventListener('input', function (e) {
-                        updateCheckItem(id, { text: e.target.value });
-                    });
+                    inp.addEventListener('input', function (e) { updateCheckItem(id, { text: e.target.value }); });
 
-                    var delBtn       = document.createElement('button');
-                    delBtn.type      = 'button';
+                    var delBtn = document.createElement('button');
+                    delBtn.type = 'button';
                     delBtn.className = 'btn btn-sm btn-danger';
                     delBtn.innerHTML = '✖';
-                    delBtn.title     = '削除';
-                    delBtn.addEventListener('click', function () {
-                        li.remove();
-                        removeCheckItem(id);
-                    });
+                    delBtn.title = '削除';
+                    delBtn.addEventListener('click', function () { li.remove(); removeCheckItem(id); });
 
                     li.appendChild(checkbox);
                     li.appendChild(inp);
@@ -790,31 +800,88 @@
             function addCheckItem(text, isChecked, id) {
                 text      = text      !== undefined ? text      : '';
                 isChecked = isChecked !== undefined ? isChecked : false;
-                // Date.now()は連続呼び出し時に重複するため連番カウンターを使用
                 id        = id        !== undefined ? id        : 'item_' + (++idCounter);
-
                 var item = { id: id, text: text, isChecked: isChecked };
                 checkItems.push(item);
                 var el = createCheckItemElement(id, text, isChecked);
                 checklistEl.appendChild(el);
-
-                if (!text) {
-                    el.querySelector('input[type="text"]').focus();
-                }
-
+                if (!text && !isViewerMode) { el.querySelector('input[type="text"]').focus(); }
                 updateUrlStateDebounced();
             }
 
             function updateCheckItem(id, updates) {
                 var item = checkItems.find(function (i) { return i.id === id; });
-                if (item) {
-                    Object.assign(item, updates);
-                    updateUrlStateDebounced();
-                }
+                if (item) { Object.assign(item, updates); updateUrlStateDebounced(); }
             }
 
             function removeCheckItem(id) {
                 checkItems = checkItems.filter(function (i) { return i.id !== id; });
+                updateUrlStateDebounced();
+            }
+
+            // ---- 資材リスト関数 ----
+
+            function createMaterialItemElement(id, text, isChecked) {
+                var li = document.createElement('li');
+                li.className = 'check-item' + (isChecked ? ' completed' : '');
+                li.dataset.id = id;
+
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = isChecked;
+                checkbox.addEventListener('change', function (e) {
+                    li.classList.toggle('completed', e.target.checked);
+                    updateMaterialItem(id, { isChecked: e.target.checked });
+                });
+
+                if (isViewerMode) {
+                    // 閲覧モード: テキストのみ表示、削除不可
+                    var span = document.createElement('span');
+                    span.textContent = text || '資材';
+                    span.style.cssText = 'flex-grow:1; font-size:0.93rem; color:var(--text); padding:0.2rem 0;';
+                    li.appendChild(checkbox);
+                    li.appendChild(span);
+                } else {
+                    // 編集モード: テキスト入力 + 削除ボタン
+                    var inp = document.createElement('input');
+                    inp.type = 'text';
+                    inp.value = text;
+                    inp.placeholder = '資材名を入力';
+                    inp.addEventListener('input', function (e) { updateMaterialItem(id, { text: e.target.value }); });
+
+                    var delBtn = document.createElement('button');
+                    delBtn.type = 'button';
+                    delBtn.className = 'btn btn-sm btn-danger';
+                    delBtn.innerHTML = '✖';
+                    delBtn.title = '削除';
+                    delBtn.addEventListener('click', function () { li.remove(); removeMaterialItem(id); });
+
+                    li.appendChild(checkbox);
+                    li.appendChild(inp);
+                    li.appendChild(delBtn);
+                }
+                return li;
+            }
+
+            function addMaterialItem(text, isChecked, id) {
+                text      = text      !== undefined ? text      : '';
+                isChecked = isChecked !== undefined ? isChecked : false;
+                id        = id        !== undefined ? id        : 'mat_' + (++idCounter);
+                var item = { id: id, text: text, isChecked: isChecked };
+                materialItems.push(item);
+                var el = createMaterialItemElement(id, text, isChecked);
+                materialListEl.appendChild(el);
+                if (!text && !isViewerMode) { el.querySelector('input[type="text"]').focus(); }
+                updateUrlStateDebounced();
+            }
+
+            function updateMaterialItem(id, updates) {
+                var item = materialItems.find(function (i) { return i.id === id; });
+                if (item) { Object.assign(item, updates); updateUrlStateDebounced(); }
+            }
+
+            function removeMaterialItem(id) {
+                materialItems = materialItems.filter(function (i) { return i.id !== id; });
                 updateUrlStateDebounced();
             }
 
@@ -824,6 +891,9 @@
                     state[fid] = document.getElementById(fid).value;
                 });
                 state.checkItems = checkItems.map(function (item) {
+                    return { text: item.text, isChecked: item.isChecked };
+                });
+                state.materialItems = materialItems.map(function (item) {
                     return { text: item.text, isChecked: item.isChecked };
                 });
                 return state;
@@ -866,17 +936,36 @@
             }
 
             function loadFromUrl() {
-                // ?d= クエリパラメータ（新形式）を優先、旧 #hash 形式も互換対応
                 var params     = new URLSearchParams(window.location.search);
                 var compressed = params.get('d') || window.location.hash.substring(1);
 
                 if (!compressed) {
+                    // デフォルト資材
+                    addMaterialItem('衣装段ボール（）', false);
+                    addMaterialItem('布団袋（）', false);
+                    addMaterialItem('マットレスカバー（）', false);
+                    addMaterialItem('床養生（）', false);
+                    addMaterialItem('エレベーター養生（）', false);
+                    addMaterialItem('フレコン（）', false);
+                    addMaterialItem('段ボール（中古/新品）', false);
+                    addMaterialItem('台車（）', false);
+                    addMaterialItem('木台車（）', false);
+                    addMaterialItem('冷蔵庫台車（）', false);
+                    addMaterialItem('ツールボックス', false);
+                    addMaterialItem('90ℓゴミ袋', false);
+                    // デフォルトチェック項目
                     addCheckItem('戸締り・清掃', false);
                     addCheckItem('搬出忘れ確認', false);
                     addCheckItem('完了写真', false);
                     addCheckItem('トランクルームチェック', false);
                     addCheckItem('お客様（管理人）へご挨拶', false);
                     addCheckItem('鍵返却', false);
+                    addCheckItem('預かり貴重品', false);
+                    addCheckItem('お焚き上げ', false);
+                    addCheckItem('養生外し', false);
+                    addCheckItem('共用部清掃', false);
+                    addCheckItem('お客様に完了報告', false);
+                    addCheckItem('口コミ案内', false);
                     return;
                 }
 
@@ -889,6 +978,12 @@
                             document.getElementById(fid).value = state[fid];
                         }
                     });
+
+                    if (state.materialItems && Array.isArray(state.materialItems)) {
+                        state.materialItems.forEach(function (item) {
+                            addMaterialItem(item.text, item.isChecked);
+                        });
+                    }
 
                     if (state.checkItems && Array.isArray(state.checkItems)) {
                         state.checkItems.forEach(function (item) {
@@ -929,19 +1024,21 @@
             // 閲覧モード適用
             if (isViewerMode) {
                 addCheckItemBtn.style.display = 'none';
+                addMaterialBtn.style.display  = 'none';
                 document.getElementById('viewerBadge').style.display = 'inline-flex';
-                // メンバー・スケジュール・現場情報フィールドを読み取り専用に
+                document.getElementById('materialViewerBadge').style.display = 'inline-flex';
+                // メンバー・スケジュール・現場情報フィールドを無効化
                 var editFields = ['leader','staff1','staff2','staff3','staff4',
                                   'startTime','endTime','taskContent','meetingPlace','relocationPlace'];
                 editFields.forEach(function (fid) {
                     var el = document.getElementById(fid);
                     if (el) el.setAttribute('disabled', true);
                 });
-                // 地図ボタン以外のアクション系も非表示（追加ボタンは既に消した）
             }
 
             // ボタンイベント
             addCheckItemBtn.addEventListener('click', function () { addCheckItem(); });
+            addMaterialBtn.addEventListener('click', function () { addMaterialItem(); });
             shareBtn.addEventListener('click', generateAndCopyUrl);
             printBtn.addEventListener('click', function () { window.print(); });
 
