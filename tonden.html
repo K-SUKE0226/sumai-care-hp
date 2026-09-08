@@ -29,14 +29,13 @@
       padding-bottom: 125px;
     }
 
+    /* 最上部ヘッダー */
     header {
       background: linear-gradient(135deg, #1e3a8a, #2563eb);
       color: white;
-      padding: 14px 16px;
+      padding: 14px 16px 16px;
       text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: relative;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .badge-sub {
@@ -57,13 +56,64 @@
       margin-top: 2px;
     }
 
+    /* 最上部：税込合計金額ドデカ表示カード */
+    .top-hero-card {
+      background: #ffffff;
+      border: 2px solid #3b82f6;
+      border-radius: 14px;
+      margin: 12px 12px 6px;
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+    }
+    .top-hero-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .top-hero-badge {
+      background: #ef4444;
+      color: white;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .top-hero-amount {
+      font-size: 32px;
+      font-weight: 900;
+      color: #1e3a8a;
+      letter-spacing: -0.03em;
+      margin: 4px 0 2px;
+      line-height: 1.1;
+    }
+    .top-hero-yen {
+      font-size: 16px;
+      font-weight: 700;
+      margin-left: 2px;
+    }
+    .top-hero-sub {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* 税抜・税込切替タブ */
     .tax-toggle-bar {
       background: #e2e8f0;
       padding: 4px;
       border-radius: 8px;
       display: flex;
       max-width: 240px;
-      margin: 10px auto 0;
+      margin: 8px auto 4px;
     }
     .tax-btn {
       flex: 1;
@@ -83,19 +133,20 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
+    /* アクションバー */
     .action-bar {
       display: flex;
       gap: 6px;
-      padding: 10px 14px 4px;
+      padding: 8px 12px 4px;
       overflow-x: auto;
     }
     .action-btn {
       flex: 1;
-      min-width: 76px;
+      min-width: 74px;
       background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 7px 5px;
+      padding: 7px 4px;
       font-size: 11px;
       font-weight: 600;
       color: #334155;
@@ -103,9 +154,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 3px;
       white-space: nowrap;
       box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .action-btn.btn-pdf {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #991b1b;
+      font-weight: 700;
     }
     .action-btn:active {
       background: #f1f5f9;
@@ -115,9 +172,10 @@
     .container {
       max-width: 640px;
       margin: 0 auto;
-      padding: 8px 12px;
+      padding: 4px 12px 8px;
     }
 
+    /* セクションカード */
     .section-card {
       background: var(--card-bg);
       border-radius: 12px;
@@ -145,6 +203,7 @@
       color: var(--primary);
     }
 
+    /* 明細行 */
     .item-row {
       padding: 10px 12px;
       border-bottom: 1px solid #f1f5f9;
@@ -175,6 +234,7 @@
       color: #0f172a;
     }
 
+    /* 数量・単価入力 */
     .inputs-grid {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -243,16 +303,18 @@
       background: #e2e8f0;
     }
 
-    /* メモ欄スタイル */
-    .memo-container {
+    /* 下に独立したメモ項目 */
+    .memo-block {
       margin-top: 6px;
+      padding-top: 5px;
+      border-top: 1px dashed #f1f5f9;
     }
     .memo-input {
       width: 100%;
       border: 1px dashed #cbd5e1;
       background: transparent;
       border-radius: 6px;
-      padding: 4px 8px;
+      padding: 5px 8px;
       font-size: 11px;
       color: #334155;
       outline: none;
@@ -263,13 +325,15 @@
       background: #ffffff;
       box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
     }
+    /* メモが追記された時の強調表示 */
     .memo-input:not(:placeholder-shown) {
       border: 1px solid #fcd34d;
       background: #fffbeb;
       color: #92400e;
-      font-weight: 500;
+      font-weight: 600;
     }
 
+    /* 下部固定フッター */
     .sticky-footer {
       position: fixed;
       bottom: 0;
@@ -346,23 +410,134 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* ============================================================
+       印刷 / PDF保存用 スタイル (@media print)
+       A4用紙に最適化した綺麗な内訳書として出力
+       ============================================================ */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        padding-bottom: 0 !important;
+      }
+      header {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        border-bottom: 2px solid #000;
+        padding: 0 0 8px 0;
+        text-align: left;
+      }
+      .badge-sub, .tax-toggle-bar, .action-bar, .quick-btns, .sticky-footer, .toast {
+        display: none !important;
+      }
+      .top-hero-card {
+        border: 1px solid #94a3b8 !important;
+        box-shadow: none !important;
+        margin: 10px 0 !important;
+        padding: 8px 12px !important;
+        background: #f8fafc !important;
+      }
+      .top-hero-amount {
+        font-size: 24px !important;
+        color: #000 !important;
+      }
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .section-card {
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        margin-bottom: 12px !important;
+        page-break-inside: avoid;
+      }
+      .section-header {
+        background: #f1f5f9 !important;
+        border-bottom: 1px solid #cbd5e1 !important;
+        padding: 6px 10px !important;
+      }
+      .item-row {
+        padding: 6px 10px !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+      }
+      .inputs-grid {
+        background: transparent !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+      .input-wrapper {
+        border: none !important;
+        padding: 0 !important;
+        height: auto !important;
+      }
+      .num-input {
+        width: auto !important;
+        font-size: 12px !important;
+      }
+      /* メモの印刷制御：未入力なら完全に隠す、入力があれば印刷 */
+      .memo-block {
+        margin-top: 3px !important;
+        padding-top: 2px !important;
+        border-top: none !important;
+      }
+      .memo-input:placeholder-shown {
+        display: none !important;
+      }
+      .memo-input:not(:placeholder-shown) {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        color: #1e293b !important;
+        font-weight: 600 !important;
+        font-size: 11px !important;
+      }
+      .memo-input:not(:placeholder-shown)::before {
+        content: "【メモ】 ";
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- 最上部ヘッダー -->
   <header>
     <div class="badge-sub">単価シミュレーター</div>
     <h1>屯田3-5 エールハイツヒロ202</h1>
     <div class="meta-info">原状回復工事（発行：株式会社 ワイエスディ）</div>
   </header>
 
+  <!-- 最上部：税込合計金額カード（最上部に常時表示） -->
+  <div class="top-hero-card">
+    <div class="top-hero-label">
+      <span>現在の総合計金額</span>
+      <span class="top-hero-badge">税込 10%</span>
+    </div>
+    <div class="top-hero-amount">
+      <span id="top-grand-total">890,384</span><span class="top-hero-yen">円</span>
+    </div>
+    <div class="top-hero-sub">
+      <span>税抜: <b id="top-ex-total">809,440</b> 円</span>
+      <span>|</span>
+      <span>消費税: <b id="top-tax">80,944</b> 円</span>
+    </div>
+  </div>
+
   <div class="container">
+    <!-- 税抜・税込切替タブ（下部バー表示切替用） -->
     <div class="tax-toggle-bar">
       <button id="btn-tax-ex" class="tax-btn active" onclick="setTaxMode('ex')">税抜表示</button>
       <button id="btn-tax-in" class="tax-btn" onclick="setTaxMode('in')">税込表示 (10%)</button>
     </div>
 
+    <!-- アクションボタン（PDF保存ボタン追加） -->
     <div class="action-bar">
+      <button class="action-btn btn-pdf" onclick="saveAsPDF()">
+        📄 PDF保存
+      </button>
       <button class="action-btn" onclick="resetToInitial()">
         🔄 初期値
       </button>
@@ -373,13 +548,14 @@
         📋 LINEコピー
       </button>
       <button class="action-btn" onclick="exportCSV()">
-        📥 CSV保存
+        📥 CSV
       </button>
     </div>
   </div>
 
   <div class="container" id="sections-root"></div>
 
+  <!-- 下部固定フッター -->
   <div class="sticky-footer">
     <div class="footer-inner">
       <div class="total-meta">
@@ -429,12 +605,11 @@
 
     const ORIGINAL_EX_TOTAL = 809440;
     
-    // 既存保存データにmemoフィールドをマージ
     let savedData = JSON.parse(localStorage.getItem("tonden_estimate_data"));
     let data;
     if (savedData) {
-      savedData.forEach((s, sIdx) => {
-        s.items.forEach((item, iIdx) => {
+      savedData.forEach((s) => {
+        s.items.forEach((item) => {
           if (item.memo === undefined) item.memo = "";
         });
       });
@@ -513,8 +688,10 @@
                 </div>
               </div>
             </div>
-            <div class="memo-container">
-              <input type="text" class="memo-input" placeholder="＋ メモを追記（例：施主負担、一部補修など）" 
+            <!-- 下に1つ追加された独立メモ項目 -->
+            <div class="memo-block">
+              <input type="text" class="memo-input" 
+                placeholder="＋ メモを追記（未入力ならそのまま非表示）" 
                 value="${item.memo ? item.memo.replace(/"/g, '&quot;') : ''}" 
                 oninput="updateMemo(${sIdx}, ${iIdx}, this.value)" />
             </div>
@@ -538,11 +715,17 @@
       const tax = Math.round(exTotal * 0.1);
       const inTotal = exTotal + tax;
 
+      // 最上部の税込金額表示を更新！
+      document.getElementById("top-grand-total").textContent = formatNumber(inTotal);
+      document.getElementById("top-ex-total").textContent = formatNumber(exTotal);
+      document.getElementById("top-tax").textContent = formatNumber(tax);
+
+      // 下部フッター
       const displayVal = currentTaxMode === "ex" ? exTotal : inTotal;
       document.getElementById("grand-total").textContent = formatNumber(displayVal);
 
       document.getElementById("tax-subtext").innerHTML = 
-        `税抜: <b>${formatNumber(exTotal)}円</b> (税: ${formatNumber(tax)}円) / 税込: <b>${formatNumber(inTotal)}円</b>`;
+        `税抜: <b>${formatNumber(exTotal)}円</b> / 税込: <b>${formatNumber(inTotal)}円</b>`;
 
       const originalCompare = currentTaxMode === "ex" ? ORIGINAL_EX_TOTAL : Math.round(ORIGINAL_EX_TOTAL * 1.1);
       const diff = displayVal - originalCompare;
@@ -614,6 +797,14 @@
       showToast("全体を値引き適用しました");
     }
 
+    // PDF保存機能（印刷ダイアログからワンタップでPDF保存）
+    function saveAsPDF() {
+      showToast("印刷メニューから「PDFとして保存」を選択できます");
+      setTimeout(() => {
+        window.print();
+      }, 300);
+    }
+
     function copySummaryText() {
       let text = "【屯田3条5丁目 原状回復工事 内訳試算】\n";
       let grandExTotal = 0;
@@ -623,8 +814,10 @@
         sec.items.forEach(item => {
           const amt = Math.round(item.qty * item.price);
           secTotal += amt;
-          const memoStr = item.memo ? ` [メモ: ${item.memo}]` : "";
-          text += `・${item.name} (${item.qty}${item.unit} × @${formatNumber(item.price)}): ${formatNumber(amt)}円${memoStr}\n`;
+          text += `・${item.name} (${item.qty}${item.unit} × @${formatNumber(item.price)}): ${formatNumber(amt)}円\n`;
+          if (item.memo) {
+            text += `  └ [メモ] ${item.memo}\n`;
+          }
         });
         text += ` 小計: ${formatNumber(secTotal)}円\n`;
         grandExTotal += secTotal;
