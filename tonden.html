@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>原状回復 単価シミュレーター | 屯田3条5丁目</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-sub: #64748b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --success: #10b981;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 110px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      padding: 16px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .badge-sub {
+      display: inline-block;
+      font-size: 11px;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-bottom: 4px;
+    }
+    h1 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .meta-info {
+      font-size: 11px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .action-bar {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px 6px;
+      overflow-x: auto;
+    }
+    .action-btn {
+      flex: 1;
+      min-width: 80px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .action-btn:active {
+      background: #f1f5f9;
+      transform: scale(0.97);
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 8px 12px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+    .section-header {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .section-subtotal {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .item-row {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .item-row:last-child {
+      border-bottom: none;
+    }
+    .item-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .item-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .item-spec {
+      font-size: 11px;
+      color: #64748b;
+      margin-left: 4px;
+      font-weight: normal;
+    }
+    .item-amount {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 8px;
+      background: #f8fafc;
+      padding: 8px 10px;
+      border-radius: 8px;
+      align-items: center;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .input-label {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 0 6px;
+      height: 34px;
+    }
+    .input-wrapper:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    }
+    .num-input {
+      width: 100%;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: right;
+      outline: none;
+      background: transparent;
+    }
+    .unit-text {
+      font-size: 11px;
+      color: #64748b;
+      margin-left: 4px;
+      white-space: nowrap;
+    }
+
+    .quick-btns {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+      justify-content: flex-end;
+    }
+    .q-btn {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 10px;
+      color: #334155;
+      padding: 2px 5px;
+      cursor: pointer;
+    }
+    .q-btn:active {
+      background: #e2e8f0;
+    }
+
+    .sticky-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+      z-index: 100;
+    }
+    .footer-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .total-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+    }
+    .total-diff {
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+    .diff-plus { color: var(--danger); }
+    .diff-minus { color: var(--success); }
+    .diff-zero { color: #94a3b8; }
+    
+    .total-amount-box {
+      text-align: right;
+    }
+    .total-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1e3a8a;
+      letter-spacing: -0.02em;
+    }
+    .yen {
+      font-size: 13px;
+      margin-left: 2px;
+      font-weight: 600;
+    }
+
+    .toast {
+      position: fixed;
+      top: 65px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #1e293b;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      opacity: 0;
+      transition: all 0.25s ease;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge-sub">単価シミュレーター</div>
+    <h1>屯田3-5 エールハイツヒロ202</h1>
+    <div class="meta-info">原状回復工事（発行：株式会社 ワイエスディ）</div>
+  </header>
+
+  <div class="container">
+    <div class="action-bar">
+      <button class="action-btn" onclick="resetToInitial()">
+        🔄 初期値に戻す
+      </button>
+      <button class="action-btn" onclick="applyDiscount(0.9)">
+        🏷️ 全体10%減
+      </button>
+      <button class="action-btn" onclick="copySummaryText()">
+        📋 LINE用にコピー
+      </button>
+      <button class="action-btn" onclick="exportCSV()">
+        📥 CSV保存
+      </button>
+    </div>
+  </div>
+
+  <div class="container" id="sections-root"></div>
+
+  <div class="sticky-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="total-label">総合計金額</div>
+        <div id="diff-indicator" class="total-diff diff-zero">原案との差額: ±0円</div>
+      </div>
+      <div class="total-amount-box">
+        <span id="grand-total" class="total-val">809,440</span><span class="yen">円</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">クリップボードにコピーしました</div>
+
+  <script>
+    const INITIAL_DATA = [
+      {
+        category: "1. 【クロス張り替え工事】",
+        items: [
+          { id: "c1", name: "リビング・キッチン（天井・壁）", spec: "#500", qty: 42, unit: "㎡", price: 1200, step: 100 },
+          { id: "c2", name: "洋室1（天井・壁）", spec: "#500", qty: 64, unit: "㎡", price: 1200, step: 100 },
+          { id: "c3", name: "ＵＴ（天井・壁）", spec: "#500", qty: 16.4, unit: "㎡", price: 1200, step: 100 },
+          { id: "c4", name: "トイレ（天井・壁）", spec: "#500", qty: 1, unit: "式", price: 22000, step: 1000 },
+          { id: "c5", name: "玄関（天井・壁）", spec: "#500", qty: 1, unit: "式", price: 22000, step: 1000 },
+          { id: "c6", name: "下地処理", spec: "", qty: 1, unit: "式", price: 25000, step: 1000 },
+        ]
+      },
+      {
+        category: "2. 【CF張替え工事・その他】",
+        items: [
+          { id: "f1", name: "居間、洋室", spec: "", qty: 25.8, unit: "㎡", price: 3200, step: 100 },
+          { id: "f2", name: "UT、トイレ、土間", spec: "", qty: 1, unit: "式", price: 50000, step: 5000 },
+          { id: "f3", name: "ソフト幅木", spec: "", qty: 35, unit: "枚", price: 800, step: 50 },
+          { id: "f4", name: "見切り", spec: "", qty: 2, unit: "本", price: 4000, step: 500 },
+          { id: "f5", name: "下地調整", spec: "", qty: 1, unit: "式", price: 30000, step: 5000 },
+          { id: "f6", name: "クロス・CFはがし", spec: "", qty: 1, unit: "式", price: 60000, step: 5000 },
+          { id: "f7", name: "諸経費", spec: "シート貼り普及品", qty: 1, unit: "式", price: 30000, step: 5000 },
+          { id: "f8", name: "廃材処理費", spec: "", qty: 1, unit: "式", price: 25000, step: 5000 },
+          { id: "f9", name: "特殊清掃（消臭込み）", spec: "", qty: 1, unit: "式", price: 250000, step: 10000 },
+          { id: "f10", name: "仕上げ清掃", spec: "", qty: 1, unit: "式", price: 30000, step: 5000 },
+        ]
+      }
+    ];
+
+    const ORIGINAL_TOTAL = 809440;
+    let data = JSON.parse(localStorage.getItem("tonden_estimate_data")) || JSON.parse(JSON.stringify(INITIAL_DATA));
+
+    function formatNumber(num) {
+      return Math.round(num).toLocaleString();
+    }
+
+    function render() {
+      const root = document.getElementById("sections-root");
+      root.innerHTML = "";
+
+      let grandTotal = 0;
+
+      data.forEach((sec, sIdx) => {
+        let secTotal = 0;
+        const secCard = document.createElement("div");
+        secCard.className = "section-card";
+
+        const secHeader = document.createElement("div");
+        secHeader.className = "section-header";
+        secHeader.innerHTML = `
+          <div class="section-title">${sec.category}</div>
+          <div class="section-subtotal" id="sec-subtotal-${sIdx}">小計: 0円</div>
+        `;
+        secCard.appendChild(secHeader);
+
+        sec.items.forEach((item, iIdx) => {
+          const rowTotal = item.qty * item.price;
+          secTotal += rowTotal;
+
+          const row = document.createElement("div");
+          row.className = "item-row";
+          row.innerHTML = `
+            <div class="item-title-row">
+              <div>
+                <span class="item-name">${item.name}</span>
+                ${item.spec ? `<span class="item-spec">${item.spec}</span>` : ""}
+              </div>
+              <div class="item-amount" id="amt-${item.id}">${formatNumber(rowTotal)}円</div>
+            </div>
+            <div class="inputs-grid">
+              <div class="input-group">
+                <span class="input-label">数量 (${item.unit})</span>
+                <div class="input-wrapper">
+                  <input type="number" step="any" inputmode="decimal" class="num-input" value="${item.qty}" 
+                    oninput="updateValue(${sIdx}, ${iIdx}, 'qty', this.value)">
+                  <span class="unit-text">${item.unit}</span>
+                </div>
+              </div>
+              <div class="input-group">
+                <span class="input-label">単価 (円)</span>
+                <div class="input-wrapper">
+                  <input type="number" step="any" inputmode="numeric" class="num-input" value="${item.price}" 
+                    oninput="updateValue(${sIdx}, ${iIdx}, 'price', this.value)">
+                  <span class="unit-text">円</span>
+                </div>
+                <div class="quick-btns">
+                  <button class="q-btn" onclick="adjustPrice(${sIdx}, ${iIdx}, -${item.step})">-${item.step >= 1000 ? (item.step/1000) + 'k' : item.step}</button>
+                  <button class="q-btn" onclick="adjustPrice(${sIdx}, ${iIdx}, ${item.step})">+${item.step >= 1000 ? (item.step/1000) + 'k' : item.step}</button>
+                </div>
+              </div>
+            </div>
+          `;
+          secCard.appendChild(row);
+        });
+
+        root.appendChild(secCard);
+        grandTotal += secTotal;
+
+        setTimeout(() => {
+          const subEl = document.getElementById(`sec-subtotal-${sIdx}`);
+          if (subEl) subEl.textContent = `小計: ${formatNumber(secTotal)}円`;
+        }, 0);
+      });
+
+      updateTotalsUI(grandTotal);
+    }
+
+    function updateTotalsUI(total) {
+      document.getElementById("grand-total").textContent = formatNumber(total);
+
+      const diff = total - ORIGINAL_TOTAL;
+      const diffEl = document.getElementById("diff-indicator");
+      if (diff > 0) {
+        diffEl.className = "total-diff diff-plus";
+        diffEl.textContent = `原案比: +${formatNumber(diff)}円 (${(diff/ORIGINAL_TOTAL*100).toFixed(1)}% UP)`;
+      } else if (diff < 0) {
+        diffEl.className = "total-diff diff-minus";
+        diffEl.textContent = `原案比: ${formatNumber(diff)}円 (${(Math.abs(diff)/ORIGINAL_TOTAL*100).toFixed(1)}% DOWN)`;
+      } else {
+        diffEl.className = "total-diff diff-zero";
+        diffEl.textContent = "原案との差額: ±0円";
+      }
+
+      localStorage.setItem("tonden_estimate_data", JSON.stringify(data));
+    }
+
+    function updateValue(sIdx, iIdx, field, val) {
+      const num = parseFloat(val);
+      data[sIdx].items[iIdx][field] = isNaN(num) ? 0 : num;
+      recalculate();
+    }
+
+    function adjustPrice(sIdx, iIdx, delta) {
+      const current = Number(data[sIdx].items[iIdx].price) || 0;
+      data[sIdx].items[iIdx].price = Math.max(0, current + delta);
+      render();
+    }
+
+    function recalculate() {
+      let grandTotal = 0;
+      data.forEach((sec, sIdx) => {
+        let secTotal = 0;
+        sec.items.forEach((item) => {
+          const rowTotal = item.qty * item.price;
+          secTotal += rowTotal;
+          const amtEl = document.getElementById(`amt-${item.id}`);
+          if (amtEl) amtEl.textContent = `${formatNumber(rowTotal)}円`;
+        });
+        const subEl = document.getElementById(`sec-subtotal-${sIdx}`);
+        if (subEl) subEl.textContent = `小計: ${formatNumber(secTotal)}円`;
+        grandTotal += secTotal;
+      });
+      updateTotalsUI(grandTotal);
+    }
+
+    function resetToInitial() {
+      if (confirm("全ての単価・数量を初期の見積もり状態に戻しますか？")) {
+        data = JSON.parse(JSON.stringify(INITIAL_DATA));
+        render();
+        showToast("初期値にリセットしました");
+      }
+    }
+
+    function applyDiscount(rate) {
+      data.forEach(sec => {
+        sec.items.forEach(item => {
+          item.price = Math.round(item.price * rate);
+        });
+      });
+      render();
+      showToast("全体を値引き適用しました");
+    }
+
+    function copySummaryText() {
+      let text = "【屯田3条5丁目 原状回復工事 内訳試算】\n";
+      let grandTotal = 0;
+      data.forEach(sec => {
+        text += `\n${sec.category}\n`;
+        let secTotal = 0;
+        sec.items.forEach(item => {
+          const amt = Math.round(item.qty * item.price);
+          secTotal += amt;
+          text += `・${item.name} (${item.qty}${item.unit} × @${formatNumber(item.price)}): ${formatNumber(amt)}円\n`;
+        });
+        text += ` 小計: ${formatNumber(secTotal)}円\n`;
+        grandTotal += secTotal;
+      });
+      const diff = grandTotal - ORIGINAL_TOTAL;
+      text += `\n-------------------\n総合計: ${formatNumber(grandTotal)}円`;
+      text += ` (原案比: ${diff >= 0 ? '+' : ''}${formatNumber(diff)}円)\n`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("LINE用テキストをコピーしました！");
+      }).catch(() => {
+        showToast("コピーに失敗しました");
+      });
+    }
+
+    function exportCSV() {
+      let csv = "\uFEFF名称,適用,数量,単位,単価,金額\n";
+      data.forEach(sec => {
+        csv += `[${sec.category}],,,,,\n`;
+        sec.items.forEach(item => {
+          const amt = Math.round(item.qty * item.price);
+          csv += `"${item.name}","${item.spec}",${item.qty},"${item.unit}",${item.price},${amt}\n`;
+        });
+      });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "屯田3条5丁目_原状回復単価シミュレーション.csv";
+      link.click();
+      showToast("CSVファイルをダウンロードしました");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+
+    render();
+  </script>
+</body>
+</html>
